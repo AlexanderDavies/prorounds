@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Claude Code — local, per-machine settings
+.claude/settings.local.json
+
+# Swift / SwiftPM
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode
+*.xcuserstate
+xcuserdata/
+DerivedData/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# Misc
+*.log

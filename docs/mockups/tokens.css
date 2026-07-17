@@ -1,0 +1,83 @@
+/* ProRounds — semantic design tokens (DESIGN.md §2–§4).
+   Every value resolves for both light and dark (invariant §0.6.6).
+   Features reference roles, never raw hex. */
+
+:root {
+  /* Spacing — 8-pt grid (§2.1) */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Radius (§2.2) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Accent is constant across appearances (Decisions log §11) */
+  --accent: #E50914;        /* red/600 */
+  --accent-bright: #FF1E27; /* red/500 */
+  --accent-pressed: #B00610;/* red/700 */
+  --on-accent: #FFFFFF;
+
+  /* Chart categorical palette (§7.5) */
+  --series-shadow: #E50914;
+  --series-skip:   #17C3B2;
+  --series-bag:    #F5A623;
+  --series-speed:  #5B8DEF;
+  --series-spar:   #B06BF2;
+
+  /* Type (§4) */
+  --font: -apple-system, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+  --mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+/* ---- Dark (dark-first canvas) ---- */
+[data-theme="dark"] {
+  --canvas: #0A0A0B;          /* ink/850 */
+  --surface-base: #0A0A0B;    /* ink/850 */
+  --surface-raised: #141416;  /* ink/800 */
+  --surface-overlay: #1F1F22; /* ink/700 */
+  --border: #2C2C30;          /* ink/600 */
+  --text-primary: #F5F5F7;
+  --text-secondary: #8E8E93;  /* grey/500 */
+  --text-tertiary: #A1A1AA;   /* grey/400 */
+  --phase-prepare: #F5A623;   /* amber/500 */
+  --phase-round: #FF1E27;     /* red/500 */
+  --phase-rest: #17C3B2;      /* teal/500 */
+  --phase-finished: #F5F5F7;
+  --track-dim: #1F1F22;       /* ink/700 */
+  --success: #17C3B2;
+  --danger: #E50914;
+  --raised-shadow: none;
+  --overlay-shadow: none;
+  --series-total: #F5F5F7;
+}
+
+/* ---- Light (faithful, high-contrast inversion §3.2) ---- */
+[data-theme="light"] {
+  --canvas: #F7F7F8;          /* paper/50 */
+  --surface-base: #FFFFFF;    /* paper/0 */
+  --surface-raised: #FFFFFF;
+  --surface-overlay: #FFFFFF;
+  --border: #E3E3E6;          /* paper/200 */
+  --text-primary: #0A0A0B;    /* ink/850 */
+  --text-secondary: #8E8E93;  /* grey/500 */
+  --text-tertiary: #B8B8BE;
+  --phase-prepare: #D98A00;
+  --phase-round: #E50914;     /* red/600 */
+  --phase-rest: #0E9C8E;
+  --phase-finished: #0A0A0B;
+  --track-dim: #E3E3E6;       /* paper/200 */
+  --success: #0E9C8E;
+  --danger: #E50914;
+  --raised-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --overlay-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  --series-total: #0A0A0B;
+}

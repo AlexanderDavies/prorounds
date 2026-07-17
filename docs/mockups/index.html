@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProRounds — Screen Mockups</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: #17181c;
+    color: #e9e9ee;
+    -webkit-font-smoothing: antialiased;
+    padding: 40px 32px 80px;
+  }
+  body.lightstage { background: #d9dade; color: #16171b; }
+
+  .page-head {
+    max-width: 1400px; margin: 0 auto 40px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .page-head h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
+  .page-head h1 .r { color: var(--accent); }
+  .page-head p { font-size: 14px; opacity: 0.6; margin-top: 6px; max-width: 620px; line-height: 1.5; }
+  .toggle {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+    color: inherit; font: inherit; font-size: 14px; font-weight: 600;
+    padding: 10px 16px; border-radius: 999px; user-select: none;
+  }
+  body.lightstage .toggle { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); }
+
+  .grid {
+    max-width: 1400px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 340px));
+    gap: 48px 40px; justify-content: center;
+  }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .cell .label { font-size: 13px; opacity: 0.55; text-align: center; }
+  .cell .label b { opacity: 0.95; font-weight: 700; }
+
+  /* ---- iPhone frame ---- */
+  .phone {
+    width: 340px; height: 724px; flex: none;
+    background: var(--canvas); color: var(--text-primary);
+    border-radius: 46px; overflow: hidden; position: relative;
+    border: 10px solid #050506;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .screen { position: absolute; inset: 0; display: flex; flex-direction: column; }
+
+  .statusbar {
+    height: 46px; flex: none; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 26px 0 30px; font-size: 14px; font-weight: 700; color: var(--text-primary);
+  }
+  .statusbar .glyphs { display: flex; align-items: center; gap: 6px; }
+  .statusbar svg { display: block; }
+
+  .content { flex: 1 1 auto; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; }
+
+  /* ---- Tab bar (§6.7) ---- */
+  .tabbar {
+    flex: none; height: 74px; display: flex; padding: 8px 0 18px;
+    background: var(--surface-raised); border-top: 1px solid var(--border);
+    box-shadow: var(--raised-shadow);
+  }
+  .tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-tertiary); }
+  .tab.active { color: var(--accent); }
+  .tab span { font-size: 11px; font-weight: 600; }
+  .tab svg { width: 24px; height: 24px; }
+
+  .icon-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--surface-raised); border: 1px solid var(--border); color: var(--text-primary);
+    border-radius: 999px; box-shadow: var(--raised-shadow);
+  }
+
+  /* section eyebrow */
+  .overline { font-size: 11px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-secondary); }
+
+  /* ---- Config cards (§6.5) ---- */
+  .screen-title { font-size: 32px; font-weight: 800; letter-spacing: -0.6px; }
+  .config-card {
+    background: var(--surface-raised); border-radius: var(--radius-lg); padding: 16px;
+    display: flex; align-items: center; gap: 14px; border: 1px solid var(--border);
+    box-shadow: var(--raised-shadow);
+  }
+  .type-circle {
+    width: 46px; height: 46px; border-radius: 999px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent);
+  }
+  .config-card .body { flex: 1; min-width: 0; }
+  .config-card .name { font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }
+  .config-card .meta { font-size: 15px; color: var(--text-secondary); margin-top: 3px; }
+  .time-chip {
+    font-size: 13px; font-weight: 700; color: var(--text-primary);
+    background: var(--surface-overlay); padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border);
+  }
+  .chevron { color: var(--text-tertiary); flex: none; }
+
+  /* ---- Timer ring (§6.2) ---- */
+  .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .ring-wrap { position: relative; width: 244px; height: 244px; }
+  .ring-wrap svg { width: 244px; height: 244px; transform: rotate(-90deg); }
+  .ring-center {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  }
+  .phase-badge {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .timer-num { font-family: var(--mono); font-size: 62px; font-weight: 700; letter-spacing: -1.5px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .timer-sub { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+
+  .transport { display: flex; align-items: center; justify-content: center; gap: 34px; padding: 8px 0 6px; }
+  .transport .primary {
+    width: 72px; height: 72px; border-radius: 999px; background: var(--accent); color: var(--on-accent);
+    display: flex; align-items: center; justify-content: center; border: none;
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  .transport .secondary { width: 52px; height: 52px; }
+  .transport .secondary.disabled { opacity: 0.4; }
+
+  /* ---- Config editor (§6.6) ---- */
+  .field-row {
+    background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md);
+    padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    box-shadow: var(--raised-shadow);
+  }
+  .field-row .lbl { font-size: 15px; font-weight: 500; }
+  .stepper { display: flex; align-items: center; gap: 12px; }
+  .stepper .val { font-family: var(--mono); font-size: 17px; font-weight: 600; min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
+  .step-btn {
+    width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface-overlay); color: var(--text-primary);
+    display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600;
+  }
+  .segmented {
+    display: flex; background: var(--surface-overlay); border-radius: 10px; padding: 3px; gap: 3px; border: 1px solid var(--border);
+  }
+  .segmented .seg { flex: 1; text-align: center; font-size: 13px; font-weight: 600; padding: 7px 4px; border-radius: 7px; color: var(--text-secondary); }
+  .segmented .seg.on { background: var(--accent); color: var(--on-accent); }
+  .segmented.neutral .seg.on { background: var(--surface-raised); color: var(--text-primary); box-shadow: var(--raised-shadow); }
+
+  .btn-primary {
+    height: 52px; border-radius: 999px; background: var(--accent); color: var(--on-accent);
+    font-size: 17px; font-weight: 700; border: none; display: flex; align-items: center; justify-content: center; width: 100%;
+  }
+  .btn-secondary {
+    height: 52px; border-radius: 999px; background: transparent; color: var(--text-primary);
+    font-size: 17px; font-weight: 600; border: 1.5px solid var(--border); width: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .btn-text { color: var(--accent); font-size: 15px; font-weight: 700; background: none; border: none; }
+  .btn-destructive { color: var(--danger); font-size: 15px; font-weight: 600; background: none; border: none; }
+
+  /* ---- Performance ---- */
+  .tile-row { display: flex; gap: 10px; }
+  .tile { flex: 1; background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; box-shadow: var(--raised-shadow); }
+  .tile .k { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+  .tile .t { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-top: 2px; }
+  .chart-card { background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 16px 14px 12px; box-shadow: var(--raised-shadow); }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 12px; }
+  .legend .li { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); }
+  .legend .dot { width: 10px; height: 10px; border-radius: 3px; }
+
+  /* ---- Settings ---- */
+  .settings-group { background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--raised-shadow); }
+  .settings-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+  .settings-row + .settings-row { border-top: 1px solid var(--border); }
+  .settings-row .lead { color: var(--text-secondary); display: flex; }
+  .settings-row .lbl { flex: 1; font-size: 17px; }
+  .check { color: var(--accent); }
+  .native-toggle { width: 46px; height: 28px; border-radius: 999px; background: var(--success); position: relative; }
+  .native-toggle::after { content: ""; position: absolute; top: 2px; left: 20px; width: 24px; height: 24px; border-radius: 999px; background: #fff; }
+  .coming-soon { font-size: 12px; color: var(--text-tertiary); }
+  .row-disabled { opacity: 0.5; }
+
+  .stack { display: flex; flex-direction: column; }
+</style>
+</head>
+<body class="stage">
+
+<div class="page-head">
+  <div>
+    <h1>P<span class="r">R</span>oRounds — Screen Mockups</h1>
+    <p>The five core screens from <b>DESIGN.md §7</b>, built on the semantic tokens (§2–§4). Dark-first,
+       one hot red, the number is the hero. Toggle to verify the light-mode inversion (§3.2, invariant §0.6.6).</p>
+  </div>
+  <button class="toggle" id="themeToggle">◐ &nbsp;Switch to Light</button>
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- ============ 1. CONFIGURATIONS (§7.1) ============ -->
+  <div class="cell">
+    <div class="phone" data-theme="dark">
+      <div class="screen">
+        <div class="statusbar">
+          <span>9:41</span>
+          <span class="glyphs">
+            <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="currentColor"/><rect x="5" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="10" y="1" width="3" height="11" rx="1" fill="currentColor" opacity="0.4"/><rect x="15" y="1" width="3" height="11" rx="1" fill="currentColor" opacity="0.4"/></svg>
+            <svg width="24" height="12" viewBox="0 0 24 12"><rect x="1" y="1" width="19" height="10" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.5"/><rect x="3" y="3" width="13" height="6" rx="1.5" fill="currentColor"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor" opacity="0.5"/></svg>
+          </span>
+        </div>
+        <div class="content stack" style="gap:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:6px;">
+            <div class="screen-title">ProRounds</div>
+            <button class="icon-btn" style="width:44px;height:44px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+
+          <div class="config-card">
+            <div class="type-circle">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h7a4 4 0 0 1 4 4v3a4 4 0 0 1-4 4h-1v3a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 1-1.7zM13 7v6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+            </div>
+            <div class="body">
+              <div class="name">Heavy Bag Blast</div>
+              <div class="meta">12 × 3:00 · 1:00 rest</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="time-chip">15:00</div>
+              <span class="chevron"><svg width="9" height="16" viewBox="0 0 9 16"><path d="M1 1l6 7-6 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </div>
+
+          <div class="config-card">
+            <div class="type-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4c-2 0-3 2-3 5s0 9 4 9M18 4c2 0 3 2 3 5s0 9-4 9" stroke-linecap="round"/><circle cx="12" cy="9" r="3"/></svg>
+            </div>
+            <div class="body">
+              <div class="name">Quick Shadow</div>
+              <div class="meta">3 × 2:00 · 0:30 rest</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="time-chip">7:00</div>
+              <span class="chevron"><svg width="9" height="16" viewBox="0 0 9 16"><path d="M1 1l6 7-6 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </div>
+
+          <div class="config-card">
+            <div class="type-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+            </div>
+            <div class="body">
+              <div class="name">Speed Ball 5s</div>
+              <div class="meta">5 × 1:30 · 0:30 rest</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="time-chip">9:30</div>
+              <span class="chevron"><svg width="9" height="16" viewBox="0 0 9 16"><path d="M1 1l6 7-6 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M9 2h6" stroke-linecap="round"/></svg>
+            <span>Timer</span>
+          </div>
+          <div class="tab">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20h18M6 20V11M11 20V6M16 20v-5M21 20V9" stroke-linecap="round"/></svg>
+            <span>Performance</span>
+          </div>
+          <div class="tab">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke-linecap="round"/></svg>
+            <span>Settings</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="label"><b>1 · Configurations</b> — Timer tab root (§7.1)</div>
+  </div>
+
+  <!-- ============ 2. CONFIG EDITOR (§7.2) ============ -->
+  <div class="cell">
+    <div class="phone" data-theme="dark">
+      <div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="glyphs">
+          <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="currentColor"/><rect x="5" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="10" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="15" y="1" width="3" height="11" rx="1" fill="currentColor" opacity="0.4"/></svg>
+          <svg width="24" height="12" viewBox="0 0 24 12"><rect x="1" y="1" width="19" height="10" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.5"/><rect x="3" y="3" width="13" height="6" rx="1.5" fill="currentColor"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor" opacity="0.5"/></svg>
+        </span></div>
+        <div class="content stack" style="gap:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <button class="btn-text" style="color:var(--text-secondary);">Cancel</button>
+            <span class="overline">New Workout</span>
+            <button class="btn-text">&nbsp;</button>
+          </div>
+
+          <div style="text-align:center;padding:6px 0 2px;">
+            <div style="font-size:26px;font-weight:800;letter-spacing:-0.4px;">Heavy Bag Blast</div>
+            <div style="font-size:14px;color:var(--text-secondary);margin-top:4px;">15:00 total · auto-named</div>
+          </div>
+
+          <div class="field-row" style="display:block;">
+            <div class="overline" style="margin-bottom:8px;">Workout type</div>
+            <div class="segmented neutral" style="font-size:11px;">
+              <div class="seg">Shadow</div><div class="seg on">Bag</div><div class="seg">Skip</div><div class="seg">Speed</div><div class="seg">Spar</div>
+            </div>
+          </div>
+
+          <div class="field-row"><span class="lbl">Rounds</span>
+            <div class="stepper"><button class="step-btn">−</button><span class="val">12</span><button class="step-btn">+</button></div>
+          </div>
+          <div class="field-row"><span class="lbl">Round time</span>
+            <div class="stepper"><button class="step-btn">−</button><span class="val">3:00</span><button class="step-btn">+</button></div>
+          </div>
+          <div class="field-row"><span class="lbl">Rest time</span>
+            <div class="stepper"><button class="step-btn">−</button><span class="val">1:00</span><button class="step-btn">+</button></div>
+          </div>
+          <div class="field-row"><span class="lbl">Prep time</span>
+            <div class="stepper"><button class="step-btn">−</button><span class="val">0:10</span><button class="step-btn">+</button></div>
+          </div>
+          <div class="field-row"><span class="lbl">Warning lead</span>
+            <div class="stepper"><button class="step-btn">−</button><span class="val">0:10</span><button class="step-btn">+</button></div>
+          </div>
+
+          <div style="flex:1;"></div>
+          <button class="btn-primary" style="margin-bottom:14px;">Save workout</button>
+        </div>
+        <div class="tabbar">
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M9 2h6" stroke-linecap="round"/></svg><span>Timer</span></div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20h18M6 20V11M11 20V6M16 20v-5M21 20V9" stroke-linecap="round"/></svg><span>Performance</span></div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke-linecap="round"/></svg><span>Settings</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label"><b>2 · Config editor</b> — create / edit (§7.2)</div>
+  </div>
+
+  <!-- ============ 3. WORKOUT (running) (§7.3) ============ -->
+  <div class="cell">
+    <div class="phone" data-theme="dark">
+      <div class="screen" style="background:linear-gradient(180deg, color-mix(in srgb, var(--phase-round) 8%, var(--canvas)), var(--canvas) 55%);">
+        <div class="statusbar"><span>9:41</span><span class="glyphs">
+          <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="currentColor"/><rect x="5" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="10" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="15" y="1" width="3" height="11" rx="1" fill="currentColor"/></svg>
+          <svg width="24" height="12" viewBox="0 0 24 12"><rect x="1" y="1" width="19" height="10" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.5"/><rect x="3" y="3" width="13" height="6" rx="1.5" fill="currentColor"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor" opacity="0.5"/></svg>
+        </span></div>
+        <div class="content stack">
+          <div style="text-align:right;font-size:13px;color:var(--text-secondary);padding-top:2px;">Heavy Bag Blast</div>
+
+          <div class="hero">
+            <div class="ring-wrap">
+              <svg viewBox="0 0 244 244">
+                <circle cx="122" cy="122" r="115" fill="none" stroke="var(--track-dim)" stroke-width="14"/>
+                <circle cx="122" cy="122" r="115" fill="none" stroke="var(--phase-round)" stroke-width="14"
+                        stroke-linecap="round" stroke-dasharray="332.4 390.1" stroke-dashoffset="0"/>
+              </svg>
+              <div class="ring-center">
+                <span class="phase-badge" style="background:color-mix(in srgb, var(--phase-round) 16%, transparent);color:var(--phase-round);">● Round 3 / 12</span>
+                <span class="timer-num">01:23</span>
+                <span class="timer-sub">12:40 left</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="transport">
+            <button class="icon-btn secondary disabled">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v4h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="primary">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4.2" height="14" rx="1.3"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.3"/></svg>
+            </button>
+          </div>
+          <div style="height:14px;"></div>
+        </div>
+        <div class="tabbar">
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M9 2h6" stroke-linecap="round"/></svg><span>Timer</span></div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20h18M6 20V11M11 20V6M16 20v-5M21 20V9" stroke-linecap="round"/></svg><span>Performance</span></div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke-linecap="round"/></svg><span>Settings</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label"><b>3 · Workout (running)</b> — the hero screen, round phase (§7.3)</div>
+  </div>
+
+  <!-- ============ 4. PERFORMANCE (§7.4) ============ -->
+  <div class="cell">
+    <div class="phone" data-theme="dark">
+      <div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="glyphs">
+          <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="currentColor"/><rect x="5" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="10" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="15" y="1" width="3" height="11" rx="1" fill="currentColor" opacity="0.4"/></svg>
+          <svg width="24" height="12" viewBox="0 0 24 12"><rect x="1" y="1" width="19" height="10" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.5"/><rect x="3" y="3" width="13" height="6" rx="1.5" fill="currentColor"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor" opacity="0.5"/></svg>
+        </span></div>
+        <div class="content stack" style="gap:14px;">
+          <div style="padding-top:6px;"><div class="screen-title">Performance</div></div>
+
+          <div class="segmented neutral">
+            <div class="seg on">Week</div><div class="seg">Month</div><div class="seg">All</div>
+          </div>
+
+          <div class="tile-row">
+            <div class="tile"><div class="k">96<span style="font-size:13px;font-weight:600;color:var(--text-secondary);">min</span></div><div class="t">Active this week</div></div>
+            <div class="tile"><div class="k">7</div><div class="t">Sessions</div></div>
+            <div class="tile"><div class="k">58</div><div class="t">Rounds</div></div>
+          </div>
+
+          <div class="chart-card">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;">
+              <span class="overline">Active minutes</span>
+              <span style="font-size:12px;color:var(--text-secondary);">Mon–Sun</span>
+            </div>
+            <svg viewBox="0 0 300 150" style="width:100%;height:auto;margin-top:8px;" preserveAspectRatio="none">
+              <g stroke="var(--border)" stroke-width="1">
+                <line x1="0" y1="20" x2="300" y2="20"/><line x1="0" y1="55" x2="300" y2="55"/>
+                <line x1="0" y1="90" x2="300" y2="90"/><line x1="0" y1="125" x2="300" y2="125"/>
+              </g>
+              <polyline fill="none" stroke="var(--series-total)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"
+                points="6,96 55,78 104,84 153,50 202,58 251,30 294,22"/>
+              <polyline fill="none" stroke="var(--series-shadow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                points="6,118 55,112 104,120 153,100 202,108 251,92 294,88"/>
+              <polyline fill="none" stroke="var(--series-bag)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                points="6,124 55,108 104,116 153,96 202,104 251,84 294,80"/>
+              <polyline fill="none" stroke="var(--series-skip)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                points="6,132 55,128 104,122 153,124 202,116 251,120 294,110"/>
+              <polyline fill="none" stroke="var(--series-speed)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                points="6,138 55,134 104,136 153,128 202,132 251,126 294,124"/>
+              <polyline fill="none" stroke="var(--series-spar)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                points="6,140 55,142 104,138 153,140 202,134 251,138 294,132"/>
+            </svg>
+            <div class="legend">
+              <span class="li"><span class="dot" style="background:var(--series-total);"></span>Total</span>
+              <span class="li"><span class="dot" style="background:var(--series-shadow);"></span>Shadow</span>
+              <span class="li"><span class="dot" style="background:var(--series-bag);"></span>Heavy Bag</span>
+              <span class="li"><span class="dot" style="background:var(--series-skip);"></span>Skipping</span>
+              <span class="li"><span class="dot" style="background:var(--series-speed);"></span>Speed Ball</span>
+              <span class="li"><span class="dot" style="background:var(--series-spar);"></span>Sparring</span>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M9 2h6" stroke-linecap="round"/></svg><span>Timer</span></div>
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20h18M6 20V11M11 20V6M16 20v-5M21 20V9" stroke-linecap="round"/></svg><span>Performance</span></div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke-linecap="round"/></svg><span>Settings</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label"><b>4 · Performance</b> — training volume over time (§7.4)</div>
+  </div>
+
+  <!-- ============ 5. SETTINGS (§7.5) ============ -->
+  <div class="cell">
+    <div class="phone" data-theme="dark">
+      <div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="glyphs">
+          <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="currentColor"/><rect x="5" y="4" width="3" height="8" rx="1" fill="currentColor"/><rect x="10" y="1" width="3" height="11" rx="1" fill="currentColor"/><rect x="15" y="1" width="3" height="11" rx="1" fill="currentColor" opacity="0.4"/></svg>
+          <svg width="24" height="12" viewBox="0 0 24 12"><rect x="1" y="1" width="19" height="10" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.5"/><rect x="3" y="3" width="13" height="6" rx="1.5" fill="currentColor"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor" opacity="0.5"/></svg>
+        </span></div>
+        <div class="content stack" style="gap:20px;">
+          <div style="padding-top:6px;"><div class="screen-title">Settings</div></div>
+
+          <div class="stack" style="gap:8px;">
+            <div class="overline" style="padding-left:4px;">Warning sound</div>
+            <div class="settings-group">
+              <div class="settings-row"><span class="lead"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 13l2 6M16 13l-2 6M6 9l6-5 6 5-6 3z" stroke-linejoin="round"/></svg></span><span class="lbl">Wooden clap</span><span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="settings-row"><span class="lead"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10v4h4l6 5V5L7 10zM17 8a5 5 0 0 1 0 8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">Electronic horn</span></div>
+              <div class="settings-row"><span class="lead"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-2 8-2 8h16s-2-1-2-8M10 20a2 2 0 0 0 4 0" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">Buzzer</span></div>
+            </div>
+          </div>
+
+          <div class="stack" style="gap:8px;">
+            <div class="overline" style="padding-left:4px;">Timer display</div>
+            <div class="segmented neutral">
+              <div class="seg on">Count down</div><div class="seg">Count up</div>
+            </div>
+          </div>
+
+          <div class="stack" style="gap:8px;">
+            <div class="overline" style="padding-left:4px;">Appearance</div>
+            <div class="segmented neutral">
+              <div class="seg">Light</div><div class="seg">Dark</div><div class="seg on">System</div>
+            </div>
+          </div>
+
+          <div class="stack" style="gap:8px;">
+            <div class="overline" style="padding-left:4px;">Biometrics</div>
+            <div class="settings-group">
+              <div class="settings-row row-disabled"><span class="lead"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2 6 4-14 2 8h6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">Connect WHOOP</span><span class="coming-soon">Coming soon</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 13V9M9 2h6" stroke-linecap="round"/></svg><span>Timer</span></div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20h18M6 20V11M11 20V6M16 20v-5M21 20V9" stroke-linecap="round"/></svg><span>Performance</span></div>
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" stroke-linecap="round"/></svg><span>Settings</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="label"><b>5 · Settings</b> — sound · display · appearance (§7.5)</div>
+  </div>
+
+</div>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  let dark = true;
+  btn.addEventListener('click', () => {
+    dark = !dark;
+    document.querySelectorAll('.phone').forEach(p => p.setAttribute('data-theme', dark ? 'dark' : 'light'));
+    document.body.classList.toggle('lightstage', !dark);
+    btn.textContent = dark ? '◐  Switch to Light' : '◐  Switch to Dark';
+  });
+</script>
+</body>
+</html>
