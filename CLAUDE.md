@@ -2,7 +2,7 @@
 
 Swift 6 / SwiftUI iOS app (iOS 17+): a **local-first boxing round-timer**. No login, no backend — all state
 (configurations, sessions, settings) persists on-device via SwiftData / `UserDefaults`. The defining component
-is a **deterministic, clock-injected round-timer engine**; audio cues, charts, and a black/red Netflix-inspired
+is a **deterministic, clock-injected round-timer engine**; audio cues, charts, and a black/red cinematic
 theme (light + dark) sit around it. Product spec: [`prorounds_app_prompt.md`](prorounds_app_prompt.md).
 
 ## Architecture guide — read before feature work

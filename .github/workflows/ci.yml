@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Lint · Test · Coverage · Build
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Swift toolchain
+        run: swift --version
+
+      - name: Install tooling
+        run: brew install xcodegen swiftlint
+
+      - name: SwiftLint (strict)
+        run: ./scripts/lint.sh
+
+      - name: Test + coverage gate
+        run: ./scripts/coverage.sh
+        env:
+          COVERAGE_THRESHOLD: "90"
+
+      - name: Design-system snapshot tests (iOS simulator)
+        # References are device/OS-specific; SNAPSHOT_DEVICE must match the recording environment.
+        run: ./scripts/snapshot.sh
+        env:
+          SNAPSHOT_DEVICE: "iPhone 17 Pro"
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build app (iOS Simulator)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project ProRounds.xcodeproj \
+            -scheme ProRounds \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: UI flow test (iOS Simulator)
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project ProRounds.xcodeproj \
+            -scheme ProRounds \
+            -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+            -only-testing:ProRoundsUITests \
+            CODE_SIGNING_ALLOWED=NO

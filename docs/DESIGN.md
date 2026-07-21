@@ -13,7 +13,8 @@ token**, never a raw hex in a feature.
 ## 1. Design philosophy
 
 ProRounds should feel like a **premium fight-timer**: focused, confident, and cinematic — the calm of a corner
-between rounds and the intensity of the bell. We borrow Netflix's design language, not its brand.
+between rounds and the intensity of the bell. The language is dark-cinematic: bold, high-contrast, and
+edge-to-edge, so the interface recedes and the round takes center stage.
 
 **Five principles, applied on every screen:**
 
@@ -133,7 +134,7 @@ The raw palette exists only inside the design system, mapped to roles per appear
 | `color.success`       | `teal/500`       | `#0E9C8E`        | Saved / confirmations                           |
 | `color.danger`        | `red/600`        | `red/600`        | Destructive (delete a config)                   |
 
-**Reconciling Netflix + light mode.** Netflix's identity is dark-cinematic; light mode keeps the same *bones* —
+**Reconciling dark-cinematic + light mode.** The identity is dark-cinematic; light mode keeps the same *bones* —
 one hot red on a near-neutral field, bold type, generous space — but inverts to crisp white with soft shadows.
 It reads clean and premium, not "the dark theme with the lights off." The accent red is deliberately unchanged
 across appearances so the brand moment is constant.
@@ -146,8 +147,8 @@ legible to color-blind users and in bright sunlight.
 ## 4. Typography
 
 **Type family:** system **SF Pro** — `SF Pro Display` for ≥20 pt, `SF Pro Text` below, tabular/monospaced digits
-for anything counting. (SF is the closest high-quality stand-in for Netflix Sans and ships free with iOS; no
-custom font bundling in the MVP.) Large type uses **Heavy/Bold** with tight tracking for the Netflix punch.
+for anything counting. (SF is a high-quality system family that ships free with iOS; no
+custom font bundling in the MVP.) Large type uses **Heavy/Bold** with tight tracking for a cinematic punch.
 
 | Token          | Size/Weight            | Tracking | Use                                          |
 |----------------|------------------------|----------|----------------------------------------------|
@@ -357,16 +358,19 @@ Follow the **dataviz skill** when implementing this chart (categorical palette, 
 - Grouped sections with `type.overline` headers, `color.surface.raised` rows, hairline dividers.
 - (Phase 2 placeholder, disabled/"Coming soon": WHOOP connection.)
 
-**Chart categorical palette** (workout-type series — desaturated so no single line fights the brand red except
-where red *is* a series): Shadow Boxing `#E50914`, Skipping `#17C3B2`, Heavy Bag `#F5A623`, Speed Ball `#5B8DEF`,
-Sparring `#B06BF2`. Total line = `color.textPrimary`, heavier stroke. Validate contrast/order via the dataviz
-skill at build time.
+**Chart categorical palette** (workout-type series — one brand red plus four evenly-spaced, well-separated hues):
+Shadow Boxing `#E50914`, Skipping `#0E9C8E`, Heavy Bag `#B8770A`, Speed Ball `#2E6FE0`, Sparring `#B23A8A`. Total
+line = `color.textPrimary`, heavier stroke. **Validated** with the dataviz skill (2026-07-19): passes all six
+checks — lightness band, chroma, CVD separation, normal-vision floor, and contrast — against both the light and
+dark chart surfaces. The earlier draft (`#17C3B2`/`#F5A623`/`#5B8DEF`/`#B06BF2`) failed: the blue/purple pair was
+indistinguishable (normal-vision ΔE 13.5, below the 15 floor) and amber/teal were too light. The order is the
+workout-type spec order; hues follow the entity, never the rank.
 
 ---
 
 ## 8. Motion & haptics
 
-**Character:** weighted and smooth — Netflix-like ease, never playful bounce.
+**Character:** weighted and smooth — a cinematic ease, never playful bounce.
 
 | Moment                    | Motion                                                        | Duration/curve            |
 |---------------------------|--------------------------------------------------------------|---------------------------|
@@ -422,7 +426,7 @@ and screens that depend on it.
 
 | Decision | Choice | Where |
 |----------|--------|-------|
-| **Signature accent red** | `#E50914` (Netflix red), constant across light/dark | §3.1 `red/600`, §3.2 `color.accent` |
+| **Signature accent red** | `#E50914` (a hot cinematic red), constant across light/dark | §3.1 `red/600`, §3.2 `color.accent` |
 | **Rest-phase color** | Teal `#17C3B2` — cools rest so red owns "work" (Prepare stays amber) | §3.2 `color.phase.rest` |
 | **Appearance control** | Light / Dark / **System** (three-way, System default) | §7.5 |
 | **Performance chart Y-metric** | **Total active minutes** (sum of round time; rest/prep excluded) | §7.4 |

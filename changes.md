@@ -1,0 +1,6 @@
+- Don't want to auto start when selecting the workout, you should have to click the play button which is represented by the standard play symbol.
+- How do i edit an existing workout? 
+- Only want one name field that is editable with a pencil icon and not a default name and custom name field
+- THe no rounds button text is too close to the right and left edge, there needs to be additional space on either side
+- Default prep time should be 20 seconds 
+- Prep time shouldn't be included in the calculated total time

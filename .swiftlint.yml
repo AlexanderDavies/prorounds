@@ -1,0 +1,48 @@
+# SwiftLint configuration for ProRounds.
+# Run: swiftlint lint --strict   (CI treats any violation as a failure)
+
+included:
+  - Sources
+  - Tests
+  - ProRounds
+
+excluded:
+  - .build
+  - ProRounds.xcodeproj
+
+opt_in_rules:
+  - empty_count
+  - explicit_init
+  - first_where
+  - force_unwrapping
+  - redundant_nil_coalescing
+  - toggle_bool
+  - unneeded_parentheses_in_closure_argument
+
+analyzer_rules: []
+
+line_length:
+  warning: 120
+  error: 160
+  ignores_comments: true
+
+identifier_name:
+  min_length: 2
+  # Allow short, conventional names.
+  excluded: [id, x, y, h, m, s]
+
+type_name:
+  min_length: 3
+  max_length: 50
+
+# The timer engine and value math are inherently a little long; keep sane limits.
+function_body_length:
+  warning: 60
+  error: 100
+
+file_length:
+  warning: 400
+  error: 600
+
+force_unwrapping:
+  severity: warning

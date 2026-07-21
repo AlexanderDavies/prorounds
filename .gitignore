@@ -7,9 +7,10 @@
 # Swift / SwiftPM
 .build/
 .swiftpm/
-Package.resolved
 
-# Xcode
+# Xcode — the project + Info.plist are generated from project.yml by XcodeGen; never commit them
+ProRounds.xcodeproj/
+ProRounds/Info.plist
 *.xcuserstate
 xcuserdata/
 DerivedData/

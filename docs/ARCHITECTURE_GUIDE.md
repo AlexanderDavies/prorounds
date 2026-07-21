@@ -122,7 +122,7 @@ These sit **above** §0.1–§0.5 when they conflict.
 5. **Privacy & minimal data.** Collect only what a feature needs; no analytics of user activity, no PII, no
    third-party trackers. **(Phase 2)** WHOOP / HealthKit biometrics are sensitive health data — kept on-device,
    never logged, accessed only with explicit user consent, and easy to revoke.
-6. **Both appearances, accessible.** Light and dark mode are both first-class. The black/red, Netflix-inspired
+6. **Both appearances, accessible.** Light and dark mode are both first-class. The black/red, cinematic
    theme still meets contrast, Dynamic Type, and VoiceOver expectations (§13).
 
 #### The invariants, mapped onto this guide's sections
@@ -320,7 +320,7 @@ One responsibility per type; the suffix names it. SwiftLint file-name + custom r
 - **Foundation (`ProRoundsFoundation*`)** — cross-cutting capability with **no product logic**: `Timing`
   (the `TimeSource` seam), `Audio` (playback + `AVAudioSession`), `Persistence` (the `ModelContainer`),
   `Diagnostics`, `Utilities`, and (Phase 2) `Health`.
-- **DesignSystem (`ProRoundsDesignSystem`)** — theme tokens (black/red, Netflix-inspired), reusable components,
+- **DesignSystem (`ProRoundsDesignSystem`)** — theme tokens (black/red, cinematic), reusable components,
   snapshot-tested. Foundation-level; importable by Feature + App; holds no product logic.
 
 ### 2.5 The composition root
@@ -964,7 +964,7 @@ Foundation-level (importable by Feature + App) and holds **no product logic**.
 
 ### 13.1 The theme
 
-- **Black & red, Netflix-inspired** — dark-first, bold typography, edge-to-edge, high contrast, confident red
+- **Black & red, cinematic** — dark-first, bold typography, edge-to-edge, high contrast, confident red
   accents (per the prompt's Design section).
 - **Both appearances are first-class.** Define semantic tokens (`Color.brandAccent`, `Color.surface`,
   `Color.timerRing`) that resolve for **light and dark**, driven by the user's theme toggle

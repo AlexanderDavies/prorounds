@@ -86,7 +86,7 @@ Controls and display:
 ## Design
 
 - **Black and red** theme; sleek and minimal.
-- Follow **Netflix's design principles / look and feel** — dark-first, bold typography,
+- Follow a **dark-cinematic design language** — dark-first, bold typography,
   edge-to-edge content, high contrast, confident use of red accents.
 - Smooth transitions and a polished, premium feel.
 - Fully functional in both **light and dark mode**.
