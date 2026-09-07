@@ -43,6 +43,9 @@ targets:
         product: ProRoundsFeatureSettings
       - package: ProRoundsModules
         product: ProRoundsDataSettings
+      # Assisted coaching: the catalog + scheduler, and the entitlement seam the root injects.
+      - package: ProRoundsModules
+        product: ProRoundsFoundationCoaching
     # Generated Info.plist so we can declare the audio background mode (cues fire when locked).
     info:
       path: ProRounds/Info.plist

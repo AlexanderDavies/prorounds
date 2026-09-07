@@ -56,7 +56,8 @@ public struct ConfigListView: View {
             List {
                 ForEach(model.rows) { row in
                     ConfigCard(iconSystemName: row.iconSystemName, name: row.name,
-                               metadata: row.metadata, totalText: row.totalText)
+                               metadata: row.metadata, totalText: row.totalText,
+                               coachingBadge: row.coachingBadge)
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                         .listRowInsets(EdgeInsets(top: Spacing.xs, leading: Spacing.md,

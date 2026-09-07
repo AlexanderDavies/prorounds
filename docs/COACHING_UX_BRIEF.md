@@ -109,6 +109,29 @@ For reference, the leading candidate when it does land: one-time StoreKit 2 non-
 (`Transaction.currentEntitlements` needs no backend, survives reinstall — respects local-first),
 with the first round of any coached workout playing free so the coach is heard before the ask.
 
+## Implementation status (updated 2026-09-08)
+
+**Decisions 1, 2, 4 and 5 are built.** Decision 3 (the dual-convention ticker) is not — it belongs to
+the running screen, which is the next change.
+
+- **Decision 1** — catalog and scheduler shipped in `ProRoundsFoundationCoaching`, reproducing
+  `scripts/coach-script.py` byte for byte against 49 committed fixtures.
+- **Decision 2** — `Configuration.coachingLevel`, an optional `CoachingLevel`. The editor offers a
+  Coaching section only for workout types with an authored script, and clears the level if the type
+  changes to one without. The `Coach: Off ▾` chip on the idle workout screen is *not* built; it is
+  the second entry point into this same stored value and lands with the running screen.
+- **Decision 4** — `namingConvention` on `SettingsStore`, reusing `NamingConvention` from the
+  coaching module rather than declaring a second enum, so the setting and the scheduler cannot drift.
+  Surfaced in Settings with an example of the coach's words per option; the coaching-sheet mirror
+  lands with the running screen.
+- **Decision 5** — `EntitlementStore` seam, `UnlockedEntitlementStore` in v1, constructed only at the
+  composition root. It returns a plain `Bool` **synchronously** — no `async`, no publisher — so the
+  rule that a paywall can never stall a round is enforced by the type rather than by discipline. A
+  test asserts the timer target does not depend on the coaching module at all.
+
+Two mockup-stage items also landed: the minimal-screen preference is a global `SettingsStore` value,
+and the `ConfigCard` badge names the level rather than merely marking a card as coached.
+
 ## Script content — direction for the authoring stage
 
 - **Punches** — Beginner capped at 1/2/3 (jab, cross, lead hook). 4–6 unlock at Intermediate.

@@ -42,7 +42,12 @@ private enum LegacySchema {
     }
 }
 
-@Suite("Migration from the pre-coaching store")
+/// **Serialized on purpose.** `LegacySchema.ConfigurationEntity` deliberately shares its class name
+/// with the shipped entity — that is what makes the fixture a real old store — but SwiftData keys
+/// stored entities on that name, so two models claiming it must never be live at once. Overlapping
+/// containers intermittently drop the newer column (a coached configuration reads back uncoached)
+/// and can abort the whole test run.
+@Suite("Migration from the pre-coaching store", .serialized)
 struct ConfigurationMigrationTests {
     private struct Seed {
         let id = UUID()
@@ -71,6 +76,8 @@ struct ConfigurationMigrationTests {
                 customName: seed.name, createdAt: .now, updatedAt: .now))
         }
         try context.save()
+        // Drop the legacy container before returning: its entity description must not be live when
+        // a container for the shipped entity is created.
         return directory
     }
 
@@ -129,7 +136,7 @@ struct ConfigurationMigrationTests {
     }
 }
 
-@Suite("Coaching persistence")
+@Suite("Coaching persistence", .serialized)
 struct CoachingPersistenceTests {
     private func make(_ level: CoachingLevel?) -> Configuration {
         Configuration(workoutType: .heavyBag, rounds: 5, roundDuration: .seconds(120),

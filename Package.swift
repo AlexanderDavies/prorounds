@@ -102,6 +102,7 @@ let package = Package(
             "ProRoundsDataSettings",
             "ProRoundsDesignSystem",
             "ProRoundsFoundationAudio",
+            "ProRoundsFoundationCoaching",
             "ProRoundsFoundationUtilities",
         ]),
 
@@ -154,6 +155,7 @@ let package = Package(
         .testTarget(name: "ProRoundsFeatureSettingsTests", dependencies: [
             "ProRoundsFeatureSettings",
             "ProRoundsFoundationAudio",
+            "ProRoundsFoundationCoaching",
             .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
         ], exclude: ["__Snapshots__"]),
         .testTarget(name: "ProRoundsDesignSystemTests", dependencies: [

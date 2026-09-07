@@ -61,8 +61,10 @@ renders training-volume-over-time with Swift Charts, and `ProRoundsFeatureSettin
 `ProRoundsDataSettings`) owns the warning sound, timer display, and appearance preferences.
 `ProRoundsFoundationCoaching` holds the assisted-coaching catalog and cue scheduler — pure, with no
 audio and no UI. It ships the 115 voice clips and reproduces `scripts/coach-script.py` byte for byte,
-which its tests assert against committed fixtures. Nothing links it yet; the app wires it in a later
-change. The app
+which its tests assert against committed fixtures. It also owns the `EntitlementStore` seam, which
+the composition root constructs. A `Configuration` carries an optional `CoachingLevel`, and the
+naming convention plus the minimal-screen preference live in `SettingsStore`. Cue playback and the
+running-screen ticker are not built yet. The app
 target hosts the **composition root** (`AppEnvironment` + `ViewModelFactory`, one shared store for
 configs + sessions, a shared `SettingsViewModel` driving `preferredColorScheme`); the Timer tab runs
 workouts (saving a session on completion), Performance shows the chart, and Settings persists
@@ -88,7 +90,9 @@ xcodebuild test -project ProRounds.xcodeproj -scheme ProRounds \
 # Generate the Xcode project (after any project.yml change)
 xcodegen generate
 
-# Run the logic test suite (Swift Testing, macOS host)
+# Run the logic test suite (Swift Testing, macOS host). Runs serially — see the note in test.sh:
+# the schema-migration fixture registers a second model under the shipped entity's name, which is
+# not safe to have live concurrently with the real one.
 ./scripts/test.sh
 
 # Lint (strict — any violation fails)

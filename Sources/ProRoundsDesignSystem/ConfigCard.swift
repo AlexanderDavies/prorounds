@@ -8,12 +8,25 @@ public struct ConfigCard: View {
     public let name: String
     public let metadata: String
     public let totalText: String
+    /// The coaching level's name when the workout is coached, otherwise nil.
+    ///
+    /// Carries the level's *name* rather than merely marking the card as coached, so a second level
+    /// is a new string rather than a redesign. Defaulted to nil so every existing call site — and
+    /// every existing snapshot — is unaffected.
+    public let coachingBadge: String?
 
-    public init(iconSystemName: String, name: String, metadata: String, totalText: String) {
+    public init(
+        iconSystemName: String,
+        name: String,
+        metadata: String,
+        totalText: String,
+        coachingBadge: String? = nil
+    ) {
         self.iconSystemName = iconSystemName
         self.name = name
         self.metadata = metadata
         self.totalText = totalText
+        self.coachingBadge = coachingBadge
     }
 
     public var body: some View {
@@ -31,10 +44,24 @@ public struct ConfigCard: View {
                     .fontToken(.headline)
                     .foregroundStyle(ProRoundsColor.textPrimary)
                     .lineLimit(1)
-                Text(metadata)
-                    .fontToken(.subhead)
-                    .foregroundStyle(ProRoundsColor.textSecondary)
-                    .lineLimit(1)
+                HStack(spacing: Spacing.xs) {
+                    Text(metadata)
+                        .fontToken(.subhead)
+                        .foregroundStyle(ProRoundsColor.textSecondary)
+                        .lineLimit(1)
+                    if let coachingBadge {
+                        Text(coachingBadge)
+                            .fontToken(.caption)
+                            .foregroundStyle(ProRoundsColor.accent)
+                            .padding(.horizontal, Spacing.xs)
+                            .padding(.vertical, 1)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: Radius.sm)
+                                    .stroke(ProRoundsColor.accent.opacity(0.5), lineWidth: 1)
+                            )
+                            .accessibilityLabel("Coached, \(coachingBadge)")
+                    }
+                }
             }
 
             Spacer(minLength: Spacing.sm)
