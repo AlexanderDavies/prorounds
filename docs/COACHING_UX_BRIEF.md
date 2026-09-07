@@ -111,8 +111,7 @@ with the first round of any coached workout playing free so the coach is heard b
 
 ## Implementation status (updated 2026-09-08)
 
-**Decisions 1, 2, 4 and 5 are built.** Decision 3 (the dual-convention ticker) is not — it belongs to
-the running screen, which is the next change.
+**All five decisions are built.**
 
 - **Decision 1** — catalog and scheduler shipped in `ProRoundsFoundationCoaching`, reproducing
   `scripts/coach-script.py` byte for byte against 49 committed fixtures.
@@ -120,6 +119,11 @@ the running screen, which is the next change.
   Coaching section only for workout types with an authored script, and clears the level if the type
   changes to one without. The `Coach: Off ▾` chip on the idle workout screen is *not* built; it is
   the second entry point into this same stored value and lands with the running screen.
+- **Decision 3** — the dual-convention ticker renders on the running screen: numbers small above,
+  names large below, modifier separate beneath. Fed by strings resolved in the planner, so the timer
+  module names no coaching type. It carries every call, because it is the entire channel for a user
+  who cannot hear the coach — and its accessible description joins call and modifier into one phrase
+  rather than announcing three fragments.
 - **Decision 4** — `namingConvention` on `SettingsStore`, reusing `NamingConvention` from the
   coaching module rather than declaring a second enum, so the setting and the scheduler cannot drift.
   Surfaced in Settings with an example of the coach's words per option; the coaching-sheet mirror
@@ -129,8 +133,14 @@ the running screen, which is the next change.
   rule that a paywall can never stall a round is enforced by the type rather than by discipline. A
   test asserts the timer target does not depend on the coaching module at all.
 
-Two mockup-stage items also landed: the minimal-screen preference is a global `SettingsStore` value,
-and the `ConfigCard` badge names the level rather than merely marking a card as coached.
+Two mockup-stage items also landed: the minimal-screen preference is a global `SettingsStore` value
+(and now strips the running screen back during a coached round), and the `ConfigCard` badge names the
+level rather than merely marking a card as coached.
+
+Cue playback rides the engine's own monotonic-deadline clock as a new kind of cue — never a second
+timeline. The `RoundCuePlanning` seam takes offsets only, so it cannot express a delay or hold a
+clock, and `ProRoundsFeatureTimer` has no dependency on the coaching module at all. That last point
+is enforced by `ProRoundsArchitectureTests`, because SwiftPM does not enforce it.
 
 ## Script content — direction for the authoring stage
 

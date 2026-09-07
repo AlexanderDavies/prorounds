@@ -61,12 +61,12 @@ struct ViewModelFactory {
         guard let level = configuration.coachingLevel else { return NoRoundCuePlanner() }
         _ = level  // Beginner is the only level in v1; it selects no variant yet.
         let warningMs = Int(configuration.warningLead.components.seconds) * 1000
-        return (try? CoachCuePlanner.make(
+        return CoachCuePlanner.makeOrSilent(
             workoutType: configuration.workoutType,
             configID: configuration.id.uuidString,
             convention: environment.settingsStore.namingConvention,
             warningMs: warningMs,
-            entitlement: environment.entitlementStore)) ?? NoRoundCuePlanner()
+            entitlement: environment.entitlementStore)
     }
 
     /// The naming-convention choices, resolved to strings because `ProRoundsFeatureTimer` cannot

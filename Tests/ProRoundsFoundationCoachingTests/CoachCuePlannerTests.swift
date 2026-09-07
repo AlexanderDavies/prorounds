@@ -135,3 +135,36 @@ struct ScriptAvailabilityTests {
         #expect(scripted == ["shadowBoxing", "heavyBag"])
     }
 }
+
+@Suite("Coaching degrades rather than failing")
+struct CoachPlannerDegradationTests {
+    /// A bundle with no coaching resources — what a botched build or a stripped asset looks like.
+    private var emptyBundle: Bundle { Bundle(for: BundleMarker.self) }
+    private final class BundleMarker {}
+
+    @Test("a missing catalog throws from make")
+    func makeThrowsWithoutACatalog() {
+        #expect(throws: (any Error).self) {
+            try CoachCuePlanner.make(
+                workoutType: .shadowBoxing, configID: "cfg", convention: .numbers,
+                warningMs: 10_000, entitlement: UnlockedEntitlementStore(), bundle: emptyBundle)
+        }
+    }
+
+    /// The rule that matters at launch: a content problem must never cost the user their timer.
+    @Test("a missing catalog degrades to silence, not a crash")
+    func degradesToSilence() {
+        let planner = CoachCuePlanner.makeOrSilent(
+            workoutType: .shadowBoxing, configID: "cfg", convention: .numbers,
+            warningMs: 10_000, entitlement: UnlockedEntitlementStore(), bundle: emptyBundle)
+        #expect(planner.cues(forRound: 0, length: .seconds(180)).isEmpty)
+    }
+
+    @Test("with the real bundle, makeOrSilent still plans")
+    func realBundleStillPlans() {
+        let planner = CoachCuePlanner.makeOrSilent(
+            workoutType: .shadowBoxing, configID: "cfg", convention: .numbers,
+            warningMs: 10_000, entitlement: UnlockedEntitlementStore())
+        #expect(!planner.cues(forRound: 0, length: .seconds(180)).isEmpty)
+    }
+}

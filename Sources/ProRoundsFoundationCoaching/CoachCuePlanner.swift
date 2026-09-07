@@ -42,6 +42,25 @@ public struct CoachCuePlanner: RoundCuePlanning {
         return NoRoundCuePlanner()
     }
 
+    /// The same as `make`, but a catalog that cannot be loaded yields a planner that plans nothing
+    /// rather than throwing.
+    ///
+    /// The composition root uses this: a content problem must never cost the user their timer. The
+    /// degradation lives here rather than as a `try?` at the call site so it is covered by tests —
+    /// the app target is not compiled by the package suite at all.
+    public static func makeOrSilent(
+        workoutType: WorkoutType,
+        configID: String,
+        convention: NamingConvention,
+        warningMs: Int,
+        entitlement: any EntitlementStore,
+        bundle: Bundle = CoachingBundle.resources
+    ) -> any RoundCuePlanning {
+        (try? make(workoutType: workoutType, configID: configID, convention: convention,
+                   warningMs: warningMs, entitlement: entitlement, bundle: bundle))
+            ?? NoRoundCuePlanner()
+    }
+
     init(
         catalog: CoachCatalog, script: CoachScript, configID: String,
         convention: NamingConvention, warningMs: Int, bundle: Bundle

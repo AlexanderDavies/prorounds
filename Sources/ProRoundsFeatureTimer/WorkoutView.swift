@@ -36,7 +36,8 @@ struct WorkoutContentView: View {
                         phaseColor: phaseColor,
                         badgeLabel: display.phaseLabel,
                         numeral: display.timeLabel,
-                        totalRemaining: display.totalRemainingLabel
+                        totalRemaining: display.hidesSecondaryDetail
+                            ? "" : display.totalRemainingLabel
                     )
 
                     if let call = display.currentCall {

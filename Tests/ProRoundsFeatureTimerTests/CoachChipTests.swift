@@ -77,3 +77,42 @@ struct CoachChipTests {
         #expect(!display(coaching: .beginner, started: false, minimal: true).hidesSecondaryDetail)
     }
 }
+
+@MainActor
+@Suite("What minimal actually hides")
+struct MinimalScreenContentTests {
+    private func display(minimal: Bool, coached: Bool = true, started: Bool = true) -> WorkoutDisplayModel {
+        let call = CoachCallDisplay(primary: "Jab Cross", secondary: "1 · 2", modifier: nil)
+        let snapshot = WorkoutSnapshot(
+            phase: .round(index: 3), remaining: .seconds(95), elapsedInPhase: .seconds(85),
+            elapsedTotal: .seconds(560), totalDuration: .seconds(2830), roundCount: 12,
+            isPaused: false, started: started, currentCall: coached ? call : nil)
+        return WorkoutDisplayModel(snapshot, direction: .countDown, workoutType: .heavyBag,
+                                   coachingLevel: coached ? .beginner : nil, minimalScreen: minimal)
+    }
+
+    /// Asserting the *effect*, not the flag. The first version of this feature set the flag
+    /// correctly and hid almost nothing — the two rendered screens were near-identical, which only
+    /// showed up in a snapshot.
+    @Test("minimal keeps the time, the phase and the call")
+    func keepsTheEssentials() {
+        let minimal = display(minimal: true)
+        #expect(minimal.timeLabel == "1:35")
+        #expect(minimal.phaseLabel == "Round 3 / 12")
+        #expect(minimal.currentCall?.primary == "Jab Cross")
+    }
+
+    @Test("minimal drops the total-remaining line, which normal keeps")
+    func dropsTotalRemaining() {
+        #expect(display(minimal: true).hidesSecondaryDetail)
+        #expect(!display(minimal: false).hidesSecondaryDetail)
+        // The label is still computed — the view decides not to draw it — so the two differ only
+        // in what the screen shows, not in what the model knows.
+        #expect(display(minimal: true).totalRemainingLabel == display(minimal: false).totalRemainingLabel)
+    }
+
+    @Test("an uncoached workout is never stripped, whatever the preference")
+    func uncoachedIsUntouched() {
+        #expect(!display(minimal: true, coached: false).hidesSecondaryDetail)
+    }
+}

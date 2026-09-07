@@ -22,8 +22,18 @@ export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Develope
 DEVICE="${SNAPSHOT_DEVICE:-iPhone 17 Pro}"
 DESTINATION="platform=iOS Simulator,name=${DEVICE}"
 
+# Recording is selected by a COMPILER FLAG, not an environment variable.
+#
+# xcodebuild does not forward an exported variable into the simulator's test process, so the
+# library never saw SNAPSHOT_TESTING_RECORD and RECORD=1 silently did nothing — it only appeared to
+# work because swift-snapshot-testing writes a reference that is entirely missing whatever the
+# record mode is. Changed references were never re-recorded. Build settings do propagate, so the
+# suites read `#if RECORD_SNAPSHOTS` instead.
+# Always set, never an empty array: `set -u` on the bash that ships with macOS treats an empty
+# array expansion as an unbound variable, which silently turned a verification run into a no-op.
+SWIFT_FLAGS='$(inherited)'
 if [[ "${RECORD:-0}" == "1" ]]; then
-  export SNAPSHOT_TESTING_RECORD=all
+  SWIFT_FLAGS='$(inherited) -D RECORD_SNAPSHOTS'
   echo "Recording snapshot references on ${DEVICE}…"
 fi
 
@@ -48,4 +58,5 @@ exec xcodebuild test \
   -only-testing:ProRoundsFeaturePerformanceTests \
   -only-testing:ProRoundsFeatureSettingsTests \
   -derivedDataPath "$DERIVED" \
-  CODE_SIGNING_ALLOWED=NO
+  CODE_SIGNING_ALLOWED=NO \
+  "OTHER_SWIFT_FLAGS=${SWIFT_FLAGS}"

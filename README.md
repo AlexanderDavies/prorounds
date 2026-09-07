@@ -107,8 +107,17 @@ xcodegen generate
 # Tests + coverage gate (default 90%; engine always included, DesignSystem views excluded)
 ./scripts/coverage.sh
 
-# Design-system snapshot tests (iOS simulator). Re-record references with RECORD=1.
+# Design-system + running-screen snapshot tests (iOS simulator). Re-record with RECORD=1.
+# RECORD passes TEST_RUNNER_SNAPSHOT_TESTING_RECORD to xcodebuild — a plain `export` does not
+# reach the test process, which is why re-recording silently did nothing before.
+# Works here: xcode-select reports Command Line Tools, but full Xcode is installed and the
+# scripts fall back to it. Checking `xcode-select -p` alone gives the wrong answer.
 ./scripts/snapshot.sh
+
+# The app target. `swift test` does NOT compile ProRounds/, so the composition root is only
+# type-checked here — two undeclared module imports reached main before this was run.
+xcodebuild -project ProRounds.xcodeproj -scheme ProRounds \
+  -destination 'platform=iOS Simulator,name=iPhone 17' build
 
 # Coach-script content checks (no Swift toolchain needed) — see docs/coaching/
 ./scripts/coach-script.py validate
