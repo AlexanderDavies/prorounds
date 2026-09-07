@@ -1,0 +1,1441 @@
+{
+  "version": 1,
+  "level": "beginner",
+  "note": "Single source of truth for coaching phrase IDs. Scripts reference these IDs; they never inline text.",
+  "clipFolders": {
+    "forked": [
+      "clips/numbers/<id>.m4a",
+      "clips/names/<id>.m4a"
+    ],
+    "shared": [
+      "clips/shared/<id>.m4a"
+    ]
+  },
+  "phrases": [
+    {
+      "id": "jab",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab"
+      ],
+      "estMs": 600,
+      "text": {
+        "numbers": "One",
+        "names": "Jab"
+      },
+      "ticker": {
+        "numbers": "1",
+        "names": "Jab"
+      }
+    },
+    {
+      "id": "double_jab",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab"
+      ],
+      "estMs": 900,
+      "text": {
+        "numbers": "One, one",
+        "names": "Jab, jab"
+      },
+      "ticker": {
+        "numbers": "1 · 1",
+        "names": "Jab Jab"
+      }
+    },
+    {
+      "id": "triple_jab",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab"
+      ],
+      "estMs": 1200,
+      "text": {
+        "numbers": "One, one, one",
+        "names": "Jab, jab, jab"
+      },
+      "ticker": {
+        "numbers": "1 · 1 · 1",
+        "names": "Jab Jab Jab"
+      }
+    },
+    {
+      "id": "hook",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "hook"
+      ],
+      "estMs": 600,
+      "text": {
+        "numbers": "Three",
+        "names": "Hook"
+      },
+      "ticker": {
+        "numbers": "3",
+        "names": "Hook"
+      }
+    },
+    {
+      "id": "jab_cross",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross"
+      ],
+      "estMs": 900,
+      "text": {
+        "numbers": "One, two",
+        "names": "Jab, cross"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross"
+      }
+    },
+    {
+      "id": "jab_jab_cross",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross"
+      ],
+      "estMs": 1200,
+      "text": {
+        "numbers": "One, one, two",
+        "names": "Jab, jab, cross"
+      },
+      "ticker": {
+        "numbers": "1 · 1 · 2",
+        "names": "Jab Jab Cross"
+      }
+    },
+    {
+      "id": "jab_hook",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "hook"
+      ],
+      "estMs": 900,
+      "text": {
+        "numbers": "One, three",
+        "names": "Jab, hook"
+      },
+      "ticker": {
+        "numbers": "1 · 3",
+        "names": "Jab Hook"
+      }
+    },
+    {
+      "id": "cross_hook",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "cross",
+        "hook"
+      ],
+      "estMs": 900,
+      "text": {
+        "numbers": "Two, three",
+        "names": "Cross, hook"
+      },
+      "ticker": {
+        "numbers": "2 · 3",
+        "names": "Cross Hook"
+      }
+    },
+    {
+      "id": "jab_cross_hook",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "hook"
+      ],
+      "estMs": 1300,
+      "text": {
+        "numbers": "One, two, three",
+        "names": "Jab, cross, hook"
+      },
+      "ticker": {
+        "numbers": "1 · 2 · 3",
+        "names": "Jab Cross Hook"
+      }
+    },
+    {
+      "id": "cross_hook_cross",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "cross",
+        "hook"
+      ],
+      "estMs": 1300,
+      "text": {
+        "numbers": "Two, three, two",
+        "names": "Cross, hook, cross"
+      },
+      "ticker": {
+        "numbers": "2 · 3 · 2",
+        "names": "Cross Hook Cross"
+      }
+    },
+    {
+      "id": "jab_cross_hook_cross",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "hook"
+      ],
+      "estMs": 1600,
+      "text": {
+        "numbers": "One, two, three, two",
+        "names": "Jab, cross, hook, cross"
+      },
+      "ticker": {
+        "numbers": "1 · 2 · 3 · 2",
+        "names": "Jab Cross Hook Cross"
+      }
+    },
+    {
+      "id": "jab_body_jab_head",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "body"
+      ],
+      "estMs": 2000,
+      "text": {
+        "numbers": "One to the body, one upstairs",
+        "names": "Body jab, jab upstairs"
+      },
+      "ticker": {
+        "numbers": "1 · 1",
+        "names": "Jab Jab",
+        "modifier": "body, then upstairs"
+      }
+    },
+    {
+      "id": "jab_cross_body",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "body"
+      ],
+      "estMs": 1700,
+      "text": {
+        "numbers": "One, two to the body",
+        "names": "Jab, cross to the body"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross",
+        "modifier": "to the body"
+      }
+    },
+    {
+      "id": "jab_cross_body_hook_head",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "hook",
+        "body"
+      ],
+      "estMs": 2400,
+      "text": {
+        "numbers": "One, two to the body, three upstairs",
+        "names": "Jab, cross to the body, hook upstairs"
+      },
+      "ticker": {
+        "numbers": "1 · 2 · 3",
+        "names": "Jab Cross Hook",
+        "modifier": "body, then upstairs"
+      }
+    },
+    {
+      "id": "jab_cross_slip",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "defence"
+      ],
+      "estMs": 1400,
+      "text": {
+        "numbers": "One, two — slip",
+        "names": "Jab, cross — slip"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross",
+        "modifier": "slip"
+      }
+    },
+    {
+      "id": "jab_cross_roll",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "defence"
+      ],
+      "estMs": 1600,
+      "text": {
+        "numbers": "One, two — roll left",
+        "names": "Jab, cross — roll left"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross",
+        "modifier": "roll left"
+      }
+    },
+    {
+      "id": "jab_cross_hook_pivot",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "hook",
+        "movement"
+      ],
+      "estMs": 2000,
+      "text": {
+        "numbers": "One, two, three — pivot left",
+        "names": "Jab, cross, hook — pivot left"
+      },
+      "ticker": {
+        "numbers": "1 · 2 · 3",
+        "names": "Jab Cross Hook",
+        "modifier": "pivot left"
+      }
+    },
+    {
+      "id": "jab_step_in",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "movement"
+      ],
+      "estMs": 1200,
+      "text": {
+        "numbers": "One — step in behind it",
+        "names": "Jab — step in behind it"
+      },
+      "ticker": {
+        "numbers": "1",
+        "names": "Jab",
+        "modifier": "step in behind it"
+      }
+    },
+    {
+      "id": "jab_cross_out",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "movement"
+      ],
+      "estMs": 1500,
+      "text": {
+        "numbers": "One, two — and out",
+        "names": "Jab, cross — and out"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross",
+        "modifier": "and out"
+      }
+    },
+    {
+      "id": "double_jab_cross_angle",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "movement"
+      ],
+      "estMs": 1900,
+      "text": {
+        "numbers": "One, one, two — angle off",
+        "names": "Jab, jab, cross — angle off"
+      },
+      "ticker": {
+        "numbers": "1 · 1 · 2",
+        "names": "Jab Jab Cross",
+        "modifier": "angle off"
+      }
+    },
+    {
+      "id": "jab_cross_sit_down",
+      "kind": "combo",
+      "clip": "forked",
+      "tags": [
+        "jab",
+        "cross",
+        "bag"
+      ],
+      "estMs": 1800,
+      "text": {
+        "numbers": "One, two — sit down on it",
+        "names": "Jab, cross — sit down on it"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross",
+        "modifier": "sit down on it"
+      }
+    },
+    {
+      "id": "def_catch_the_jab",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "catch"
+      ],
+      "estMs": 1400,
+      "text": "Catch the jab",
+      "ticker": {
+        "line": "Catch the jab"
+      }
+    },
+    {
+      "id": "def_catch_catch",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "catch"
+      ],
+      "estMs": 1800,
+      "text": "Catch, catch — then answer",
+      "ticker": {
+        "line": "Catch, catch — answer"
+      }
+    },
+    {
+      "id": "def_catch_return",
+      "kind": "defence",
+      "clip": "forked",
+      "tags": [
+        "defence",
+        "catch",
+        "jab",
+        "cross"
+      ],
+      "estMs": 1900,
+      "text": {
+        "numbers": "Catch — one, two",
+        "names": "Catch — jab, cross"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross",
+        "modifier": "catch first"
+      }
+    },
+    {
+      "id": "def_block_the_hook",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "guard"
+      ],
+      "estMs": 1800,
+      "text": "Block the hook — tight guard",
+      "ticker": {
+        "line": "Block the hook"
+      }
+    },
+    {
+      "id": "def_parry_step_out",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "movement"
+      ],
+      "estMs": 1600,
+      "text": "Parry — step out",
+      "ticker": {
+        "line": "Parry — step out"
+      }
+    },
+    {
+      "id": "def_slip_left_right",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "slip",
+        "head"
+      ],
+      "estMs": 1600,
+      "text": "Slip left, slip right",
+      "ticker": {
+        "line": "Slip left, slip right"
+      }
+    },
+    {
+      "id": "def_slip_outside",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "slip",
+        "head"
+      ],
+      "estMs": 1700,
+      "text": "Slip outside the jab",
+      "ticker": {
+        "line": "Slip outside the jab"
+      }
+    },
+    {
+      "id": "def_slip_counter",
+      "kind": "defence",
+      "clip": "forked",
+      "tags": [
+        "defence",
+        "slip",
+        "jab",
+        "cross"
+      ],
+      "estMs": 1900,
+      "text": {
+        "numbers": "Slip — one, two",
+        "names": "Slip — jab, cross"
+      },
+      "ticker": {
+        "numbers": "1 · 2",
+        "names": "Jab Cross",
+        "modifier": "slip first"
+      }
+    },
+    {
+      "id": "def_slip_slip_cross",
+      "kind": "defence",
+      "clip": "forked",
+      "tags": [
+        "defence",
+        "slip",
+        "cross"
+      ],
+      "estMs": 2100,
+      "text": {
+        "numbers": "Slip, slip — two",
+        "names": "Slip, slip — cross"
+      },
+      "ticker": {
+        "numbers": "2",
+        "names": "Cross",
+        "modifier": "slip, slip first"
+      }
+    },
+    {
+      "id": "def_roll_left",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "roll",
+        "head"
+      ],
+      "estMs": 900,
+      "text": "Roll left",
+      "ticker": {
+        "line": "Roll left"
+      }
+    },
+    {
+      "id": "def_roll_right",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "roll",
+        "head"
+      ],
+      "estMs": 900,
+      "text": "Roll right",
+      "ticker": {
+        "line": "Roll right"
+      }
+    },
+    {
+      "id": "def_roll_roll",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "roll",
+        "head"
+      ],
+      "estMs": 1600,
+      "text": "Roll left, roll right",
+      "ticker": {
+        "line": "Roll left, roll right"
+      }
+    },
+    {
+      "id": "def_roll_hook",
+      "kind": "defence",
+      "clip": "forked",
+      "tags": [
+        "defence",
+        "roll",
+        "hook"
+      ],
+      "estMs": 1700,
+      "text": {
+        "numbers": "Roll right — three",
+        "names": "Roll right — hook"
+      },
+      "ticker": {
+        "numbers": "3",
+        "names": "Hook",
+        "modifier": "roll right first"
+      }
+    },
+    {
+      "id": "def_roll_counter",
+      "kind": "defence",
+      "clip": "forked",
+      "tags": [
+        "defence",
+        "roll",
+        "cross",
+        "hook"
+      ],
+      "estMs": 2000,
+      "text": {
+        "numbers": "Roll left — two, three",
+        "names": "Roll left — cross, hook"
+      },
+      "ticker": {
+        "numbers": "2 · 3",
+        "names": "Cross Hook",
+        "modifier": "roll left first"
+      }
+    },
+    {
+      "id": "def_catch_slip_roll",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "catch",
+        "slip",
+        "roll"
+      ],
+      "estMs": 1900,
+      "text": "Catch, slip, roll",
+      "ticker": {
+        "line": "Catch · slip · roll"
+      }
+    },
+    {
+      "id": "def_roll_off_the_line",
+      "kind": "defence",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "roll",
+        "head"
+      ],
+      "estMs": 1900,
+      "text": "Punch, then roll off the line",
+      "ticker": {
+        "line": "Roll off the line"
+      }
+    },
+    {
+      "id": "move_circle_left",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement"
+      ],
+      "estMs": 800,
+      "text": "Circle left",
+      "ticker": {
+        "line": "Circle left"
+      }
+    },
+    {
+      "id": "move_circle_right",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement"
+      ],
+      "estMs": 800,
+      "text": "Circle right",
+      "ticker": {
+        "line": "Circle right"
+      }
+    },
+    {
+      "id": "move_step_in_out",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement"
+      ],
+      "estMs": 1200,
+      "text": "Step in — step out",
+      "ticker": {
+        "line": "Step in — step out"
+      }
+    },
+    {
+      "id": "move_pivot_left",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement"
+      ],
+      "estMs": 800,
+      "text": "Pivot left",
+      "ticker": {
+        "line": "Pivot left"
+      }
+    },
+    {
+      "id": "move_angle_off",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement"
+      ],
+      "estMs": 800,
+      "text": "Angle off",
+      "ticker": {
+        "line": "Angle off"
+      }
+    },
+    {
+      "id": "move_reset",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement",
+        "stance"
+      ],
+      "estMs": 1300,
+      "text": "Reset — back to your stance",
+      "ticker": {
+        "line": "Reset your stance"
+      }
+    },
+    {
+      "id": "move_back_and_in",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement"
+      ],
+      "estMs": 1600,
+      "text": "Two steps back — then straight in",
+      "ticker": {
+        "line": "Back — then straight in"
+      }
+    },
+    {
+      "id": "move_walk_the_bag",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement",
+        "bag"
+      ],
+      "estMs": 1500,
+      "text": "Walk around it — keep it moving",
+      "ticker": {
+        "line": "Walk around it"
+      }
+    },
+    {
+      "id": "move_close_the_distance",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement",
+        "bag"
+      ],
+      "estMs": 1400,
+      "text": "Close the distance — get in on it",
+      "ticker": {
+        "line": "Close the distance"
+      }
+    },
+    {
+      "id": "move_out_of_range",
+      "kind": "movement",
+      "clip": "shared",
+      "tags": [
+        "movement",
+        "bag"
+      ],
+      "estMs": 1700,
+      "text": "Step out of range — then straight back in",
+      "ticker": {
+        "line": "Out of range — then in"
+      }
+    },
+    {
+      "id": "tech_balls_of_feet",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "stance"
+      ],
+      "estMs": 1600,
+      "text": "Stay on the balls of your feet",
+      "ticker": {
+        "line": "On the balls of your feet"
+      }
+    },
+    {
+      "id": "tech_feet_under",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "stance"
+      ],
+      "estMs": 1800,
+      "text": "Feet under you — never cross them",
+      "ticker": {
+        "line": "Feet under you"
+      }
+    },
+    {
+      "id": "tech_knees_soft",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "stance"
+      ],
+      "estMs": 1500,
+      "text": "Knees soft, weight even",
+      "ticker": {
+        "line": "Knees soft"
+      }
+    },
+    {
+      "id": "tech_lazy_hand",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard"
+      ],
+      "estMs": 1900,
+      "follows": [
+        "jab"
+      ],
+      "text": "Snap that jab back — don't leave it out there",
+      "ticker": {
+        "line": "Snap that jab back"
+      }
+    },
+    {
+      "id": "tech_chin_down",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard",
+        "head"
+      ],
+      "estMs": 900,
+      "text": "Chin down",
+      "ticker": {
+        "line": "Chin down"
+      }
+    },
+    {
+      "id": "tech_rear_hand_chin",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard"
+      ],
+      "estMs": 1500,
+      "text": "Rear hand glued to your chin",
+      "ticker": {
+        "line": "Rear hand glued to your chin"
+      }
+    },
+    {
+      "id": "tech_elbows_in",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard"
+      ],
+      "estMs": 1700,
+      "text": "Elbows in — cover the body",
+      "ticker": {
+        "line": "Elbows in"
+      }
+    },
+    {
+      "id": "tech_shoulder_up",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard",
+        "head"
+      ],
+      "estMs": 1900,
+      "text": "Shoulder up — chin behind it",
+      "ticker": {
+        "line": "Shoulder up, chin behind it"
+      }
+    },
+    {
+      "id": "tech_off_centre_line",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "head"
+      ],
+      "estMs": 1700,
+      "text": "Keep your head off the centre line",
+      "ticker": {
+        "line": "Head off the centre line"
+      }
+    },
+    {
+      "id": "tech_move_head_after",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "head",
+        "defence"
+      ],
+      "estMs": 1800,
+      "follows": [
+        "jab",
+        "cross",
+        "hook"
+      ],
+      "text": "Move your head after you punch",
+      "ticker": {
+        "line": "Move your head after"
+      }
+    },
+    {
+      "id": "tech_dont_stand_square",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "stance",
+        "defence"
+      ],
+      "estMs": 1600,
+      "text": "Don't square up — stay side on",
+      "ticker": {
+        "line": "Don't square up"
+      }
+    },
+    {
+      "id": "tech_slip_off_line",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "head",
+        "defence"
+      ],
+      "estMs": 1900,
+      "follows": [
+        "jab",
+        "cross",
+        "hook"
+      ],
+      "text": "Slip off the line when you finish",
+      "ticker": {
+        "line": "Slip off the line"
+      }
+    },
+    {
+      "id": "tech_breathe",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "breath"
+      ],
+      "estMs": 2000,
+      "text": "Breathe — sharp out on every shot",
+      "ticker": {
+        "line": "Breathe out on every shot"
+      }
+    },
+    {
+      "id": "tech_relax_shoulders",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "breath"
+      ],
+      "estMs": 1500,
+      "text": "Relax the shoulders",
+      "ticker": {
+        "line": "Relax the shoulders"
+      }
+    },
+    {
+      "id": "tech_loose_hands",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "power"
+      ],
+      "estMs": 1900,
+      "text": "Loose hands — snap them at the end",
+      "ticker": {
+        "line": "Loose hands, snap it"
+      }
+    },
+    {
+      "id": "tech_eyes_on_target",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "focus"
+      ],
+      "estMs": 1200,
+      "text": "Eyes on the target",
+      "ticker": {
+        "line": "Eyes on the target"
+      }
+    },
+    {
+      "id": "tech_jab_straight",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "technique"
+      ],
+      "estMs": 2000,
+      "follows": [
+        "jab"
+      ],
+      "text": "That jab travels straight — no looping",
+      "ticker": {
+        "line": "Jab travels straight"
+      }
+    },
+    {
+      "id": "tech_turn_the_hip",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "power"
+      ],
+      "estMs": 1800,
+      "follows": [
+        "cross"
+      ],
+      "text": "Turn the hip into the cross",
+      "ticker": {
+        "line": "Turn the hip"
+      }
+    },
+    {
+      "id": "tech_pivot_the_foot",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "power"
+      ],
+      "estMs": 1900,
+      "follows": [
+        "hook"
+      ],
+      "text": "Pivot the front foot with the hook",
+      "ticker": {
+        "line": "Pivot the front foot"
+      }
+    },
+    {
+      "id": "tech_short_punches",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "technique"
+      ],
+      "estMs": 1700,
+      "text": "Short and sharp — don't reach",
+      "ticker": {
+        "line": "Short and sharp"
+      }
+    },
+    {
+      "id": "tech_bag_punch_through",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "bag",
+        "power"
+      ],
+      "estMs": 1900,
+      "text": "Punch through it, not at it",
+      "ticker": {
+        "line": "Punch through it"
+      }
+    },
+    {
+      "id": "tech_bag_plant_feet",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "bag",
+        "stance"
+      ],
+      "estMs": 2200,
+      "text": "Plant your feet before you sit down on it",
+      "ticker": {
+        "line": "Plant your feet"
+      }
+    },
+    {
+      "id": "tech_bag_stay_in_range",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "bag"
+      ],
+      "estMs": 1800,
+      "text": "Stay in range — don't drift out",
+      "ticker": {
+        "line": "Stay in range"
+      }
+    },
+    {
+      "id": "tech_bag_control",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "bag"
+      ],
+      "estMs": 1700,
+      "text": "Control it — don't chase it",
+      "ticker": {
+        "line": "Control it, don't chase"
+      }
+    },
+    {
+      "id": "tech_bag_dont_lean",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "bag",
+        "stance"
+      ],
+      "estMs": 1600,
+      "text": "Don't lean on it — stand it up",
+      "ticker": {
+        "line": "Don't lean on it"
+      }
+    },
+    {
+      "id": "tech_bag_body_dig",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "bag",
+        "body"
+      ],
+      "estMs": 1800,
+      "follows": [
+        "body"
+      ],
+      "text": "Dig it under the elbow",
+      "ticker": {
+        "line": "Under the elbow"
+      }
+    },
+    {
+      "id": "tech_catch_dont_swat",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "catch",
+        "guard"
+      ],
+      "estMs": 1800,
+      "follows": [
+        "catch"
+      ],
+      "text": "Catch it — don't swat at it",
+      "ticker": {
+        "line": "Catch, don't swat"
+      }
+    },
+    {
+      "id": "tech_slip_small",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "slip",
+        "head"
+      ],
+      "estMs": 1500,
+      "follows": [
+        "slip"
+      ],
+      "text": "Small slip — don't dive",
+      "ticker": {
+        "line": "Small slip"
+      }
+    },
+    {
+      "id": "tech_roll_from_the_legs",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "roll"
+      ],
+      "estMs": 2000,
+      "follows": [
+        "roll"
+      ],
+      "text": "Roll from the legs, not the waist",
+      "ticker": {
+        "line": "Roll from the legs"
+      }
+    },
+    {
+      "id": "tech_eyes_up_defending",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "focus"
+      ],
+      "estMs": 1400,
+      "follows": [
+        "slip",
+        "roll",
+        "catch"
+      ],
+      "text": "Eyes stay on them",
+      "ticker": {
+        "line": "Eyes stay up"
+      }
+    },
+    {
+      "id": "tech_guard_stays_home",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "defence",
+        "guard"
+      ],
+      "estMs": 1300,
+      "follows": [
+        "slip",
+        "roll",
+        "catch"
+      ],
+      "text": "Guard stays home",
+      "ticker": {
+        "line": "Guard stays home"
+      }
+    },
+    {
+      "id": "tech_answer_after_defence",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "defence"
+      ],
+      "estMs": 1900,
+      "follows": [
+        "slip",
+        "roll",
+        "catch"
+      ],
+      "text": "Don't just defend — always answer",
+      "ticker": {
+        "line": "Always answer"
+      }
+    },
+    {
+      "id": "tech_lead_hand_back",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard"
+      ],
+      "estMs": 2000,
+      "follows": [
+        "jab"
+      ],
+      "text": "Lead hand straight back to your cheek",
+      "ticker": {
+        "line": "Lead hand back to your cheek"
+      }
+    },
+    {
+      "id": "tech_rear_hand_back",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard"
+      ],
+      "estMs": 1700,
+      "follows": [
+        "cross"
+      ],
+      "text": "Rear hand back to your chin",
+      "ticker": {
+        "line": "Rear hand back to your chin"
+      }
+    },
+    {
+      "id": "tech_rear_hand_stays",
+      "kind": "technique",
+      "clip": "shared",
+      "tags": [
+        "guard"
+      ],
+      "estMs": 2100,
+      "follows": [
+        "jab"
+      ],
+      "text": "Don't drop that rear hand when you jab",
+      "ticker": {
+        "line": "Rear hand stays up"
+      }
+    },
+    {
+      "id": "effort_work",
+      "kind": "effort",
+      "clip": "shared",
+      "tags": [
+        "effort"
+      ],
+      "estMs": 500,
+      "text": "Work!",
+      "ticker": {
+        "line": "Work!"
+      }
+    },
+    {
+      "id": "effort_hands_up",
+      "kind": "effort",
+      "clip": "shared",
+      "tags": [
+        "effort",
+        "guard"
+      ],
+      "estMs": 700,
+      "text": "Hands up!",
+      "ticker": {
+        "line": "Hands up!"
+      }
+    },
+    {
+      "id": "effort_dont_drop",
+      "kind": "effort",
+      "clip": "shared",
+      "tags": [
+        "effort",
+        "guard"
+      ],
+      "estMs": 1600,
+      "text": "Hands stay up — push through it",
+      "ticker": {
+        "line": "Hands stay up"
+      }
+    },
+    {
+      "id": "effort_keep_going",
+      "kind": "effort",
+      "clip": "shared",
+      "tags": [
+        "effort"
+      ],
+      "estMs": 1600,
+      "text": "You've got more than that",
+      "ticker": {
+        "line": "You've got more"
+      }
+    },
+    {
+      "id": "effort_finish_strong",
+      "kind": "effort",
+      "clip": "shared",
+      "tags": [
+        "effort"
+      ],
+      "estMs": 1000,
+      "text": "Finish strong",
+      "ticker": {
+        "line": "Finish strong"
+      }
+    },
+    {
+      "id": "effort_last_ten",
+      "kind": "effort",
+      "clip": "shared",
+      "tags": [
+        "effort"
+      ],
+      "estMs": 2000,
+      "windowFromRoundEndMs": [
+        8000,
+        12000
+      ],
+      "text": "Last ten — everything you've got",
+      "ticker": {
+        "line": "Last ten!"
+      }
+    },
+    {
+      "id": "effort_empty_tank",
+      "kind": "effort",
+      "clip": "shared",
+      "tags": [
+        "effort"
+      ],
+      "estMs": 1300,
+      "windowFromRoundEndMs": [
+        0,
+        25000
+      ],
+      "text": "Empty the tank",
+      "ticker": {
+        "line": "Empty the tank"
+      }
+    }
+  ]
+}

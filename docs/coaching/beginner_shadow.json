@@ -1,0 +1,767 @@
+{
+  "id": "beginner_shadow",
+  "version": 1,
+  "level": "beginner",
+  "workoutType": "shadowBoxing",
+  "title": "Beginner — Shadow Boxing",
+  "voice": "Calm and instructional in the open, shorter and sharper as the round burns down.",
+  "guards": {
+    "roundStartDelayMs": 1500,
+    "roundEndGuardMs": 2000,
+    "warningGuardMs": 750,
+    "minGapMs": 1200,
+    "maxConsecutiveNonCombo": 2,
+    "followsBoost": 3,
+    "answerAfterNonCombo": true,
+    "noRepeatWithinKind": {
+      "combo": 5,
+      "defence": 4,
+      "movement": 2,
+      "technique": 6,
+      "effort": 3
+    }
+  },
+  "segments": [
+    {
+      "id": "open",
+      "share": 0.2,
+      "cadenceMs": [
+        8000,
+        10000
+      ],
+      "intent": "Find range, get the feet moving, set the guard before anything gets fast.",
+      "mix": {
+        "combo": 0.4,
+        "defence": 0.1,
+        "movement": 0.13,
+        "technique": 0.37,
+        "effort": 0.0
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab",
+            "w": 6
+          },
+          {
+            "id": "double_jab",
+            "w": 5
+          },
+          {
+            "id": "jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_step_in",
+            "w": 3
+          },
+          {
+            "id": "jab_hook",
+            "w": 2
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 2
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_catch_the_jab",
+            "w": 3
+          },
+          {
+            "id": "def_slip_left_right",
+            "w": 3
+          },
+          {
+            "id": "def_roll_left",
+            "w": 2
+          },
+          {
+            "id": "def_roll_right",
+            "w": 2
+          },
+          {
+            "id": "def_catch_catch",
+            "w": 2
+          },
+          {
+            "id": "def_roll_roll",
+            "w": 2
+          },
+          {
+            "id": "def_block_the_hook",
+            "w": 2
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_circle_left",
+            "w": 3
+          },
+          {
+            "id": "move_circle_right",
+            "w": 3
+          },
+          {
+            "id": "move_step_in_out",
+            "w": 3
+          },
+          {
+            "id": "move_reset",
+            "w": 2
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_balls_of_feet",
+            "w": 4
+          },
+          {
+            "id": "tech_feet_under",
+            "w": 3
+          },
+          {
+            "id": "tech_knees_soft",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_chin",
+            "w": 3
+          },
+          {
+            "id": "tech_chin_down",
+            "w": 3
+          },
+          {
+            "id": "tech_dont_stand_square",
+            "w": 2
+          },
+          {
+            "id": "tech_relax_shoulders",
+            "w": 2
+          },
+          {
+            "id": "tech_eyes_on_target",
+            "w": 2
+          },
+          {
+            "id": "tech_jab_straight",
+            "w": 2
+          },
+          {
+            "id": "tech_lead_hand_back",
+            "w": 2
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 2
+          },
+          {
+            "id": "tech_off_centre_line",
+            "w": 2
+          },
+          {
+            "id": "tech_guard_stays_home",
+            "w": 1
+          }
+        ],
+        "effort": []
+      }
+    },
+    {
+      "id": "build",
+      "share": 0.35,
+      "cadenceMs": [
+        6000,
+        8000
+      ],
+      "intent": "Two- and three-punch combinations, defence between them, movement after.",
+      "mix": {
+        "combo": 0.44,
+        "defence": 0.18,
+        "movement": 0.08,
+        "technique": 0.3,
+        "effort": 0.0
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_hook",
+            "w": 5
+          },
+          {
+            "id": "jab_hook",
+            "w": 3
+          },
+          {
+            "id": "cross_hook",
+            "w": 3
+          },
+          {
+            "id": "double_jab",
+            "w": 2
+          },
+          {
+            "id": "jab_cross_slip",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_out",
+            "w": 3
+          },
+          {
+            "id": "jab_body_jab_head",
+            "w": 2
+          },
+          {
+            "id": "jab_cross_body",
+            "w": 2
+          },
+          {
+            "id": "jab_step_in",
+            "w": 2
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_slip_counter",
+            "w": 4
+          },
+          {
+            "id": "def_catch_return",
+            "w": 4
+          },
+          {
+            "id": "def_roll_hook",
+            "w": 3
+          },
+          {
+            "id": "def_slip_outside",
+            "w": 3
+          },
+          {
+            "id": "def_catch_the_jab",
+            "w": 2
+          },
+          {
+            "id": "def_roll_left",
+            "w": 2
+          },
+          {
+            "id": "def_roll_right",
+            "w": 2
+          },
+          {
+            "id": "def_block_the_hook",
+            "w": 2
+          },
+          {
+            "id": "def_parry_step_out",
+            "w": 2
+          },
+          {
+            "id": "def_slip_left_right",
+            "w": 2
+          },
+          {
+            "id": "def_roll_off_the_line",
+            "w": 2
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_circle_left",
+            "w": 3
+          },
+          {
+            "id": "move_circle_right",
+            "w": 3
+          },
+          {
+            "id": "move_angle_off",
+            "w": 3
+          },
+          {
+            "id": "move_pivot_left",
+            "w": 2
+          },
+          {
+            "id": "move_back_and_in",
+            "w": 2
+          },
+          {
+            "id": "move_step_in_out",
+            "w": 2
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_lead_hand_back",
+            "w": 4
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 4
+          },
+          {
+            "id": "tech_rear_hand_stays",
+            "w": 2
+          },
+          {
+            "id": "tech_lazy_hand",
+            "w": 4
+          },
+          {
+            "id": "tech_move_head_after",
+            "w": 4
+          },
+          {
+            "id": "tech_chin_down",
+            "w": 3
+          },
+          {
+            "id": "tech_breathe",
+            "w": 3
+          },
+          {
+            "id": "tech_off_centre_line",
+            "w": 3
+          },
+          {
+            "id": "tech_turn_the_hip",
+            "w": 2
+          },
+          {
+            "id": "tech_pivot_the_foot",
+            "w": 2
+          },
+          {
+            "id": "tech_slip_small",
+            "w": 2
+          },
+          {
+            "id": "tech_catch_dont_swat",
+            "w": 2
+          },
+          {
+            "id": "tech_roll_from_the_legs",
+            "w": 2
+          },
+          {
+            "id": "tech_elbows_in",
+            "w": 2
+          },
+          {
+            "id": "tech_short_punches",
+            "w": 2
+          },
+          {
+            "id": "tech_loose_hands",
+            "w": 2
+          },
+          {
+            "id": "tech_shoulder_up",
+            "w": 2
+          },
+          {
+            "id": "tech_answer_after_defence",
+            "w": 2
+          },
+          {
+            "id": "tech_eyes_up_defending",
+            "w": 1
+          }
+        ],
+        "effort": []
+      }
+    },
+    {
+      "id": "work",
+      "share": 0.3,
+      "cadenceMs": [
+        5000,
+        6000
+      ],
+      "intent": "Faster cadence, longer combinations running straight into defence and an angle.",
+      "mix": {
+        "combo": 0.45,
+        "defence": 0.2,
+        "movement": 0.06,
+        "technique": 0.24,
+        "effort": 0.05
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab_cross_hook",
+            "w": 6
+          },
+          {
+            "id": "jab_cross_hook_pivot",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_hook_cross",
+            "w": 4
+          },
+          {
+            "id": "cross_hook_cross",
+            "w": 4
+          },
+          {
+            "id": "double_jab_cross_angle",
+            "w": 4
+          },
+          {
+            "id": "jab_cross_body_hook_head",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_roll",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_slip",
+            "w": 3
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_out",
+            "w": 2
+          },
+          {
+            "id": "jab_cross_body",
+            "w": 2
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_roll_counter",
+            "w": 4
+          },
+          {
+            "id": "def_slip_counter",
+            "w": 4
+          },
+          {
+            "id": "def_slip_slip_cross",
+            "w": 3
+          },
+          {
+            "id": "def_catch_return",
+            "w": 3
+          },
+          {
+            "id": "def_roll_hook",
+            "w": 3
+          },
+          {
+            "id": "def_catch_slip_roll",
+            "w": 3
+          },
+          {
+            "id": "def_roll_roll",
+            "w": 2
+          },
+          {
+            "id": "def_block_the_hook",
+            "w": 2
+          },
+          {
+            "id": "def_roll_off_the_line",
+            "w": 3
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_angle_off",
+            "w": 3
+          },
+          {
+            "id": "move_pivot_left",
+            "w": 3
+          },
+          {
+            "id": "move_circle_left",
+            "w": 2
+          },
+          {
+            "id": "move_circle_right",
+            "w": 2
+          },
+          {
+            "id": "move_back_and_in",
+            "w": 2
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_move_head_after",
+            "w": 4
+          },
+          {
+            "id": "tech_lead_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_stays",
+            "w": 2
+          },
+          {
+            "id": "tech_breathe",
+            "w": 3
+          },
+          {
+            "id": "tech_lazy_hand",
+            "w": 3
+          },
+          {
+            "id": "tech_slip_off_line",
+            "w": 3
+          },
+          {
+            "id": "tech_chin_down",
+            "w": 2
+          },
+          {
+            "id": "tech_balls_of_feet",
+            "w": 2
+          },
+          {
+            "id": "tech_answer_after_defence",
+            "w": 2
+          },
+          {
+            "id": "tech_guard_stays_home",
+            "w": 2
+          },
+          {
+            "id": "tech_roll_from_the_legs",
+            "w": 2
+          },
+          {
+            "id": "tech_eyes_up_defending",
+            "w": 2
+          },
+          {
+            "id": "tech_off_centre_line",
+            "w": 2
+          },
+          {
+            "id": "tech_short_punches",
+            "w": 1
+          }
+        ],
+        "effort": [
+          {
+            "id": "effort_work",
+            "w": 3
+          },
+          {
+            "id": "effort_hands_up",
+            "w": 3
+          },
+          {
+            "id": "effort_keep_going",
+            "w": 2
+          },
+          {
+            "id": "effort_finish_strong",
+            "w": 2
+          },
+          {
+            "id": "effort_dont_drop",
+            "w": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "finish",
+      "share": 0.15,
+      "cadenceMs": [
+        4000,
+        5000
+      ],
+      "intent": "Burnout. Short calls, loud effort cues, and the guard is what fails first.",
+      "mix": {
+        "combo": 0.5,
+        "defence": 0.1,
+        "movement": 0.04,
+        "technique": 0.18,
+        "effort": 0.18
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_hook",
+            "w": 5
+          },
+          {
+            "id": "double_jab",
+            "w": 4
+          },
+          {
+            "id": "triple_jab",
+            "w": 4
+          },
+          {
+            "id": "cross_hook_cross",
+            "w": 4
+          },
+          {
+            "id": "jab_cross_hook_cross",
+            "w": 3
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 3
+          },
+          {
+            "id": "hook",
+            "w": 2
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_roll_left",
+            "w": 3
+          },
+          {
+            "id": "def_roll_right",
+            "w": 3
+          },
+          {
+            "id": "def_slip_left_right",
+            "w": 3
+          },
+          {
+            "id": "def_catch_slip_roll",
+            "w": 2
+          },
+          {
+            "id": "def_roll_roll",
+            "w": 2
+          },
+          {
+            "id": "def_slip_outside",
+            "w": 2
+          },
+          {
+            "id": "def_roll_hook",
+            "w": 2
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_pivot_left",
+            "w": 2
+          },
+          {
+            "id": "move_angle_off",
+            "w": 2
+          },
+          {
+            "id": "move_circle_left",
+            "w": 1
+          },
+          {
+            "id": "move_circle_right",
+            "w": 1
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_chin_down",
+            "w": 3
+          },
+          {
+            "id": "tech_lead_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_breathe",
+            "w": 3
+          },
+          {
+            "id": "tech_lazy_hand",
+            "w": 2
+          },
+          {
+            "id": "tech_balls_of_feet",
+            "w": 2
+          },
+          {
+            "id": "tech_guard_stays_home",
+            "w": 2
+          },
+          {
+            "id": "tech_off_centre_line",
+            "w": 2
+          },
+          {
+            "id": "tech_rear_hand_chin",
+            "w": 2
+          }
+        ],
+        "effort": [
+          {
+            "id": "effort_work",
+            "w": 4
+          },
+          {
+            "id": "effort_hands_up",
+            "w": 4
+          },
+          {
+            "id": "effort_dont_drop",
+            "w": 3
+          },
+          {
+            "id": "effort_finish_strong",
+            "w": 2
+          },
+          {
+            "id": "effort_empty_tank",
+            "w": 2
+          },
+          {
+            "id": "effort_keep_going",
+            "w": 2
+          }
+        ]
+      },
+      "pinned": [
+        {
+          "id": "effort_last_ten",
+          "atFromRoundEndMs": 10000,
+          "why": "a coach always calls the last ten; too important to leave to the draw"
+        }
+      ]
+    }
+  ]
+}

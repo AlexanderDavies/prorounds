@@ -8,6 +8,7 @@ cinematic theme sit around it.
 - **Product spec:** [`prorounds_app_prompt.md`](prorounds_app_prompt.md)
 - **Architecture guide:** [`docs/ARCHITECTURE_GUIDE.md`](docs/ARCHITECTURE_GUIDE.md) — read before feature work
 - **Design system:** [`docs/DESIGN.md`](docs/DESIGN.md) · mockups in [`docs/mockups/`](docs/mockups)
+- **Coach scripts:** [`docs/coaching/`](docs/coaching) — assisted-coaching content + `scripts/coach-script.py`
 - **Build plan:** managed as sequential OpenSpec changes under [`openspec/changes/`](openspec/changes)
 
 ## Requirements
@@ -33,8 +34,8 @@ Sources/               # one folder per module
 Tests/                 # Swift Testing suites (FoundationTiming, FoundationUtilities so far)
 ProRounds/             # the iOS app target: @main entry + the 3-tab shell
 project.yml            # XcodeGen definition of the app target + scheme
-scripts/               # test.sh · lint.sh · coverage.sh
-docs/                  # architecture guide, design system, mockups
+scripts/               # test.sh · lint.sh · coverage.sh · coach-script.py
+docs/                  # architecture guide, design system, mockups, coach scripts
 openspec/              # spec-driven change proposals
 ```
 
@@ -94,6 +95,10 @@ xcodegen generate
 
 # Design-system snapshot tests (iOS simulator). Re-record references with RECORD=1.
 ./scripts/snapshot.sh
+
+# Coach-script content checks (no Swift toolchain needed) — see docs/coaching/
+./scripts/coach-script.py validate
+./scripts/coach-script.py preview beginner_shadow --convention names
 ```
 
 The scripts prefer a full Xcode toolchain (they set `DEVELOPER_DIR` to `/Applications/Xcode.app`
