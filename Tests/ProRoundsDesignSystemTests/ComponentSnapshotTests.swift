@@ -26,7 +26,8 @@ final class ComponentSnapshotTests: XCTestCase {
             UITraitCollection(userInterfaceStyle: style),
             UITraitCollection(preferredContentSizeCategory: contentSize)
         ])
-        assertSnapshot(
+        withSnapshotTesting(record: snapshotRecordMode) {
+            assertSnapshot(
             of: root,
             as: .image(perceptualPrecision: 0.98, layout: .sizeThatFits, traits: traits),
             named: name,
@@ -34,6 +35,7 @@ final class ComponentSnapshotTests: XCTestCase {
             testName: testName,
             line: line
         )
+    }
     }
 
     // MARK: Buttons
@@ -118,5 +120,67 @@ final class ComponentSnapshotTests: XCTestCase {
     func test_configCard_dynamicType() {
         assertComponent(configCardGallery, style: .dark, contentSize: .accessibilityLarge, name: "axLarge")
     }
+
+    // MARK: ConfigCard — coached
+    //
+    // Its own gallery rather than a change to the one above: the existing references are the
+    // regression guard for the uncoached card, and a badge appearing in them would hide whether the
+    // default layout still holds.
+
+    private var coachedCardGallery: some View {
+        VStack(spacing: Spacing.md) {
+            ConfigCard(iconSystemName: "figure.boxing", name: "Heavy Bag Blast",
+                       metadata: "12 × 3:00 · 1:00 rest", totalText: "47:10",
+                       coachingBadge: "Beginner")
+            ConfigCard(iconSystemName: "figure.boxing", name: "Uncoached, for comparison",
+                       metadata: "12 × 3:00 · 1:00 rest", totalText: "47:10")
+        }
+    }
+
+    func test_coachedCard_light() { assertComponent(coachedCardGallery, style: .light, name: "light") }
+    func test_coachedCard_dark() { assertComponent(coachedCardGallery, style: .dark, name: "dark") }
+    func test_coachedCard_dynamicType() {
+        assertComponent(coachedCardGallery, style: .dark, contentSize: .accessibilityLarge, name: "axLarge")
+    }
+
+    // MARK: Coach ticker
+
+    private var coachTickerGallery: some View {
+        VStack(spacing: Spacing.xl) {
+            CoachTickerView(primary: "Jab Cross", secondary: "1 · 2", modifier: "to the body",
+                            accessibleDescription: "Jab Cross, to the body")
+            CoachTickerView(primary: "Circle left", secondary: nil, modifier: nil,
+                            accessibleDescription: "Circle left")
+            CoachTickerView(primary: "Jab Cross Hook", secondary: "1 · 2 · 3", modifier: nil,
+                            accessibleDescription: "Jab Cross Hook")
+        }
+    }
+
+    func test_coachTicker_light() { assertComponent(coachTickerGallery, style: .light, name: "light") }
+    func test_coachTicker_dark() { assertComponent(coachTickerGallery, style: .dark, name: "dark") }
+    /// The ticker is the whole channel for a user who cannot hear the coach, so it has to survive
+    /// the largest accessibility sizes rather than truncating to nothing.
+    func test_coachTicker_dynamicType() {
+        assertComponent(coachTickerGallery, style: .dark, contentSize: .accessibilityLarge, name: "axLarge")
+    }
 }
+
+/// How this suite records.
+///
+/// A **compiler flag**, not an environment variable: `xcodebuild` does not forward an exported
+/// variable into the simulator's test process, so `SNAPSHOT_TESTING_RECORD=all` never reached the
+/// library and `RECORD=1` silently did nothing but create wholly missing references — which
+/// swift-snapshot-testing writes regardless of record mode. Build settings do propagate, so
+/// `scripts/snapshot.sh` passes `-D RECORD_SNAPSHOTS`.
+///
+/// Repeated per target because test modules cannot share a helper without a support target, and one
+/// six-line property is cheaper than that.
+private var snapshotRecordMode: SnapshotTestingConfiguration.Record {
+    #if RECORD_SNAPSHOTS
+    return .all
+    #else
+    return .missing
+    #endif
+}
+
 #endif

@@ -1,0 +1,54 @@
+{
+  "script": "beginner_bag",
+  "roundMs": 60000,
+  "warningMs": 10000,
+  "roundIndex": 0,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1500,
+      "phraseId": "move_circle_left",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 12000,
+      "phraseId": "jab_cross_sit_down",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 21732,
+      "phraseId": "tech_loose_hands",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 31124,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 33000,
+      "phraseId": "jab_cross_body",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 39422,
+      "phraseId": "jab_cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 46968,
+      "phraseId": "move_out_of_range",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 51000,
+      "phraseId": "cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 56808,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    }
+  ]
+}

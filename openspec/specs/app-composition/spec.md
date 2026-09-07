@@ -30,3 +30,41 @@ Configurations saved through the composition-root repository SHALL be written to
 - **WHEN** a configuration is saved and the app is relaunched
 - **THEN** the configuration is listed again from the on-disk store
 
+### Requirement: The composition root owns the entitlement store
+The single composition root SHALL construct the entitlement store and inject it, consistent with
+every other dependency. No feature SHALL construct one itself or reach a global.
+
+#### Scenario: The entitlement store is built once and injected
+- **WHEN** the object graph is built
+- **THEN** exactly one entitlement store SHALL be constructed and passed to the types that need it
+
+#### Scenario: Swapping the implementation is a composition-root change
+- **WHEN** the entitlement implementation is replaced
+- **THEN** only the composition root SHALL change, with no edit to any feature or data type
+
+### Requirement: The app links the coaching module
+The app target SHALL link `ProRoundsFoundationCoaching`, so the catalog and scheduler are reachable
+from the running app rather than test-only.
+
+#### Scenario: The coaching catalog loads in the app
+- **WHEN** the app runs
+- **THEN** the coaching catalog and both scripts SHALL load from the module bundle without error
+
+### Requirement: The composition root builds the coaching cue planner
+The composition root SHALL construct the planner from the coaching catalog, the settings store and
+the entitlement store, and inject it into the workout runtime. No feature SHALL construct one itself.
+
+#### Scenario: The planner is built once and injected
+- **WHEN** the object graph is built
+- **THEN** one planner SHALL be constructed and passed to the runtime that needs it
+
+#### Scenario: A catalog that fails to load degrades to no coaching
+- **WHEN** the coaching catalog cannot be loaded at launch
+- **THEN** the app SHALL start with coaching unavailable rather than fail to launch, because a
+  content problem must never cost the user their timer
+
+#### Scenario: The timer module still cannot reach coaching
+- **WHEN** the object graph is built
+- **THEN** the timer module SHALL still have no dependency on the coaching module, the planner
+  reaching it only through the injected seam
+

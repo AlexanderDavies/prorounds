@@ -16,6 +16,13 @@ final class ConfigurationEntity {
     var warningLeadSeconds: Int
     /// Empty string means "no custom name" (the effective name is auto-generated).
     var customName: String
+    /// The coaching level's raw value; nil means coaching is off.
+    ///
+    /// **Optional on purpose.** SwiftData lightweight-migrates a new attribute only when it is
+    /// optional or defaulted, and a non-optional attribute without a default fails to open a store
+    /// written before it existed. This store is the user's only copy of their configurations — no
+    /// backend, no export — so the safest of the two options is the right one.
+    var coachingLevelRaw: String?
     /// Store-internal ordering timestamps — not exposed on the domain model.
     var createdAt: Date
     var updatedAt: Date
@@ -29,6 +36,7 @@ final class ConfigurationEntity {
         prepSeconds: Int,
         warningLeadSeconds: Int,
         customName: String,
+        coachingLevelRaw: String? = nil,
         createdAt: Date,
         updatedAt: Date
     ) {
@@ -40,6 +48,7 @@ final class ConfigurationEntity {
         self.prepSeconds = prepSeconds
         self.warningLeadSeconds = warningLeadSeconds
         self.customName = customName
+        self.coachingLevelRaw = coachingLevelRaw
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

@@ -37,6 +37,11 @@ public extension FontToken {
     static let subhead = FontToken(size: 15, weight: .regular)
     static let caption = FontToken(size: 13, weight: .medium, tracking: 0.5)
     static let overline = FontToken(size: 11, weight: .bold, tracking: 1)
+    // Coaching ticker (mockup-stage values): the call reads large, the other convention sits small
+    // above it, and the modifier is quieter still.
+    static let coachCall = FontToken(size: 24, weight: .semibold)
+    static let coachNumbers = FontToken(size: 13, weight: .medium, tracking: 1)
+    static let coachModifier = FontToken(size: 14, weight: .regular)
 }
 
 /// Namespaced alias for the typography scale (`ProRoundsFont.timer` == `FontToken.timer`).

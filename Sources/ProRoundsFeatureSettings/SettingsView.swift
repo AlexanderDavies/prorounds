@@ -1,5 +1,6 @@
 import SwiftUI
 import ProRoundsDataSettings
+import ProRoundsFoundationCoaching
 import ProRoundsDesignSystem
 import ProRoundsFoundationAudio
 import ProRoundsFoundationUtilities
@@ -33,6 +34,24 @@ public struct SettingsView: View {
                     selectRow("Count up", systemImage: "arrow.up",
                               isSelected: model.countDirection == .countUp) {
                         model.setCountDirection(.countUp)
+                    }
+                }
+
+                // Each option carries an example of the coach's actual words: someone who does not
+                // yet know the numbering cannot choose between "Numbers" and "Names" otherwise.
+                Section("Coaching") {
+                    ForEach(NamingConvention.allCases, id: \.self) { convention in
+                        selectRow("\(convention.displayName) — \u{201C}\(convention.example)\u{201D}",
+                                  systemImage: convention == .numbers ? "number" : "textformat",
+                                  isSelected: model.namingConvention == convention) {
+                            model.setNamingConvention(convention)
+                        }
+                    }
+                    Toggle(isOn: Binding(
+                        get: { model.minimalRunningScreen },
+                        set: { model.setMinimalRunningScreen($0) }
+                    )) {
+                        Label("Minimal running screen", systemImage: "rectangle.compress.vertical")
                     }
                 }
 

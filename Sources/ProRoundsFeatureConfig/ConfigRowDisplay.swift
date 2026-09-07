@@ -10,6 +10,9 @@ struct ConfigRowDisplay: Equatable, Identifiable {
     let metadata: String      // "12 × 3:00 · 1:00 rest"
     let totalText: String     // "47:10"
     let iconSystemName: String
+    /// The coaching level's name when coached, otherwise nil — pre-formatted like every other
+    /// string here, so the view does no lookup.
+    let coachingBadge: String?
 }
 
 /// Maps a domain `Configuration` to its list row via the single-source calculators/formatters.
@@ -22,7 +25,8 @@ enum ConfigDisplayMapper {
             name: config.effectiveName,
             metadata: metadata,
             totalText: DurationFormat.clock(config.totalDuration),
-            iconSystemName: icon(for: config.workoutType)
+            iconSystemName: icon(for: config.workoutType),
+            coachingBadge: config.coachingLevel?.displayName
         )
     }
 

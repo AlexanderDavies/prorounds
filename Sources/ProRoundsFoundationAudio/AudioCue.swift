@@ -15,4 +15,10 @@ public enum AudioCue: Equatable, Sendable {
     case roundEnd
     case restStart
     case workoutComplete
+    /// A spoken clip at a resolved file location.
+    ///
+    /// A location rather than a phrase id on purpose: an id would force this module to depend on the
+    /// coaching module to resolve it, pushing the dependency the wrong way down the layering. By the
+    /// time a cue exists the clip has already been chosen, so the player stays a dumb player.
+    case spoken(URL)
 }

@@ -21,6 +21,7 @@ let package = Package(
         .library(name: "ProRoundsFoundationTiming", targets: ["ProRoundsFoundationTiming"]),
         .library(name: "ProRoundsFoundationAudio", targets: ["ProRoundsFoundationAudio"]),
         .library(name: "ProRoundsFoundationPersistence", targets: ["ProRoundsFoundationPersistence"]),
+        .library(name: "ProRoundsFoundationCoaching", targets: ["ProRoundsFoundationCoaching"]),
         // Design system
         .library(name: "ProRoundsDesignSystem", targets: ["ProRoundsDesignSystem"]),
         // Data
@@ -44,6 +45,21 @@ let package = Package(
         .target(name: "ProRoundsFoundationTiming"),
         .target(name: "ProRoundsFoundationAudio", resources: [.process("Resources")]),
         .target(name: "ProRoundsFoundationPersistence"),
+        // Catalog + cue scheduler for assisted coaching. Pure: no audio, no UI, no clock —
+        // it is an output of the round timer, never an input to it.
+        // `.copy` for the clips, not `.process`: processing FLATTENS the tree, and the 26 forked
+        // phrases share a filename across numbers/ and names/ (jab.m4a exists in both). Copying
+        // preserves the clips/<convention>/<id>.m4a layout docs/coaching/README.md defines.
+        .target(name: "ProRoundsFoundationCoaching", dependencies: [
+            "ProRoundsFoundationAudio",
+            "ProRoundsFoundationTiming",
+            "ProRoundsFoundationUtilities",
+        ], resources: [
+            .process("Resources/phrases.json"),
+            .process("Resources/beginner_shadow.json"),
+            .process("Resources/beginner_bag.json"),
+            .copy("Resources/clips"),
+        ]),
 
         // MARK: - Design system (may use Foundation)
         .target(name: "ProRoundsDesignSystem", dependencies: [
@@ -61,12 +77,14 @@ let package = Package(
         ]),
         .target(name: "ProRoundsDataSettings", dependencies: [
             "ProRoundsFoundationAudio",
+            "ProRoundsFoundationCoaching",
             "ProRoundsFoundationUtilities",
         ]),
 
         // MARK: - Feature (may reach Data / Foundation / DesignSystem; never a sibling Feature)
         .target(name: "ProRoundsFeatureTimer", dependencies: [
             "ProRoundsDataConfig",
+            "ProRoundsFoundationUtilities",
             "ProRoundsDataSessions",
             "ProRoundsFoundationTiming",
             "ProRoundsFoundationAudio",
@@ -86,6 +104,7 @@ let package = Package(
             "ProRoundsDataSettings",
             "ProRoundsDesignSystem",
             "ProRoundsFoundationAudio",
+            "ProRoundsFoundationCoaching",
             "ProRoundsFoundationUtilities",
         ]),
 
@@ -102,6 +121,11 @@ let package = Package(
         .testTarget(name: "ProRoundsFoundationPersistenceTests", dependencies: [
             "ProRoundsFoundationPersistence",
         ]),
+        // `.copy`, not `.process`, for the same reason as the target above: Fixtures/schedules/
+        // is nested, and processing would flatten it into the bundle root.
+        .testTarget(name: "ProRoundsFoundationCoachingTests", dependencies: [
+            "ProRoundsFoundationCoaching",
+        ], resources: [.copy("Fixtures")]),
         .testTarget(name: "ProRoundsDataConfigTests", dependencies: [
             "ProRoundsDataConfig",
         ]),
@@ -128,12 +152,17 @@ let package = Package(
         ], exclude: ["__Snapshots__"]),
         .testTarget(name: "ProRoundsDataSettingsTests", dependencies: [
             "ProRoundsDataSettings",
+            "ProRoundsFoundationCoaching",
         ]),
         .testTarget(name: "ProRoundsFeatureSettingsTests", dependencies: [
             "ProRoundsFeatureSettings",
             "ProRoundsFoundationAudio",
+            "ProRoundsFoundationCoaching",
             .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
         ], exclude: ["__Snapshots__"]),
+        // No dependencies: it reads Package.swift as text. The layering is not compile-enforced,
+        // so this is the only thing checking it.
+        .testTarget(name: "ProRoundsArchitectureTests"),
         .testTarget(name: "ProRoundsDesignSystemTests", dependencies: [
             "ProRoundsDesignSystem",
             .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),

@@ -3,6 +3,7 @@ import SwiftData
 import ProRoundsDataConfig
 import ProRoundsDataSessions
 import ProRoundsDataSettings
+import ProRoundsFoundationCoaching
 import ProRoundsFoundationAudio
 import ProRoundsFoundationPersistence
 import ProRoundsFoundationTiming
@@ -20,6 +21,9 @@ final class AppEnvironment {
     let audioPlayer: any AudioCuePlayer
     let interruptions: any AudioInterruptionMonitoring
     let idleTimer: AppIdleTimer
+    /// Whether coaching is unlocked. Constructed here and injected like every other dependency, so
+    /// landing a paywall later is a change to this file rather than a refactor across features.
+    let entitlementStore: any EntitlementStore
 
     init() {
         // One shared on-disk store for configurations + sessions.
@@ -43,12 +47,17 @@ final class AppEnvironment {
         timeSource = RealTimeSource()
         audioPlayer = AVAudioCuePlayer()
         interruptions = SystemAudioInterruptionMonitor()
+        // v1 ships everything unlocked; the seam exists so that stops being true without a refactor.
+        entitlementStore = UnlockedEntitlementStore()
         idleTimer = AppIdleTimer()
     }
 
     private static let demoConfiguration = Configuration(
         workoutType: .heavyBag, rounds: 3, roundDuration: .seconds(120),
         restDuration: .seconds(30), prepDuration: .seconds(5), warningLead: .seconds(10),
-        customName: "UI Test Bag"
+        customName: "UI Test Bag",
+        // Coached, so the UI flow test exercises the whole path: a real catalog load, a real
+        // schedule, real clips resolved from the bundle, and the ticker on a real clock.
+        coachingLevel: .beginner
     )
 }

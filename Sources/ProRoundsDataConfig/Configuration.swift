@@ -18,6 +18,11 @@ public struct Configuration: Sendable, Equatable, Hashable, Identifiable {
     public let warningLead: Duration
     /// A user-supplied name; when nil/blank the effective name is auto-generated.
     public let customName: String?
+    /// How much the coach says during this workout; nil means coaching is off.
+    ///
+    /// Deliberately not part of `WorkoutType`, and deliberately not part of the workout's
+    /// arithmetic — a coached and an uncoached 12×3:00 have the same total and the same auto-name.
+    public let coachingLevel: CoachingLevel?
 
     public init(
         id: UUID = UUID(),
@@ -27,7 +32,8 @@ public struct Configuration: Sendable, Equatable, Hashable, Identifiable {
         restDuration: Duration,
         prepDuration: Duration,
         warningLead: Duration,
-        customName: String? = nil
+        customName: String? = nil,
+        coachingLevel: CoachingLevel? = nil
     ) {
         self.id = id
         self.workoutType = workoutType
@@ -37,6 +43,7 @@ public struct Configuration: Sendable, Equatable, Hashable, Identifiable {
         self.prepDuration = prepDuration
         self.warningLead = warningLead
         self.customName = customName
+        self.coachingLevel = coachingLevel
     }
 
     /// Total workout time: round×N + rest×(N−1) — rounds + rest, prep excluded (it is a lead-in).

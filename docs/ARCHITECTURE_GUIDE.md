@@ -49,6 +49,8 @@ the world *when it was written*. Confirm it still holds before acting on it.
 **Smell list — if you think any of these, stop and validate:**
 - "The remaining time is probably right after a pause." (Drive it and watch.)
 - "It'll be accurate enough with a tick counter." (It won't — see §7.2; use a monotonic deadline.)
+- "The layering is compile-enforced." (It is not — SwiftPM allows undeclared same-package imports.
+  `ProRoundsArchitectureTests` is what checks it; keep the manifest honest.)
 - "`@MainActor` is probably fine for the tick source." (Check the isolation.)
 - "The test will catch a drift." (Only if it advances a fake clock and asserts on it — check.)
 

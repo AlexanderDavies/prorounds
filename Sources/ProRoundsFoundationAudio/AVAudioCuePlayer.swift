@@ -11,6 +11,9 @@ import AVFoundation
 /// module still builds for the macOS test loop.
 public actor AVAudioCuePlayer: AudioCuePlayer {
     private var players: [SoundAsset: AVAudioPlayer] = [:]
+    /// Held so a clip is not deallocated mid-playback. Separate from `players` so a spoken call and
+    /// a bell can sound at once.
+    private var spokenPlayer: AVAudioPlayer?
 
     public init() {}
 
@@ -25,9 +28,27 @@ public actor AVAudioCuePlayer: AudioCuePlayer {
     }
 
     public func play(_ cue: AudioCue) async {
-        let player = players[CueSoundMap.sound(for: cue)]
+        if case .spoken(let clip) = cue {
+            play(clip)
+            return
+        }
+        guard let asset = CueSoundMap.sound(for: cue) else { return }
+        let player = players[asset]
         player?.currentTime = 0
         player?.play()
+    }
+
+    /// Plays a spoken clip from its location.
+    ///
+    /// Kept on its own player so a call never cuts off a bell: the boundary cues have their own
+    /// preloaded players, and an unreadable clip is skipped rather than being allowed to take the
+    /// workout down with it — the clips are derived artefacts, and losing one call is a far better
+    /// failure than losing the round.
+    private func play(_ clip: URL) {
+        guard let player = try? AVAudioPlayer(contentsOf: clip) else { return }
+        spokenPlayer = player
+        player.prepareToPlay()
+        player.play()
     }
 
     /// Number of successfully preloaded sounds (for tests).

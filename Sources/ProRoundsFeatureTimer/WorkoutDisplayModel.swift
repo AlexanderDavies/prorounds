@@ -1,4 +1,5 @@
 import Foundation
+import ProRoundsDataConfig
 import ProRoundsFoundationUtilities
 
 /// A styling bucket for the current phase — the view maps it to a theme color (keeps the display
@@ -20,7 +21,27 @@ public struct WorkoutDisplayModel: Equatable, Sendable {
     public let isPaused: Bool
     public let isFinished: Bool
 
-    public init(_ snapshot: WorkoutSnapshot, direction: CountDirection) {
+    // MARK: - Coaching
+    /// The current call, or nil when the coach is silent. Nil for every uncoached workout.
+    public let currentCall: CoachCallDisplay?
+    /// "Coach: Beginner" / "Coach: Off".
+    public let coachingChipLabel: String
+    /// Whether to offer the coaching shortcut: only for a workout type with a script, and only
+    /// while idle — changing the level mid-workout would change a round's plan after it began.
+    public let showsCoachingChip: Bool
+    /// The stored preference, carried through for the view.
+    public let isMinimalScreen: Bool
+    /// Whether to actually strip the screen back. The preference alone is not enough: there is
+    /// nothing to strip back *to* unless a coached round is running and a ticker is showing.
+    public let hidesSecondaryDetail: Bool
+
+    public init(
+        _ snapshot: WorkoutSnapshot,
+        direction: CountDirection,
+        workoutType: WorkoutType = .heavyBag,
+        coachingLevel: CoachingLevel? = nil,
+        minimalScreen: Bool = false
+    ) {
         let phaseDuration = snapshot.remaining + snapshot.elapsedInPhase
 
         switch snapshot.phase {
@@ -37,6 +58,13 @@ public struct WorkoutDisplayModel: Equatable, Sendable {
             phaseLabel = "Done"
             phaseStyle = .finished
         }
+
+        currentCall = snapshot.currentCall
+        coachingChipLabel = "Coach: \(coachingLevel?.displayName ?? "Off")"
+        showsCoachingChip = workoutType.supportsCoaching && !snapshot.started
+        isMinimalScreen = minimalScreen
+        hidesSecondaryDetail = minimalScreen && snapshot.started
+            && coachingLevel != nil && snapshot.currentCall != nil
 
         let shown = direction == .countDown ? snapshot.remaining : snapshot.elapsedInPhase
         timeLabel = DurationFormat.clock(shown)

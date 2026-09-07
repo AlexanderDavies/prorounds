@@ -1,0 +1,54 @@
+{
+  "script": "beginner_bag",
+  "roundMs": 60000,
+  "warningMs": 10000,
+  "roundIndex": 2,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1500,
+      "phraseId": "jab_step_in",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 12000,
+      "phraseId": "move_angle_off",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 20122,
+      "phraseId": "def_roll_left",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 30038,
+      "phraseId": "jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 33000,
+      "phraseId": "def_slip_counter",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 39223,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 45396,
+      "phraseId": "def_roll_counter",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 51000,
+      "phraseId": "effort_dont_drop",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 56338,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    }
+  ]
+}

@@ -20,6 +20,9 @@ public final class RoundTimerEngine {
     private let timeSource: any TimeSource
     private let player: any AudioCuePlayer
     private let tickInterval: Duration
+    /// Supplies extra cues for each round. The engine fires them from its own deadline arithmetic
+    /// and never inspects them — it does not know coaching exists.
+    private let cuePlanner: any RoundCuePlanning
 
     public private(set) var snapshot: WorkoutSnapshot {
         didSet { snapshotContinuation.yield(snapshot) }
@@ -36,6 +39,9 @@ public final class RoundTimerEngine {
     private var phaseStart: ContinuousClock.Instant = ContinuousClock().now
     private var deadline: ContinuousClock.Instant = ContinuousClock().now
     private var warningFired = false
+    /// The current round's plan and how far through it the clock has reached. Reloaded at every
+    /// phase transition, so a cue can never leak into a rest or the next round.
+    private var planCursor = RoundPlanCursor()
     private var isPaused = false
     private var pausedRemaining: Duration = .zero
     private var elapsedBeforeCurrentPhase: Duration = .zero
@@ -46,13 +52,15 @@ public final class RoundTimerEngine {
         timeSource: any TimeSource,
         player: any AudioCuePlayer,
         warningSound: WarningSound = .woodenClap,
-        tickInterval: Duration = .milliseconds(100)
+        tickInterval: Duration = .milliseconds(100),
+        cuePlanner: any RoundCuePlanning = NoRoundCuePlanner()
     ) {
         self.config = configuration
         self.timeSource = timeSource
         self.player = player
         self.warningSound = warningSound
         self.tickInterval = tickInterval
+        self.cuePlanner = cuePlanner
         (self.snapshots, self.snapshotContinuation) = AsyncStream.makeStream()
         self.snapshot = Self.initialSnapshot(for: configuration)
         snapshotContinuation.yield(snapshot) // initial (didSet doesn't fire during init)
@@ -82,6 +90,7 @@ public final class RoundTimerEngine {
         started = false
         isPaused = false
         warningFired = false
+        planCursor.clear()
         elapsedBeforeCurrentPhase = .zero
         phase = Self.firstPhase(for: config)
         snapshot = Self.initialSnapshot(for: config)
@@ -107,6 +116,19 @@ public final class RoundTimerEngine {
 
     // MARK: - Synchronous core (deterministic; unit-tested directly)
 
+    /// Fetches the plan for a phase, or clears it.
+    ///
+    /// Only a round carries planned cues — v1 authors no rest or prep coaching — and the plan is
+    /// replaced at every transition, so a cue can never leak past the round it was planned for.
+    private func loadPlan(for phase: WorkoutPhase) {
+        guard case .round(let index) = phase else {
+            planCursor.clear()
+            return
+        }
+        planCursor.load(cuePlanner.cues(forRound: index - 1, length: config.roundDuration),
+                        roundLength: config.roundDuration)
+    }
+
     /// Anchors the timeline at `now` and returns the initial cues. Prep is skipped when zero.
     func beginTimeline(at now: ContinuousClock.Instant) -> [AudioCue] {
         started = true
@@ -128,6 +150,7 @@ public final class RoundTimerEngine {
             cues.append(.roundStart)
         }
         phaseStart = now
+        loadPlan(for: phase)
         deadline = now.advanced(by: duration(of: phase))
         snapshot = makeSnapshot(at: now)
         return cues
@@ -148,6 +171,9 @@ public final class RoundTimerEngine {
                 }
             }
 
+            // Planned cues, from the same crossing test as the warning above.
+            cues.append(contentsOf: planCursor.crossed(at: now, roundStart: phaseStart))
+
             guard now >= deadline, phase != .finished else { break }
 
             cues.append(contentsOf: endCues(of: phase))
@@ -156,6 +182,7 @@ public final class RoundTimerEngine {
             let next = Self.phase(after: phase, rounds: config.rounds)
             phaseStart = deadline
             phase = next
+            loadPlan(for: next)
             deadline = phaseStart.advanced(by: duration(of: next))
             warningFired = false
             cues.append(contentsOf: startCues(of: next))
@@ -268,7 +295,8 @@ public final class RoundTimerEngine {
             totalDuration: config.totalDuration,
             roundCount: config.rounds,
             isPaused: isPaused,
-            started: started
+            started: started,
+            currentCall: planCursor.currentCall
         )
     }
 

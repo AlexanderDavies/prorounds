@@ -1,0 +1,8 @@
+{
+  "script": "beginner_shadow",
+  "roundMs": 4000,
+  "warningMs": 10000,
+  "roundIndex": 2,
+  "configId": "demo",
+  "calls": []
+}

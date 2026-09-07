@@ -47,9 +47,13 @@ public struct TimerRing: View {
                     .foregroundStyle(ProRoundsColor.textPrimary)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
-                Text(totalRemaining)
-                    .fontToken(.caption)
-                    .foregroundStyle(ProRoundsColor.textSecondary)
+                // Empty means "do not show it" — the minimal running screen strips this line so
+                // the current call is the only thing competing with the clock.
+                if !totalRemaining.isEmpty {
+                    Text(totalRemaining)
+                        .fontToken(.caption)
+                        .foregroundStyle(ProRoundsColor.textSecondary)
+                }
             }
             .padding(lineWidth * 2)
         }

@@ -45,6 +45,19 @@ public struct ConfigEditorView: View {
                     Stepper("Rounds: \(model.draft.rounds)", value: $model.draft.rounds, in: 1...99)
                 }
 
+                // Offered only where a coach script exists, rather than shown disabled — reads the
+                // same `supportsCoaching` source the validator does.
+                if model.draft.showsCoachingSection {
+                    Section("Coaching") {
+                        Picker("Coach", selection: $model.draft.coachingLevel) {
+                            Text("Off").tag(CoachingLevel?.none)
+                            ForEach(CoachingLevel.allCases, id: \.self) { level in
+                                Text(level.displayName).tag(CoachingLevel?.some(level))
+                            }
+                        }
+                    }
+                }
+
                 Section("Timing") {
                     durationRow("Round time", seconds: $model.draft.roundSeconds, range: 5...3600, step: 5)
                     durationRow("Rest time", seconds: $model.draft.restSeconds, range: 0...1800, step: 5)
@@ -98,6 +111,8 @@ public struct ConfigEditorView: View {
         case .restDurationNegative: return "Rest time can't be negative."
         case .prepDurationNegative: return "Prep time can't be negative."
         case .warningLeadOutOfRange: return "Warning lead must be shorter than the round."
+        case .coachingUnavailableForWorkoutType:
+            return "Coaching isn't available for this workout type yet."
         }
     }
 }

@@ -16,7 +16,8 @@ final class ConfigScreenSnapshotTests: XCTestCase {
         testName: String = #function,
         line: UInt = #line
     ) {
-        assertSnapshot(
+        withSnapshotTesting(record: snapshotRecordMode) {
+            assertSnapshot(
             of: view,
             as: .image(
                 perceptualPrecision: 0.98,
@@ -27,6 +28,7 @@ final class ConfigScreenSnapshotTests: XCTestCase {
             testName: testName,
             line: line
         )
+    }
     }
 
     private func seededListView(empty: Bool) async throws -> some View {
@@ -68,4 +70,23 @@ final class ConfigScreenSnapshotTests: XCTestCase {
         assertScreen(ConfigEditorView(model: model, onDone: {}), style: .dark, name: "new-blank-name-dark")
     }
 }
+
+/// How this suite records.
+///
+/// A **compiler flag**, not an environment variable: `xcodebuild` does not forward an exported
+/// variable into the simulator's test process, so `SNAPSHOT_TESTING_RECORD=all` never reached the
+/// library and `RECORD=1` silently did nothing but create wholly missing references — which
+/// swift-snapshot-testing writes regardless of record mode. Build settings do propagate, so
+/// `scripts/snapshot.sh` passes `-D RECORD_SNAPSHOTS`.
+///
+/// Repeated per target because test modules cannot share a helper without a support target, and one
+/// six-line property is cheaper than that.
+private var snapshotRecordMode: SnapshotTestingConfiguration.Record {
+    #if RECORD_SNAPSHOTS
+    return .all
+    #else
+    return .missing
+    #endif
+}
+
 #endif

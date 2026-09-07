@@ -1,0 +1,719 @@
+{
+  "id": "beginner_bag",
+  "version": 1,
+  "level": "beginner",
+  "workoutType": "heavyBag",
+  "title": "Beginner — Heavy Bag",
+  "voice": "Slower cadence than shadow all the way through: the bag moves after you hit it, so there is more space between calls.",
+  "guards": {
+    "roundStartDelayMs": 1500,
+    "roundEndGuardMs": 2000,
+    "warningGuardMs": 750,
+    "minGapMs": 1500,
+    "maxConsecutiveNonCombo": 2,
+    "followsBoost": 3,
+    "answerAfterNonCombo": true,
+    "noRepeatWithinKind": {
+      "combo": 5,
+      "defence": 4,
+      "movement": 2,
+      "technique": 6,
+      "effort": 3
+    }
+  },
+  "segments": [
+    {
+      "id": "open",
+      "share": 0.2,
+      "cadenceMs": [
+        10000,
+        12000
+      ],
+      "intent": "Find your range, feet planted, work the jab before anything heavy.",
+      "mix": {
+        "combo": 0.41,
+        "defence": 0.08,
+        "movement": 0.14,
+        "technique": 0.37,
+        "effort": 0.0
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab",
+            "w": 6
+          },
+          {
+            "id": "double_jab",
+            "w": 5
+          },
+          {
+            "id": "jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_step_in",
+            "w": 3
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 2
+          },
+          {
+            "id": "jab_hook",
+            "w": 2
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_roll_left",
+            "w": 3
+          },
+          {
+            "id": "def_roll_right",
+            "w": 3
+          },
+          {
+            "id": "def_slip_left_right",
+            "w": 3
+          },
+          {
+            "id": "def_slip_outside",
+            "w": 2
+          },
+          {
+            "id": "def_roll_off_the_line",
+            "w": 2
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_walk_the_bag",
+            "w": 4
+          },
+          {
+            "id": "move_circle_left",
+            "w": 3
+          },
+          {
+            "id": "move_circle_right",
+            "w": 3
+          },
+          {
+            "id": "move_out_of_range",
+            "w": 2
+          },
+          {
+            "id": "move_step_in_out",
+            "w": 2
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_bag_stay_in_range",
+            "w": 4
+          },
+          {
+            "id": "tech_bag_plant_feet",
+            "w": 4
+          },
+          {
+            "id": "tech_balls_of_feet",
+            "w": 3
+          },
+          {
+            "id": "tech_bag_dont_lean",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_chin",
+            "w": 3
+          },
+          {
+            "id": "tech_chin_down",
+            "w": 3
+          },
+          {
+            "id": "tech_bag_punch_through",
+            "w": 3
+          },
+          {
+            "id": "tech_jab_straight",
+            "w": 2
+          },
+          {
+            "id": "tech_feet_under",
+            "w": 2
+          },
+          {
+            "id": "tech_relax_shoulders",
+            "w": 2
+          },
+          {
+            "id": "tech_lead_hand_back",
+            "w": 2
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 2
+          },
+          {
+            "id": "tech_eyes_on_target",
+            "w": 2
+          }
+        ],
+        "effort": []
+      }
+    },
+    {
+      "id": "build",
+      "share": 0.35,
+      "cadenceMs": [
+        8000,
+        10000
+      ],
+      "intent": "Combinations with weight behind them, stepping in and back out of range.",
+      "mix": {
+        "combo": 0.44,
+        "defence": 0.16,
+        "movement": 0.09,
+        "technique": 0.31,
+        "effort": 0.0
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_hook",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_sit_down",
+            "w": 4
+          },
+          {
+            "id": "cross_hook",
+            "w": 3
+          },
+          {
+            "id": "jab_hook",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_body",
+            "w": 3
+          },
+          {
+            "id": "jab_body_jab_head",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_out",
+            "w": 3
+          },
+          {
+            "id": "jab_step_in",
+            "w": 2
+          },
+          {
+            "id": "double_jab",
+            "w": 2
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_roll_left",
+            "w": 3
+          },
+          {
+            "id": "def_roll_right",
+            "w": 3
+          },
+          {
+            "id": "def_roll_counter",
+            "w": 4
+          },
+          {
+            "id": "def_roll_hook",
+            "w": 3
+          },
+          {
+            "id": "def_slip_counter",
+            "w": 3
+          },
+          {
+            "id": "def_slip_outside",
+            "w": 2
+          },
+          {
+            "id": "def_roll_off_the_line",
+            "w": 2
+          },
+          {
+            "id": "def_slip_left_right",
+            "w": 2
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_walk_the_bag",
+            "w": 3
+          },
+          {
+            "id": "move_close_the_distance",
+            "w": 3
+          },
+          {
+            "id": "move_out_of_range",
+            "w": 3
+          },
+          {
+            "id": "move_circle_left",
+            "w": 2
+          },
+          {
+            "id": "move_circle_right",
+            "w": 2
+          },
+          {
+            "id": "move_angle_off",
+            "w": 2
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_bag_punch_through",
+            "w": 4
+          },
+          {
+            "id": "tech_lead_hand_back",
+            "w": 4
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 4
+          },
+          {
+            "id": "tech_rear_hand_stays",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_control",
+            "w": 3
+          },
+          {
+            "id": "tech_lazy_hand",
+            "w": 3
+          },
+          {
+            "id": "tech_breathe",
+            "w": 3
+          },
+          {
+            "id": "tech_bag_plant_feet",
+            "w": 3
+          },
+          {
+            "id": "tech_turn_the_hip",
+            "w": 3
+          },
+          {
+            "id": "tech_bag_stay_in_range",
+            "w": 3
+          },
+          {
+            "id": "tech_pivot_the_foot",
+            "w": 2
+          },
+          {
+            "id": "tech_chin_down",
+            "w": 2
+          },
+          {
+            "id": "tech_elbows_in",
+            "w": 2
+          },
+          {
+            "id": "tech_short_punches",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_body_dig",
+            "w": 2
+          },
+          {
+            "id": "tech_roll_from_the_legs",
+            "w": 2
+          },
+          {
+            "id": "tech_move_head_after",
+            "w": 2
+          },
+          {
+            "id": "tech_loose_hands",
+            "w": 2
+          }
+        ],
+        "effort": []
+      }
+    },
+    {
+      "id": "work",
+      "share": 0.3,
+      "cadenceMs": [
+        6000,
+        8000
+      ],
+      "intent": "Longer combinations, body work, and moving off the line instead of standing square in front of it.",
+      "mix": {
+        "combo": 0.48,
+        "defence": 0.16,
+        "movement": 0.06,
+        "technique": 0.25,
+        "effort": 0.05
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab_cross_hook",
+            "w": 6
+          },
+          {
+            "id": "jab_cross_body_hook_head",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_hook_cross",
+            "w": 4
+          },
+          {
+            "id": "jab_cross_sit_down",
+            "w": 4
+          },
+          {
+            "id": "cross_hook_cross",
+            "w": 4
+          },
+          {
+            "id": "jab_cross_body",
+            "w": 4
+          },
+          {
+            "id": "double_jab_cross_angle",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_hook_pivot",
+            "w": 3
+          },
+          {
+            "id": "jab_body_jab_head",
+            "w": 3
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 2
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_roll_counter",
+            "w": 4
+          },
+          {
+            "id": "def_roll_hook",
+            "w": 3
+          },
+          {
+            "id": "def_slip_counter",
+            "w": 3
+          },
+          {
+            "id": "def_roll_roll",
+            "w": 2
+          },
+          {
+            "id": "def_roll_left",
+            "w": 2
+          },
+          {
+            "id": "def_roll_right",
+            "w": 2
+          },
+          {
+            "id": "def_roll_off_the_line",
+            "w": 3
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_close_the_distance",
+            "w": 3
+          },
+          {
+            "id": "move_out_of_range",
+            "w": 3
+          },
+          {
+            "id": "move_angle_off",
+            "w": 2
+          },
+          {
+            "id": "move_walk_the_bag",
+            "w": 2
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_bag_punch_through",
+            "w": 4
+          },
+          {
+            "id": "tech_breathe",
+            "w": 4
+          },
+          {
+            "id": "tech_lead_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_stays",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_control",
+            "w": 3
+          },
+          {
+            "id": "tech_bag_body_dig",
+            "w": 3
+          },
+          {
+            "id": "tech_lazy_hand",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_plant_feet",
+            "w": 2
+          },
+          {
+            "id": "tech_turn_the_hip",
+            "w": 2
+          },
+          {
+            "id": "tech_chin_down",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_stay_in_range",
+            "w": 2
+          },
+          {
+            "id": "tech_roll_from_the_legs",
+            "w": 2
+          },
+          {
+            "id": "tech_balls_of_feet",
+            "w": 2
+          }
+        ],
+        "effort": [
+          {
+            "id": "effort_work",
+            "w": 3
+          },
+          {
+            "id": "effort_hands_up",
+            "w": 3
+          },
+          {
+            "id": "effort_keep_going",
+            "w": 2
+          },
+          {
+            "id": "effort_finish_strong",
+            "w": 2
+          },
+          {
+            "id": "effort_dont_drop",
+            "w": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "finish",
+      "share": 0.15,
+      "cadenceMs": [
+        5000,
+        6000
+      ],
+      "intent": "Burnout. Short calls, and the hands are what drop first.",
+      "mix": {
+        "combo": 0.52,
+        "defence": 0.08,
+        "movement": 0.04,
+        "technique": 0.18,
+        "effort": 0.18
+      },
+      "pools": {
+        "combo": [
+          {
+            "id": "jab_cross",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_hook",
+            "w": 5
+          },
+          {
+            "id": "jab_cross_sit_down",
+            "w": 4
+          },
+          {
+            "id": "double_jab",
+            "w": 3
+          },
+          {
+            "id": "cross_hook_cross",
+            "w": 4
+          },
+          {
+            "id": "triple_jab",
+            "w": 3
+          },
+          {
+            "id": "jab_cross_hook_cross",
+            "w": 3
+          },
+          {
+            "id": "jab_jab_cross",
+            "w": 3
+          }
+        ],
+        "defence": [
+          {
+            "id": "def_roll_left",
+            "w": 3
+          },
+          {
+            "id": "def_roll_right",
+            "w": 3
+          },
+          {
+            "id": "def_roll_roll",
+            "w": 2
+          },
+          {
+            "id": "def_slip_left_right",
+            "w": 2
+          },
+          {
+            "id": "def_roll_off_the_line",
+            "w": 2
+          }
+        ],
+        "movement": [
+          {
+            "id": "move_close_the_distance",
+            "w": 2
+          },
+          {
+            "id": "move_walk_the_bag",
+            "w": 2
+          },
+          {
+            "id": "move_angle_off",
+            "w": 1
+          }
+        ],
+        "technique": [
+          {
+            "id": "tech_chin_down",
+            "w": 3
+          },
+          {
+            "id": "tech_lead_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_rear_hand_back",
+            "w": 3
+          },
+          {
+            "id": "tech_breathe",
+            "w": 3
+          },
+          {
+            "id": "tech_bag_punch_through",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_plant_feet",
+            "w": 2
+          },
+          {
+            "id": "tech_lazy_hand",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_stay_in_range",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_control",
+            "w": 2
+          },
+          {
+            "id": "tech_bag_dont_lean",
+            "w": 2
+          }
+        ],
+        "effort": [
+          {
+            "id": "effort_work",
+            "w": 4
+          },
+          {
+            "id": "effort_hands_up",
+            "w": 4
+          },
+          {
+            "id": "effort_dont_drop",
+            "w": 3
+          },
+          {
+            "id": "effort_finish_strong",
+            "w": 2
+          },
+          {
+            "id": "effort_empty_tank",
+            "w": 2
+          },
+          {
+            "id": "effort_keep_going",
+            "w": 2
+          }
+        ]
+      },
+      "pinned": [
+        {
+          "id": "effort_last_ten",
+          "atFromRoundEndMs": 10000,
+          "why": "a coach always calls the last ten; too important to leave to the draw"
+        }
+      ]
+    }
+  ]
+}
