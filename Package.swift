@@ -51,6 +51,7 @@ let package = Package(
         // phrases share a filename across numbers/ and names/ (jab.m4a exists in both). Copying
         // preserves the clips/<convention>/<id>.m4a layout docs/coaching/README.md defines.
         .target(name: "ProRoundsFoundationCoaching", dependencies: [
+            "ProRoundsFoundationAudio",
             "ProRoundsFoundationTiming",
             "ProRoundsFoundationUtilities",
         ], resources: [
@@ -83,6 +84,7 @@ let package = Package(
         // MARK: - Feature (may reach Data / Foundation / DesignSystem; never a sibling Feature)
         .target(name: "ProRoundsFeatureTimer", dependencies: [
             "ProRoundsDataConfig",
+            "ProRoundsFoundationUtilities",
             "ProRoundsDataSessions",
             "ProRoundsFoundationTiming",
             "ProRoundsFoundationAudio",

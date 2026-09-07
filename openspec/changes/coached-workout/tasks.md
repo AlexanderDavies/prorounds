@@ -61,15 +61,17 @@ The seam that keeps the engine ignorant of coaching. Everything else depends on 
 
 ## 8. Composition root
 
-- [ ] 8.1 Build the planner from catalog, settings and entitlement in `AppEnvironment` and inject it
+- [x] 8.1 Build the planner from catalog, settings and entitlement in `AppEnvironment` and inject it
 - [ ] 8.2 Write a failing test: a catalog that fails to load degrades to coaching unavailable rather than preventing launch — a content problem must never cost the user their timer
-- [ ] 8.3 Test that nothing outside the composition root constructs a planner
+- [x] 8.3 Test that nothing outside the composition root constructs a planner
 
 ## 9. Gates and docs
 
-- [ ] 9.1 `scripts/lint.sh` clean
-- [ ] 9.2 `scripts/test.sh` green, including every pre-existing engine and audio test unedited
-- [ ] 9.3 `scripts/coverage.sh` at or above 90%, with the engine included as always
-- [ ] 9.4 **BLOCKED — needs full Xcode.** Snapshot references for the ticker, chip and minimal screen; and the `ConfigCard` badge snapshot still outstanding from `coaching-config`. Command Line Tools has no XCTest, so these targets do not build here. Run `RECORD=1 ./scripts/snapshot.sh` under full Xcode, review the PNGs, commit
-- [ ] 9.5 **BLOCKED — needs a simulator.** Drive a coached workout end to end: start, hear calls, background, take a call, resume, reach the bell. A timer bug is invisible in a screenshot, and this is the only check that exercises real audio against a real clock
+- [x] 9.0 Build the app target with `xcodebuild`. `swift test` does not compile `ProRounds/`, so the composition root — `AppEnvironment`, `ViewModelFactory`, `RepositoryConfigurationWriter` — is not type-checked by the package suite at all
+
+- [x] 9.1 `scripts/lint.sh` clean
+- [x] 9.2 `scripts/test.sh` green, including every pre-existing engine and audio test unedited
+- [x] 9.3 `scripts/coverage.sh` at or above 90%, with the engine included as always
+- [ ] 9.4 Snapshot references for the ticker, chip and minimal screen, plus the `ConfigCard` badge still outstanding from `coaching-config`. **Not blocked after all:** Xcode is installed at `/Applications/Xcode.app` and `scripts/test.sh` already falls back to it, even though `xcode-select -p` reports Command Line Tools. `RECORD=1 ./scripts/snapshot.sh`, review the PNGs, commit
+- [ ] 9.5 Drive a coached workout end to end: start, hear calls, background, take a call, resume, reach the bell. A timer bug is invisible in a screenshot, and this is the only check that exercises real audio against a real clock. iOS 26.5 simulators are available (iPhone 17 family)
 - [ ] 9.6 Update `README.md` and `docs/COACHING_UX_BRIEF.md` per CLAUDE.md §0.3, recording Decision 3 as implemented and the feature as complete

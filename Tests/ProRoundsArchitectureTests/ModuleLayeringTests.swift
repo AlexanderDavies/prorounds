@@ -107,6 +107,36 @@ struct ModuleLayeringTests {
         }
     }
 
+    /// Every in-package module a target imports must also be declared as its dependency.
+    ///
+    /// Added after exactly this slipped through: `ProRoundsFoundationCoaching` imported
+    /// `ProRoundsFoundationAudio` without declaring it, `swift test` compiled it happily, and the
+    /// failure only surfaced when `xcodebuild` built the app for a simulator — "unable to resolve
+    /// module dependency". The layering rules above check declared edges, so an *undeclared* edge
+    /// is invisible to them; this closes that gap and keeps the manifest an honest description of
+    /// what each module actually uses.
+    @Test("every imported in-package module is a declared dependency")
+    func importsAreDeclared() throws {
+        let root = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        for module in try modules() {
+            let directory = root.appendingPathComponent("Sources/\(module.name)")
+            guard let walker = FileManager.default.enumerator(atPath: directory.path) else { continue }
+            let declared = Set(module.dependencies)
+            for case let path as String in walker where path.hasSuffix(".swift") {
+                let file = directory.appendingPathComponent(path)
+                guard let source = try? String(contentsOf: file, encoding: .utf8) else { continue }
+                for line in source.split(separator: "\n") where line.hasPrefix("import ProRounds") {
+                    let imported = String(line.dropFirst("import ".count))
+                        .trimmingCharacters(in: .whitespaces)
+                    guard imported != module.name else { continue }
+                    #expect(declared.contains(imported),
+                            "\(module.name)/\(path) imports \(imported) without declaring it")
+                }
+            }
+        }
+    }
+
     /// Foundation is the floor. A Foundation module reaching Data or a Feature would invert the
     /// graph and make the lower layers untestable in isolation.
     @Test("Foundation modules depend only on Foundation")
