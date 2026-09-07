@@ -58,7 +58,11 @@ workout screen). `ProRoundsFoundationAudio` carries the concrete `AVAudioCuePlay
 sounds and background-audio. `ProRoundsDataSessions` persists a `Session` for every completed
 workout (via `SessionRepository`, `byWorkoutType()` for the chart), and `ProRoundsFeaturePerformance`
 renders training-volume-over-time with Swift Charts, and `ProRoundsFeatureSettings` (+
-`ProRoundsDataSettings`) owns the warning sound, timer display, and appearance preferences. The app
+`ProRoundsDataSettings`) owns the warning sound, timer display, and appearance preferences.
+`ProRoundsFoundationCoaching` holds the assisted-coaching catalog and cue scheduler — pure, with no
+audio and no UI. It ships the 115 voice clips and reproduces `scripts/coach-script.py` byte for byte,
+which its tests assert against committed fixtures. Nothing links it yet; the app wires it in a later
+change. The app
 target hosts the **composition root** (`AppEnvironment` + `ViewModelFactory`, one shared store for
 configs + sessions, a shared `SettingsViewModel` driving `preferredColorScheme`); the Timer tab runs
 workouts (saving a session on completion), Performance shows the chart, and Settings persists

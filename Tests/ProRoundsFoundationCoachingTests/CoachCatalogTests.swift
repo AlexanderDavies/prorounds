@@ -125,3 +125,53 @@ struct ClipResolutionTests {
         }
     }
 }
+
+@Suite("Ticker rendering")
+struct CoachTickerTests {
+    /// The running screen's dual-convention ticker (UX brief, Decision 3). Nothing in this change
+    /// renders it, but the accessors are public API here, so they are covered here rather than
+    /// shipped untested into change 3.
+    @Test("a shared phrase renders one line under either convention")
+    func sharedTicker() throws {
+        let phrase = try #require(try CoachCatalog.bundled()["effort_work"])
+        #expect(phrase.ticker.primary(.numbers) == "Work!")
+        #expect(phrase.ticker.primary(.names) == "Work!")
+        #expect(phrase.ticker.modifier == nil)
+    }
+
+    @Test("a forked phrase renders per convention")
+    func forkedTicker() throws {
+        let phrase = try #require(try CoachCatalog.bundled()["jab_cross"])
+        #expect(phrase.ticker.primary(.numbers) == "1 · 2")
+        #expect(phrase.ticker.primary(.names) == "Jab Cross")
+        #expect(phrase.ticker.modifier == nil)
+    }
+
+    /// The modifier is carried separately so the view can set it apart from the punch numbers —
+    /// "1 · 2" large, "to the body" beneath it.
+    @Test("a modifier is exposed separately from the punches")
+    func tickerModifier() throws {
+        let phrase = try #require(try CoachCatalog.bundled()["jab_cross_body"])
+        #expect(phrase.ticker.primary(.numbers) == "1 · 2")
+        #expect(phrase.ticker.modifier == "to the body")
+    }
+
+    @Test("exactly the 15 authored phrases carry a modifier")
+    func modifierCount() throws {
+        let catalog = try CoachCatalog.bundled()
+        let withModifier = catalog.order.compactMap { catalog[$0] }.filter { $0.ticker.modifier != nil }
+        #expect(withModifier.count == 15)
+        #expect(withModifier.allSatisfy { $0.clip == .forked })
+    }
+
+    @Test("every phrase renders a non-empty ticker under both conventions")
+    func tickerAlwaysRenders() throws {
+        let catalog = try CoachCatalog.bundled()
+        for id in catalog.order {
+            let phrase = try #require(catalog[id])
+            for convention in NamingConvention.allCases {
+                #expect(!phrase.ticker.primary(convention).isEmpty, "\(id) has an empty ticker")
+            }
+        }
+    }
+}

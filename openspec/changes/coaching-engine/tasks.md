@@ -62,13 +62,13 @@ normative: where it and the README disagree, the Python wins.
 
 ## 7. Cross-check against the reference
 
-- [ ] 7.1 Run `scripts/coach-script.py validate` and `stats`; record the delivered-vs-authored mix and sanity-check it rather than assuming the reference is correct
-- [ ] 7.2 Reconcile any divergence between the Swift port and the Python; where the README's prose disagrees with the Python, correct the README
-- [ ] 7.3 Confirm `estMs`-dependent behaviour still holds after the trimmed re-record
+- [x] 7.1 Run `scripts/coach-script.py validate` and `stats`; record the delivered-vs-authored mix and sanity-check it rather than assuming the reference is correct
+- [x] 7.2 Reconcile any divergence between the Swift port and the Python; where the README's prose disagrees with the Python, correct the README
+- [x] 7.3 Confirm `estMs`-dependent behaviour still holds after the trimmed re-record
 
 ## 8. Gates and docs
 
-- [ ] 8.1 `scripts/lint.sh` clean
-- [ ] 8.2 `scripts/test.sh` green
-- [ ] 8.3 `scripts/coverage.sh` passes with the scheduler included in the gate — it is never excluded
-- [ ] 8.4 Update `README.md` (module graph and package list) and `docs/coaching/README.md` (fixture regeneration, Swift port status) per CLAUDE.md §0.3
+- [x] 8.1 `scripts/lint.sh` clean
+- [x] 8.2 `scripts/test.sh` green
+- [x] 8.3 `scripts/coverage.sh` passes with the scheduler included in the gate — it is never excluded
+- [x] 8.4 Update `README.md` (module graph and package list) and `docs/coaching/README.md` (fixture regeneration, Swift port status) per CLAUDE.md §0.3

@@ -186,7 +186,21 @@ next script (Intermediate, or a new workout type) is written to the same shape. 
 - **`cadenceMs`** — call start to call start, drawn uniformly. The real gap is
   `max(drawn, estMs + minGapMs)`.
 - **`mix`** — a **draw weight, not the delivered share.** Adjacency rules convert some draws to
-  combos, so delivered non-combo shares run ~30% below the declared mix. Tune against `stats`.
+  combos, so combo is delivered ~20-25% *above* its declared weight and the kinds it steals from run
+  below theirs — but by very different amounts, and **effort runs above**, because the pinned
+  `effort_last_ten` fires every round without passing through the draw at all. Measured over 24
+  rounds of each script:
+
+  | kind | shadow | bag |
+  |------|--------|-----|
+  | combo | +25% | +21% |
+  | defence | −19% | −13% |
+  | movement | −9% | −17% |
+  | technique | −37% | −34% |
+  | effort | **+71%** | **+81%** |
+
+  Technique absorbs most of the conversion because it is the largest pool and the most often
+  displaced. Always tune against `stats` rather than reasoning from the declared mix.
 - **`noRepeatWithinKind`** — counted **per kind**: a technique cue waits for 6 other *technique*
   cues, not 6 calls. Counting across all calls let the same reminder land three times a round.
   `validate` fails if a window is as large as a pool it applies to.
@@ -195,8 +209,21 @@ next script (Intermediate, or a new workout type) is written to the same shape. 
 
 ## Selection algorithm (what Swift must reproduce)
 
-`scripts/coach-script.py preview` is the reference. The Swift `CoachCueScheduler` must produce
-byte-identical sequences, so its tests can use previews as fixtures.
+`scripts/coach-script.py preview` is the reference. The Swift `CoachCueScheduler` **does** produce
+byte-identical sequences, asserted against 49 committed fixtures in
+`Tests/ProRoundsFoundationCoachingTests/Fixtures/`.
+
+Regenerate every fixture with **`scripts/gen-coach-fixtures.sh`** after any change to this script,
+`phrases.json`, or a script file — then read the diff. A fixture change means the coach's behaviour
+changed, which is either intended or a bug.
+
+Two details are load-bearing for byte-identity and easy to "tidy" into a divergence:
+
+- **`round()` in Python is banker's rounding.** Swift uses `.rounded(.toNearestOrEven)`. An exact
+  `.5` never actually arises from the cadence walk (0 across 212,748 sampled values), so this is
+  insurance rather than a live bug — and it cannot be covered by a fixture, only by a unit test.
+- **`weighted()`'s accumulation order and its trailing `items[-1]` fallback.** A prefix-sum
+  reformulation can pick a different element on ties, and the fallback is genuinely reachable.
 
 1. **Seed** — FNV-1a 64 over `"<configID>#<roundIndex>"`, then **SplitMix64**. Not
    `SystemRandomNumberGenerator`: the sequence must be stable across OS versions and machines.
@@ -210,6 +237,18 @@ byte-identical sequences, so its tests can use previews as fixtures.
 5. Draw weighted, nudge clear of the warning cue and any pinned window, and **drop the call** if it
    would still be speaking at `roundEndGuardMs`.
 6. Advance `t` by `max(drawn cadence, estMs + minGapMs)`.
+
+**Two things the delivered order does that the rules above do not obviously imply.** Both are
+reference behaviour, and both are pinned by tests:
+
+- **Pinned cues bypass the adjacency counter.** They are placed before the walk and merged
+  afterwards, so `run_non_combo` never sees them — a pinned `effort_last_ten` can follow two drawn
+  non-combos, giving three calls without punches at the end of a round.
+- **Two calls can share an offset** at a segment boundary, and `sorted()` then orders them by phrase
+  id rather than by draw order. `edge_offset_tie.json` is the fixture for that; without it, a port
+  that sorted by offset alone passes everything else.
+
+`roundStartDelayMs` is also narrower than it reads: it gates the **first segment only**.
 
 **Invariants this must not touch.** Cues schedule against the same monotonic deadline clock as
 existing `AudioCue`s — a new cue kind on the existing engine, never a second timeline. Coaching must
