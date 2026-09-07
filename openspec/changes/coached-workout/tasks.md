@@ -23,28 +23,28 @@ The seam that keeps the engine ignorant of coaching. Everything else depends on 
 - [x] 3.1 Write failing tests for a spoken `AudioCue` case carrying a file URL, including that it compares equal only for the same clip and that the existing cases are unchanged
 - [x] 3.2 Add the case, carrying a URL rather than a phrase id so the audio module needs no coaching dependency
 - [x] 3.3 Play the clip in `AVAudioCuePlayer` alongside the bundled sounds
-- [ ] 3.4 Write a failing test: an unreadable clip does not crash and leaves the workout unaffected
-- [ ] 3.5 Confirm the existing interruption and background-audio tests pass unchanged
-- [ ] 3.6 Test that a phase-boundary cue still plays while a spoken clip is playing — the bell is the more important sound
+- [x] 3.4 Write a failing test: an unreadable clip does not crash and leaves the workout unaffected
+- [x] 3.5 Confirm the existing interruption and background-audio tests pass unchanged
+- [x] 3.6 Test that a phase-boundary cue still plays while a spoken clip is playing — the bell is the more important sound
 
 ## 4. The planner
 
-- [ ] 4.1 Write failing tests: a coached configuration plans calls; an uncoached one plans nothing; a workout type with no script plans nothing rather than failing
-- [ ] 4.2 Implement `CoachCuePlanner` in `ProRoundsFoundationCoaching`, adding its dependency on `ProRoundsFoundationAudio` (Foundation → Foundation)
-- [ ] 4.3 Write a failing test: with entitlement locked the plan is empty, and the workout emits exactly what an uncoached one does at the same instants
-- [ ] 4.4 Test clip resolution through the stored naming convention, including that a shared phrase ignores it
-- [ ] 4.5 Write a failing test: a phrase whose clip is missing is dropped from the plan and the round runs normally
-- [ ] 4.6 Test that the plan is deterministic for the same configuration, round index and length
-- [ ] 4.7 Test that rest and prep plan nothing
+- [x] 4.1 Write failing tests: a coached configuration plans calls; an uncoached one plans nothing; a workout type with no script plans nothing rather than failing
+- [x] 4.2 Implement `CoachCuePlanner` in `ProRoundsFoundationCoaching`, adding its dependency on `ProRoundsFoundationAudio` (Foundation → Foundation)
+- [x] 4.3 Write a failing test: with entitlement locked the plan is empty, and the workout emits exactly what an uncoached one does at the same instants
+- [x] 4.4 Test clip resolution through the stored naming convention, including that a shared phrase ignores it
+- [x] 4.5 Write a failing test: a phrase whose clip is missing is dropped from the plan and the round runs normally
+- [x] 4.6 Test that the plan is deterministic for the same configuration, round index and length
+- [x] 4.7 Test that rest and prep plan nothing
 
 ## 5. The ticker
 
-- [ ] 5.1 Write failing view-model tests: a punch call exposes both conventions and its modifier; a non-punch call exposes one line and no empty second line
-- [ ] 5.2 Implement the ticker state on the workout view model, fed by the plan's resolved strings
-- [ ] 5.3 Write failing tests: the ticker clears during rest and does not retain the last call; an uncoached workout has no ticker at all
+- [x] 5.1 Write failing view-model tests: a punch call exposes both conventions and its modifier; a non-punch call exposes one line and no empty second line
+- [x] 5.2 Implement the ticker state on the workout view model, fed by the plan's resolved strings
+- [x] 5.3 Write failing tests: the ticker clears during rest and does not retain the last call; an uncoached workout has no ticker at all
 - [ ] 5.4 Build the ticker view in the design system — names prominent, numbers above, modifier beneath
-- [ ] 5.5 Give it an accessible description conveying the call and modifier as one phrase, not disconnected fragments
-- [ ] 5.6 Test that every call that fires reaches the ticker — it is the whole channel for a deaf or hard-of-hearing user, not a decoration
+- [x] 5.5 Give it an accessible description conveying the call and modifier as one phrase, not disconnected fragments
+- [x] 5.6 Test that every call that fires reaches the ticker — it is the whole channel for a deaf or hard-of-hearing user, not a decoration
 
 ## 6. The coaching chip and sheet
 

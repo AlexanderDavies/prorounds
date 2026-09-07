@@ -39,10 +39,9 @@ public final class RoundTimerEngine {
     private var phaseStart: ContinuousClock.Instant = ContinuousClock().now
     private var deadline: ContinuousClock.Instant = ContinuousClock().now
     private var warningFired = false
-    /// The current round's plan and how far through it we are. Reset at every round start, so a
-    /// cue can never leak into a rest or the next round.
-    private var roundPlan: [PlannedCue] = []
-    private var nextPlannedIndex = 0
+    /// The current round's plan and how far through it the clock has reached. Reloaded at every
+    /// phase transition, so a cue can never leak into a rest or the next round.
+    private var planCursor = RoundPlanCursor()
     private var isPaused = false
     private var pausedRemaining: Duration = .zero
     private var elapsedBeforeCurrentPhase: Duration = .zero
@@ -91,6 +90,7 @@ public final class RoundTimerEngine {
         started = false
         isPaused = false
         warningFired = false
+        planCursor.clear()
         elapsedBeforeCurrentPhase = .zero
         phase = Self.firstPhase(for: config)
         snapshot = Self.initialSnapshot(for: config)
@@ -121,16 +121,12 @@ public final class RoundTimerEngine {
     /// Only a round carries planned cues — v1 authors no rest or prep coaching — and the plan is
     /// replaced at every transition, so a cue can never leak past the round it was planned for.
     private func loadPlan(for phase: WorkoutPhase) {
-        nextPlannedIndex = 0
         guard case .round(let index) = phase else {
-            roundPlan = []
+            planCursor.clear()
             return
         }
-        // Offsets beyond the round can never be reached, so they are dropped rather than carried.
-        let length = config.roundDuration
-        roundPlan = cuePlanner.cues(forRound: index - 1, length: length)
-            .filter { $0.offset < length }
-            .sorted { $0.offset < $1.offset }
+        planCursor.load(cuePlanner.cues(forRound: index - 1, length: config.roundDuration),
+                        roundLength: config.roundDuration)
     }
 
     /// Anchors the timeline at `now` and returns the initial cues. Prep is skipped when zero.
@@ -175,15 +171,8 @@ public final class RoundTimerEngine {
                 }
             }
 
-            // Planned cues, from the same crossing test as the warning above. Driven off an index
-            // rather than a per-cue flag so a clock jump past several offsets fires all of them, in
-            // order, exactly once — which is what a resume from the background does.
-            while nextPlannedIndex < roundPlan.count {
-                let planned = roundPlan[nextPlannedIndex]
-                guard now >= phaseStart.advanced(by: planned.offset) else { break }
-                cues.append(planned.cue)
-                nextPlannedIndex += 1
-            }
+            // Planned cues, from the same crossing test as the warning above.
+            cues.append(contentsOf: planCursor.crossed(at: now, roundStart: phaseStart))
 
             guard now >= deadline, phase != .finished else { break }
 
@@ -306,7 +295,8 @@ public final class RoundTimerEngine {
             totalDuration: config.totalDuration,
             roundCount: config.rounds,
             isPaused: isPaused,
-            started: started
+            started: started,
+            currentCall: planCursor.currentCall
         )
     }
 
