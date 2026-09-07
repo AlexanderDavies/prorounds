@@ -42,21 +42,21 @@ The seam that keeps the engine ignorant of coaching. Everything else depends on 
 - [x] 5.1 Write failing view-model tests: a punch call exposes both conventions and its modifier; a non-punch call exposes one line and no empty second line
 - [x] 5.2 Implement the ticker state on the workout view model, fed by the plan's resolved strings
 - [x] 5.3 Write failing tests: the ticker clears during rest and does not retain the last call; an uncoached workout has no ticker at all
-- [ ] 5.4 Build the ticker view in the design system — names prominent, numbers above, modifier beneath
+- [x] 5.4 Build the ticker view in the design system — names prominent, numbers above, modifier beneath
 - [x] 5.5 Give it an accessible description conveying the call and modifier as one phrase, not disconnected fragments
 - [x] 5.6 Test that every call that fires reaches the ticker — it is the whole channel for a deaf or hard-of-hearing user, not a decoration
 
 ## 6. The coaching chip and sheet
 
-- [ ] 6.1 Write failing view-model tests: the chip shows the current level, is absent for workout types with no script, and is unavailable once running
+- [x] 6.1 Write failing view-model tests: the chip shows the current level, is absent for workout types with no script, and is unavailable once running
 - [ ] 6.2 Add the chip above the transport on the idle workout screen
-- [ ] 6.3 Write a failing test: changing the level from the chip persists to the same `Configuration.coachingLevel` and the list reflects it — two entry points, one stored value
+- [x] 6.3 Write a failing test: changing the level from the chip persists to the same `Configuration.coachingLevel` and the list reflects it — two entry points, one stored value
 - [ ] 6.4 Build the sheet, mirroring the naming-convention control with an example of the coach's words per option
 - [ ] 6.5 Test that the convention set here and in Settings are the same stored preference
 
 ## 7. The minimal running screen
 
-- [ ] 7.1 Write failing view-model tests: with the preference on, a coached round keeps time, phase and ticker and hides the rest
+- [x] 7.1 Write failing view-model tests: with the preference on, a coached round keeps time, phase and ticker and hides the rest
 - [ ] 7.2 Implement it, and test that changing the preference takes effect on the next coached round without a relaunch
 
 ## 8. Composition root

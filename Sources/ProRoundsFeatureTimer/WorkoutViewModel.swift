@@ -22,6 +22,11 @@ public final class WorkoutViewModel {
     private let interruptions: any AudioInterruptionMonitoring
     private let sessions: any SessionRepository
     private let countDirection: CountDirection
+    private let configurationWriter: (any ConfigurationWriting)?
+    private let minimalScreen: Bool
+    /// The coaching level as last successfully stored. Held here rather than read from the original
+    /// configuration so the chip never claims a level a failed save did not persist.
+    private var coachingLevel: CoachingLevel?
 
     private var snapshotTask: Task<Void, Never>?
     private var interruptionTask: Task<Void, Never>?
@@ -35,7 +40,9 @@ public final class WorkoutViewModel {
         idleTimer: any IdleTimerControlling,
         interruptions: any AudioInterruptionMonitoring,
         sessions: any SessionRepository,
-        countDirection: CountDirection = .countDown
+        countDirection: CountDirection = .countDown,
+        configurationWriter: (any ConfigurationWriting)? = nil,
+        minimalScreen: Bool = false
     ) {
         self.configuration = configuration
         self.title = configuration.effectiveName
@@ -44,7 +51,40 @@ public final class WorkoutViewModel {
         self.interruptions = interruptions
         self.sessions = sessions
         self.countDirection = countDirection
-        self.display = WorkoutDisplayModel(engine.snapshot, direction: countDirection)
+        self.configurationWriter = configurationWriter
+        self.minimalScreen = minimalScreen
+        self.coachingLevel = configuration.coachingLevel
+        self.display = WorkoutDisplayModel(
+            engine.snapshot, direction: countDirection, workoutType: configuration.workoutType,
+            coachingLevel: configuration.coachingLevel, minimalScreen: minimalScreen)
+    }
+
+    private func makeDisplay(_ snapshot: WorkoutSnapshot) -> WorkoutDisplayModel {
+        WorkoutDisplayModel(snapshot, direction: countDirection,
+                            workoutType: configuration.workoutType,
+                            coachingLevel: coachingLevel, minimalScreen: minimalScreen)
+    }
+
+    /// Sets the coaching level for this workout, writing through to the same stored value the
+    /// configuration editor writes.
+    ///
+    /// The displayed level is updated only after the save succeeds, so a failed write leaves the
+    /// chip telling the truth rather than promising coaching that will not happen.
+    public func setCoachingLevel(_ level: CoachingLevel?) async {
+        guard let configurationWriter else { return }
+        let updated = Configuration(
+            id: configuration.id, workoutType: configuration.workoutType,
+            rounds: configuration.rounds, roundDuration: configuration.roundDuration,
+            restDuration: configuration.restDuration, prepDuration: configuration.prepDuration,
+            warningLead: configuration.warningLead, customName: configuration.customName,
+            coachingLevel: level)
+        do {
+            try await configurationWriter.save(updated)
+            coachingLevel = level
+            display = makeDisplay(engine.snapshot)
+        } catch {
+            // Left as it was: the chip must not claim a level that was never stored.
+        }
     }
 
     /// One-line summary shown on the finished screen (rounds · total time).
@@ -57,7 +97,7 @@ public final class WorkoutViewModel {
     /// from Settings, which resets the engine) always lands on a startable ready screen.
     public func onAppear() {
         idleTimer.setDisabled(true)
-        display = WorkoutDisplayModel(engine.snapshot, direction: countDirection)
+        display = makeDisplay(engine.snapshot)
         snapshotTask = Task { [weak self] in
             guard let self else { return }
             for await snapshot in self.engine.snapshots {
@@ -87,7 +127,7 @@ public final class WorkoutViewModel {
             engine.start()
         }
         // Reflect the new transport state immediately (no Play→Pause flash while the stream catches up).
-        display = WorkoutDisplayModel(engine.snapshot, direction: countDirection)
+        display = makeDisplay(engine.snapshot)
     }
 
     public func togglePause() {
