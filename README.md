@@ -8,7 +8,7 @@ cinematic theme sit around it.
 - **Product spec:** [`prorounds_app_prompt.md`](prorounds_app_prompt.md)
 - **Architecture guide:** [`docs/ARCHITECTURE_GUIDE.md`](docs/ARCHITECTURE_GUIDE.md) — read before feature work
 - **Design system:** [`docs/DESIGN.md`](docs/DESIGN.md) · mockups in [`docs/mockups/`](docs/mockups)
-- **Coach scripts:** [`docs/coaching/`](docs/coaching) — assisted-coaching content + `scripts/coach-script.py`
+- **Coach scripts:** [`docs/coaching/`](docs/coaching) — assisted-coaching content, `scripts/coach-script.py`, and the voice-clip pipeline
 - **Build plan:** managed as sequential OpenSpec changes under [`openspec/changes/`](openspec/changes)
 
 ## Requirements
@@ -34,7 +34,7 @@ Sources/               # one folder per module
 Tests/                 # Swift Testing suites (FoundationTiming, FoundationUtilities so far)
 ProRounds/             # the iOS app target: @main entry + the 3-tab shell
 project.yml            # XcodeGen definition of the app target + scheme
-scripts/               # test.sh · lint.sh · coverage.sh · coach-script.py
+scripts/               # test.sh · lint.sh · coverage.sh · coach-script.py · gen-coach-clips.py
 docs/                  # architecture guide, design system, mockups, coach scripts
 openspec/              # spec-driven change proposals
 ```
@@ -99,6 +99,11 @@ xcodegen generate
 # Coach-script content checks (no Swift toolchain needed) — see docs/coaching/
 ./scripts/coach-script.py validate
 ./scripts/coach-script.py preview beginner_shadow --convention names
+
+# Coach voice clips (needs ELEVENLABS_API_KEY; the voice itself is baked into the script)
+./scripts/gen-coach-clips.py --dry-run   # what would be generated, and the character cost
+./scripts/gen-coach-clips.py             # generate whatever is missing
+./scripts/gen-coach-clips.py --measure   # no API calls: rewrite estMs from the clips on disk
 ```
 
 The scripts prefer a full Xcode toolchain (they set `DEVELOPER_DIR` to `/Applications/Xcode.app`

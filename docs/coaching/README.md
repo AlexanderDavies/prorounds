@@ -66,6 +66,34 @@ A corner talks; it does not narrate. Three rules, applied across the catalog:
 - **Cut the explanation.** "Angle off", not "Angle off — do not stand in front of them". The cue is a
   reminder of something already taught, not the teaching itself.
 
+## Recording the clips
+
+**Voice: "Coach Stokes"** (ElevenLabs voice library, `YifVBvyYTdmecR2h3t20`), chosen at audition over
+29 other candidates — the premade catalogue plus 27 library coach/trainer/sergeant voices. The ID is
+baked into `scripts/gen-coach-clips.py`; `$COACH_VOICE_ID` overrides it to re-audition. **One voice
+speaks every clip in both conventions**, or the app sounds like two different coaches.
+
+```bash
+export ELEVENLABS_API_KEY=...            # a paid key: free plans cannot use library voices via the API
+./scripts/gen-coach-clips.py --dry-run   # what would be generated, and the character cost
+./scripts/gen-coach-clips.py             # generate whatever is missing
+./scripts/gen-coach-clips.py --force     # regenerate everything, after a wording change
+./scripts/gen-coach-clips.py --measure   # no API calls: rewrite estMs from the clips on disk
+```
+
+Clips land in `Sources/ProRoundsFoundationCoaching/Resources/clips/` in the `numbers/` `names/`
+`shared/` layout above. The whole catalog is only 2,489 characters, so regenerating the set after a
+wording change is cheap — treat the clips as derived artefacts, not hand-tuned assets.
+
+**Trailing silence is trimmed.** ElevenLabs pads roughly 330ms of silence onto every clip; measured
+across the audition set, 28% of the returned audio was silence. That padding is dead cadence space
+the scheduler would otherwise reserve, so `trim_silence()` cuts each clip to speech plus `TAIL_PAD_MS`
+(80ms — enough decay that plosive endings like "Work!" do not sound clipped) before the AAC encode.
+
+**Licensing.** ElevenLabs free plans are non-commercial *and* cannot speak voice-library voices
+through the API at all. Clips that ship must be generated under a paid plan; Starter is enough for
+library voices flagged `free_users_allowed`, Creator for the rest.
+
 ## Shadow vs bag
 
 Not a reskin — the scripts diverge on content, as the brief requires:
@@ -194,7 +222,8 @@ not an input to it.
   cheap to add later; neither is authored here.
 - **Crossfade between calls** is assumed ~220ms in the mockups; it needs to be felt against real
   audio before it is spec'd.
-- **`estMs` values are estimates.** They must be replaced with the measured durations of the real
-  recordings — the end-of-round guard depends on them.
+- ~~**`estMs` values are estimates.**~~ **Resolved.** Every `estMs` is now the measured duration of
+  the real trimmed clip, written back by `gen-coach-clips.py`. Re-run `coach-script.py validate` after
+  any regeneration: real durations can breach a cadence ceiling the estimates cleared.
 - **Intermediate / Advanced** are not authored. Adding punches 4–6 means new phrase IDs and new
   pools, not a format change.

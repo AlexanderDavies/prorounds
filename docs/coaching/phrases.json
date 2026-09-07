@@ -19,7 +19,7 @@
       "tags": [
         "jab"
       ],
-      "estMs": 600,
+      "estMs": 470,
       "text": {
         "numbers": "One",
         "names": "Jab"
@@ -36,7 +36,7 @@
       "tags": [
         "jab"
       ],
-      "estMs": 900,
+      "estMs": 820,
       "text": {
         "numbers": "One, one",
         "names": "Jab, jab"
@@ -53,7 +53,7 @@
       "tags": [
         "jab"
       ],
-      "estMs": 1200,
+      "estMs": 970,
       "text": {
         "numbers": "One, one, one",
         "names": "Jab, jab, jab"
@@ -70,7 +70,7 @@
       "tags": [
         "hook"
       ],
-      "estMs": 600,
+      "estMs": 490,
       "text": {
         "numbers": "Three",
         "names": "Hook"
@@ -88,7 +88,7 @@
         "jab",
         "cross"
       ],
-      "estMs": 900,
+      "estMs": 1380,
       "text": {
         "numbers": "One, two",
         "names": "Jab, cross"
@@ -106,7 +106,7 @@
         "jab",
         "cross"
       ],
-      "estMs": 1200,
+      "estMs": 1100,
       "text": {
         "numbers": "One, one, two",
         "names": "Jab, jab, cross"
@@ -124,7 +124,7 @@
         "jab",
         "hook"
       ],
-      "estMs": 900,
+      "estMs": 780,
       "text": {
         "numbers": "One, three",
         "names": "Jab, hook"
@@ -142,7 +142,7 @@
         "cross",
         "hook"
       ],
-      "estMs": 900,
+      "estMs": 800,
       "text": {
         "numbers": "Two, three",
         "names": "Cross, hook"
@@ -161,7 +161,7 @@
         "cross",
         "hook"
       ],
-      "estMs": 1300,
+      "estMs": 1530,
       "text": {
         "numbers": "One, two, three",
         "names": "Jab, cross, hook"
@@ -179,7 +179,7 @@
         "cross",
         "hook"
       ],
-      "estMs": 1300,
+      "estMs": 930,
       "text": {
         "numbers": "Two, three, two",
         "names": "Cross, hook, cross"
@@ -198,7 +198,7 @@
         "cross",
         "hook"
       ],
-      "estMs": 1600,
+      "estMs": 1270,
       "text": {
         "numbers": "One, two, three, two",
         "names": "Jab, cross, hook, cross"
@@ -216,7 +216,7 @@
         "jab",
         "body"
       ],
-      "estMs": 2000,
+      "estMs": 1570,
       "text": {
         "numbers": "One to the body, one upstairs",
         "names": "Body jab, jab upstairs"
@@ -236,7 +236,7 @@
         "cross",
         "body"
       ],
-      "estMs": 1700,
+      "estMs": 1100,
       "text": {
         "numbers": "One, two to the body",
         "names": "Jab, cross to the body"
@@ -257,7 +257,7 @@
         "hook",
         "body"
       ],
-      "estMs": 2400,
+      "estMs": 1950,
       "text": {
         "numbers": "One, two to the body, three upstairs",
         "names": "Jab, cross to the body, hook upstairs"
@@ -277,7 +277,7 @@
         "cross",
         "defence"
       ],
-      "estMs": 1400,
+      "estMs": 960,
       "text": {
         "numbers": "One, two — slip",
         "names": "Jab, cross — slip"
@@ -297,7 +297,7 @@
         "cross",
         "defence"
       ],
-      "estMs": 1600,
+      "estMs": 1640,
       "text": {
         "numbers": "One, two — roll left",
         "names": "Jab, cross — roll left"
@@ -318,7 +318,7 @@
         "hook",
         "movement"
       ],
-      "estMs": 2000,
+      "estMs": 1820,
       "text": {
         "numbers": "One, two, three — pivot left",
         "names": "Jab, cross, hook — pivot left"
@@ -337,7 +337,7 @@
         "jab",
         "movement"
       ],
-      "estMs": 1200,
+      "estMs": 1240,
       "text": {
         "numbers": "One — step in behind it",
         "names": "Jab — step in behind it"
@@ -357,7 +357,7 @@
         "cross",
         "movement"
       ],
-      "estMs": 1500,
+      "estMs": 1400,
       "text": {
         "numbers": "One, two — and out",
         "names": "Jab, cross — and out"
@@ -377,7 +377,7 @@
         "cross",
         "movement"
       ],
-      "estMs": 1900,
+      "estMs": 1780,
       "text": {
         "numbers": "One, one, two — angle off",
         "names": "Jab, jab, cross — angle off"
@@ -397,7 +397,7 @@
         "cross",
         "bag"
       ],
-      "estMs": 1800,
+      "estMs": 1480,
       "text": {
         "numbers": "One, two — sit down on it",
         "names": "Jab, cross — sit down on it"
@@ -416,7 +416,7 @@
         "defence",
         "catch"
       ],
-      "estMs": 1400,
+      "estMs": 800,
       "text": "Catch the jab",
       "ticker": {
         "line": "Catch the jab"
@@ -430,7 +430,7 @@
         "defence",
         "catch"
       ],
-      "estMs": 1800,
+      "estMs": 1140,
       "text": "Catch, catch — then answer",
       "ticker": {
         "line": "Catch, catch — answer"
@@ -446,7 +446,7 @@
         "jab",
         "cross"
       ],
-      "estMs": 1900,
+      "estMs": 1460,
       "text": {
         "numbers": "Catch — one, two",
         "names": "Catch — jab, cross"
@@ -465,7 +465,7 @@
         "defence",
         "guard"
       ],
-      "estMs": 1800,
+      "estMs": 1510,
       "text": "Block the hook — tight guard",
       "ticker": {
         "line": "Block the hook"
@@ -479,7 +479,7 @@
         "defence",
         "movement"
       ],
-      "estMs": 1600,
+      "estMs": 1200,
       "text": "Parry — step out",
       "ticker": {
         "line": "Parry — step out"
@@ -494,7 +494,7 @@
         "slip",
         "head"
       ],
-      "estMs": 1600,
+      "estMs": 1000,
       "text": "Slip left, slip right",
       "ticker": {
         "line": "Slip left, slip right"
@@ -509,7 +509,7 @@
         "slip",
         "head"
       ],
-      "estMs": 1700,
+      "estMs": 990,
       "text": "Slip outside the jab",
       "ticker": {
         "line": "Slip outside the jab"
@@ -525,7 +525,7 @@
         "jab",
         "cross"
       ],
-      "estMs": 1900,
+      "estMs": 1260,
       "text": {
         "numbers": "Slip — one, two",
         "names": "Slip — jab, cross"
@@ -545,7 +545,7 @@
         "slip",
         "cross"
       ],
-      "estMs": 2100,
+      "estMs": 1220,
       "text": {
         "numbers": "Slip, slip — two",
         "names": "Slip, slip — cross"
@@ -565,7 +565,7 @@
         "roll",
         "head"
       ],
-      "estMs": 900,
+      "estMs": 720,
       "text": "Roll left",
       "ticker": {
         "line": "Roll left"
@@ -580,7 +580,7 @@
         "roll",
         "head"
       ],
-      "estMs": 900,
+      "estMs": 480,
       "text": "Roll right",
       "ticker": {
         "line": "Roll right"
@@ -595,7 +595,7 @@
         "roll",
         "head"
       ],
-      "estMs": 1600,
+      "estMs": 880,
       "text": "Roll left, roll right",
       "ticker": {
         "line": "Roll left, roll right"
@@ -610,7 +610,7 @@
         "roll",
         "hook"
       ],
-      "estMs": 1700,
+      "estMs": 1330,
       "text": {
         "numbers": "Roll right — three",
         "names": "Roll right — hook"
@@ -631,7 +631,7 @@
         "cross",
         "hook"
       ],
-      "estMs": 2000,
+      "estMs": 1520,
       "text": {
         "numbers": "Roll left — two, three",
         "names": "Roll left — cross, hook"
@@ -652,7 +652,7 @@
         "slip",
         "roll"
       ],
-      "estMs": 1900,
+      "estMs": 890,
       "text": "Catch, slip, roll",
       "ticker": {
         "line": "Catch · slip · roll"
@@ -667,7 +667,7 @@
         "roll",
         "head"
       ],
-      "estMs": 1900,
+      "estMs": 1650,
       "text": "Punch, then roll off the line",
       "ticker": {
         "line": "Roll off the line"
@@ -680,7 +680,7 @@
       "tags": [
         "movement"
       ],
-      "estMs": 800,
+      "estMs": 770,
       "text": "Circle left",
       "ticker": {
         "line": "Circle left"
@@ -693,7 +693,7 @@
       "tags": [
         "movement"
       ],
-      "estMs": 800,
+      "estMs": 700,
       "text": "Circle right",
       "ticker": {
         "line": "Circle right"
@@ -706,7 +706,7 @@
       "tags": [
         "movement"
       ],
-      "estMs": 1200,
+      "estMs": 1130,
       "text": "Step in — step out",
       "ticker": {
         "line": "Step in — step out"
@@ -732,7 +732,7 @@
       "tags": [
         "movement"
       ],
-      "estMs": 800,
+      "estMs": 860,
       "text": "Angle off",
       "ticker": {
         "line": "Angle off"
@@ -746,7 +746,7 @@
         "movement",
         "stance"
       ],
-      "estMs": 1300,
+      "estMs": 1450,
       "text": "Reset — back to your stance",
       "ticker": {
         "line": "Reset your stance"
@@ -759,7 +759,7 @@
       "tags": [
         "movement"
       ],
-      "estMs": 1600,
+      "estMs": 1720,
       "text": "Two steps back — then straight in",
       "ticker": {
         "line": "Back — then straight in"
@@ -773,7 +773,7 @@
         "movement",
         "bag"
       ],
-      "estMs": 1500,
+      "estMs": 1600,
       "text": "Walk around it — keep it moving",
       "ticker": {
         "line": "Walk around it"
@@ -787,7 +787,7 @@
         "movement",
         "bag"
       ],
-      "estMs": 1400,
+      "estMs": 1630,
       "text": "Close the distance — get in on it",
       "ticker": {
         "line": "Close the distance"
@@ -801,7 +801,7 @@
         "movement",
         "bag"
       ],
-      "estMs": 1700,
+      "estMs": 2380,
       "text": "Step out of range — then straight back in",
       "ticker": {
         "line": "Out of range — then in"
@@ -814,7 +814,7 @@
       "tags": [
         "stance"
       ],
-      "estMs": 1600,
+      "estMs": 1480,
       "text": "Stay on the balls of your feet",
       "ticker": {
         "line": "On the balls of your feet"
@@ -827,7 +827,7 @@
       "tags": [
         "stance"
       ],
-      "estMs": 1800,
+      "estMs": 1530,
       "text": "Feet under you — never cross them",
       "ticker": {
         "line": "Feet under you"
@@ -840,7 +840,7 @@
       "tags": [
         "stance"
       ],
-      "estMs": 1500,
+      "estMs": 1410,
       "text": "Knees soft, weight even",
       "ticker": {
         "line": "Knees soft"
@@ -853,7 +853,7 @@
       "tags": [
         "guard"
       ],
-      "estMs": 1900,
+      "estMs": 1940,
       "follows": [
         "jab"
       ],
@@ -870,7 +870,7 @@
         "guard",
         "head"
       ],
-      "estMs": 900,
+      "estMs": 630,
       "text": "Chin down",
       "ticker": {
         "line": "Chin down"
@@ -883,7 +883,7 @@
       "tags": [
         "guard"
       ],
-      "estMs": 1500,
+      "estMs": 1620,
       "text": "Rear hand glued to your chin",
       "ticker": {
         "line": "Rear hand glued to your chin"
@@ -896,7 +896,7 @@
       "tags": [
         "guard"
       ],
-      "estMs": 1700,
+      "estMs": 1380,
       "text": "Elbows in — cover the body",
       "ticker": {
         "line": "Elbows in"
@@ -910,7 +910,7 @@
         "guard",
         "head"
       ],
-      "estMs": 1900,
+      "estMs": 1410,
       "text": "Shoulder up — chin behind it",
       "ticker": {
         "line": "Shoulder up, chin behind it"
@@ -923,7 +923,7 @@
       "tags": [
         "head"
       ],
-      "estMs": 1700,
+      "estMs": 1330,
       "text": "Keep your head off the centre line",
       "ticker": {
         "line": "Head off the centre line"
@@ -937,7 +937,7 @@
         "head",
         "defence"
       ],
-      "estMs": 1800,
+      "estMs": 1500,
       "follows": [
         "jab",
         "cross",
@@ -956,7 +956,7 @@
         "stance",
         "defence"
       ],
-      "estMs": 1600,
+      "estMs": 1350,
       "text": "Don't square up — stay side on",
       "ticker": {
         "line": "Don't square up"
@@ -970,7 +970,7 @@
         "head",
         "defence"
       ],
-      "estMs": 1900,
+      "estMs": 1830,
       "follows": [
         "jab",
         "cross",
@@ -988,7 +988,7 @@
       "tags": [
         "breath"
       ],
-      "estMs": 2000,
+      "estMs": 2030,
       "text": "Breathe — sharp out on every shot",
       "ticker": {
         "line": "Breathe out on every shot"
@@ -1001,7 +1001,7 @@
       "tags": [
         "breath"
       ],
-      "estMs": 1500,
+      "estMs": 920,
       "text": "Relax the shoulders",
       "ticker": {
         "line": "Relax the shoulders"
@@ -1014,7 +1014,7 @@
       "tags": [
         "power"
       ],
-      "estMs": 1900,
+      "estMs": 2070,
       "text": "Loose hands — snap them at the end",
       "ticker": {
         "line": "Loose hands, snap it"
@@ -1027,7 +1027,7 @@
       "tags": [
         "focus"
       ],
-      "estMs": 1200,
+      "estMs": 1020,
       "text": "Eyes on the target",
       "ticker": {
         "line": "Eyes on the target"
@@ -1040,7 +1040,7 @@
       "tags": [
         "technique"
       ],
-      "estMs": 2000,
+      "estMs": 1790,
       "follows": [
         "jab"
       ],
@@ -1056,7 +1056,7 @@
       "tags": [
         "power"
       ],
-      "estMs": 1800,
+      "estMs": 1500,
       "follows": [
         "cross"
       ],
@@ -1072,7 +1072,7 @@
       "tags": [
         "power"
       ],
-      "estMs": 1900,
+      "estMs": 1840,
       "follows": [
         "hook"
       ],
@@ -1088,7 +1088,7 @@
       "tags": [
         "technique"
       ],
-      "estMs": 1700,
+      "estMs": 1280,
       "text": "Short and sharp — don't reach",
       "ticker": {
         "line": "Short and sharp"
@@ -1102,7 +1102,7 @@
         "bag",
         "power"
       ],
-      "estMs": 1900,
+      "estMs": 1180,
       "text": "Punch through it, not at it",
       "ticker": {
         "line": "Punch through it"
@@ -1116,7 +1116,7 @@
         "bag",
         "stance"
       ],
-      "estMs": 2200,
+      "estMs": 1720,
       "text": "Plant your feet before you sit down on it",
       "ticker": {
         "line": "Plant your feet"
@@ -1129,7 +1129,7 @@
       "tags": [
         "bag"
       ],
-      "estMs": 1800,
+      "estMs": 1810,
       "text": "Stay in range — don't drift out",
       "ticker": {
         "line": "Stay in range"
@@ -1142,7 +1142,7 @@
       "tags": [
         "bag"
       ],
-      "estMs": 1700,
+      "estMs": 1270,
       "text": "Control it — don't chase it",
       "ticker": {
         "line": "Control it, don't chase"
@@ -1156,7 +1156,7 @@
         "bag",
         "stance"
       ],
-      "estMs": 1600,
+      "estMs": 1330,
       "text": "Don't lean on it — stand it up",
       "ticker": {
         "line": "Don't lean on it"
@@ -1170,7 +1170,7 @@
         "bag",
         "body"
       ],
-      "estMs": 1800,
+      "estMs": 1180,
       "follows": [
         "body"
       ],
@@ -1188,7 +1188,7 @@
         "catch",
         "guard"
       ],
-      "estMs": 1800,
+      "estMs": 1470,
       "follows": [
         "catch"
       ],
@@ -1206,7 +1206,7 @@
         "slip",
         "head"
       ],
-      "estMs": 1500,
+      "estMs": 1240,
       "follows": [
         "slip"
       ],
@@ -1223,7 +1223,7 @@
         "defence",
         "roll"
       ],
-      "estMs": 2000,
+      "estMs": 1700,
       "follows": [
         "roll"
       ],
@@ -1240,7 +1240,7 @@
         "defence",
         "focus"
       ],
-      "estMs": 1400,
+      "estMs": 1120,
       "follows": [
         "slip",
         "roll",
@@ -1259,7 +1259,7 @@
         "defence",
         "guard"
       ],
-      "estMs": 1300,
+      "estMs": 710,
       "follows": [
         "slip",
         "roll",
@@ -1277,7 +1277,7 @@
       "tags": [
         "defence"
       ],
-      "estMs": 1900,
+      "estMs": 1920,
       "follows": [
         "slip",
         "roll",
@@ -1295,7 +1295,7 @@
       "tags": [
         "guard"
       ],
-      "estMs": 2000,
+      "estMs": 1850,
       "follows": [
         "jab"
       ],
@@ -1311,7 +1311,7 @@
       "tags": [
         "guard"
       ],
-      "estMs": 1700,
+      "estMs": 1130,
       "follows": [
         "cross"
       ],
@@ -1327,7 +1327,7 @@
       "tags": [
         "guard"
       ],
-      "estMs": 2100,
+      "estMs": 1810,
       "follows": [
         "jab"
       ],
@@ -1343,7 +1343,7 @@
       "tags": [
         "effort"
       ],
-      "estMs": 500,
+      "estMs": 460,
       "text": "Work!",
       "ticker": {
         "line": "Work!"
@@ -1357,7 +1357,7 @@
         "effort",
         "guard"
       ],
-      "estMs": 700,
+      "estMs": 630,
       "text": "Hands up!",
       "ticker": {
         "line": "Hands up!"
@@ -1371,7 +1371,7 @@
         "effort",
         "guard"
       ],
-      "estMs": 1600,
+      "estMs": 2100,
       "text": "Hands stay up — push through it",
       "ticker": {
         "line": "Hands stay up"
@@ -1384,7 +1384,7 @@
       "tags": [
         "effort"
       ],
-      "estMs": 1600,
+      "estMs": 960,
       "text": "You've got more than that",
       "ticker": {
         "line": "You've got more"
@@ -1397,7 +1397,7 @@
       "tags": [
         "effort"
       ],
-      "estMs": 1000,
+      "estMs": 810,
       "text": "Finish strong",
       "ticker": {
         "line": "Finish strong"
@@ -1410,7 +1410,7 @@
       "tags": [
         "effort"
       ],
-      "estMs": 2000,
+      "estMs": 1490,
       "windowFromRoundEndMs": [
         8000,
         12000
@@ -1427,7 +1427,7 @@
       "tags": [
         "effort"
       ],
-      "estMs": 1300,
+      "estMs": 810,
       "windowFromRoundEndMs": [
         0,
         25000
