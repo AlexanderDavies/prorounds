@@ -7,6 +7,8 @@ public enum ConfigurationValidationError: Equatable, Sendable {
     case restDurationNegative      // restDuration < 0
     case prepDurationNegative      // prepDuration < 0
     case warningLeadOutOfRange     // warningLead < 0, or >= roundDuration
+    /// Coaching was requested for a workout type with no authored coach script.
+    case coachingUnavailableForWorkoutType
 }
 
 /// The single home for configuration validation (guide §11). The engine trusts its input and does
@@ -35,6 +37,12 @@ public enum ConfigurationValidator {
             errors.append(.warningLeadOutOfRange)
         } else if configuration.roundDuration > .zero, configuration.warningLead >= configuration.roundDuration {
             errors.append(.warningLeadOutOfRange)
+        }
+
+        // Coaching is only offered where a script exists. `supportsCoaching` is the single source
+        // the editor reads too, so the rule and the UI cannot disagree about what is offerable.
+        if configuration.coachingLevel != nil, !configuration.workoutType.supportsCoaching {
+            errors.append(.coachingUnavailableForWorkoutType)
         }
 
         return errors

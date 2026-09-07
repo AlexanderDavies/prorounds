@@ -1,35 +1,35 @@
 ## 1. Domain: the coaching level
 
-- [ ] 1.1 Write failing tests for `CoachingLevel`: beginner is the only case, and it round-trips through its raw value (a rename must fail loudly, since the raw value is what is persisted)
-- [ ] 1.2 Add `CoachingLevel` to `ProRoundsDataConfig`, and a test asserting `WorkoutType` still has exactly its five cases — coached variants stay out of that enum
-- [ ] 1.3 Write failing tests: `Configuration` defaults to no coaching, and two configurations differing only in coaching level report the same `totalDuration` and the same auto-name
-- [ ] 1.4 Add `coachingLevel: CoachingLevel?` to `Configuration` with a defaulted initialiser parameter, so every existing construction site still compiles
+- [x] 1.1 Write failing tests for `CoachingLevel`: beginner is the only case, and it round-trips through its raw value (a rename must fail loudly, since the raw value is what is persisted)
+- [x] 1.2 Add `CoachingLevel` to `ProRoundsDataConfig`, and a test asserting `WorkoutType` still has exactly its five cases — coached variants stay out of that enum
+- [x] 1.3 Write failing tests: `Configuration` defaults to no coaching, and two configurations differing only in coaching level report the same `totalDuration` and the same auto-name
+- [x] 1.4 Add `coachingLevel: CoachingLevel?` to `Configuration` with a defaulted initialiser parameter, so every existing construction site still compiles
 
 ## 2. Persistence and the first migration
 
 This is the only irreversible part of the change. SwiftData is the user's sole copy of their
 configurations — no backend, no export — so a dropped record is gone.
 
-- [ ] 2.1 Write the failing migration test **first**, and build its fixture with the *pre-change* entity shape: write a store with several configurations, close it, reopen under the new schema, and assert every record is present, reads back uncoached, and every other field is unchanged. A fixture built from the new model would prove nothing
-- [ ] 2.2 Assert a migrated record is still writable: edit one and save it
-- [ ] 2.3 Add `coachingLevelRaw: String?` to `ConfigurationEntity` — **optional**, to stay in lightweight-migration territory; a non-optional attribute without a default fails to open an existing store
-- [ ] 2.4 Map the field in `ConfigurationMapper` both ways, with nil ↔ no coaching, and a test pinning the exact persisted string for beginner
-- [ ] 2.5 Write failing round-trip tests through `ConfigurationRepository` for a coached and an uncoached configuration, then make them pass
-- [ ] 2.6 Confirm an unrecognised stored level string degrades to no coaching rather than throwing — a forward-compatibility path for a store written by a later build
+- [x] 2.1 Write the failing migration test **first**, and build its fixture with the *pre-change* entity shape: write a store with several configurations, close it, reopen under the new schema, and assert every record is present, reads back uncoached, and every other field is unchanged. A fixture built from the new model would prove nothing
+- [x] 2.2 Assert a migrated record is still writable: edit one and save it
+- [x] 2.3 Add `coachingLevelRaw: String?` to `ConfigurationEntity` — **optional**, to stay in lightweight-migration territory; a non-optional attribute without a default fails to open an existing store
+- [x] 2.4 Map the field in `ConfigurationMapper` both ways, with nil ↔ no coaching, and a test pinning the exact persisted string for beginner
+- [x] 2.5 Write failing round-trip tests through `ConfigurationRepository` for a coached and an uncoached configuration, then make them pass
+- [x] 2.6 Confirm an unrecognised stored level string degrades to no coaching rather than throwing — a forward-compatibility path for a store written by a later build
 
 ## 3. Validation
 
-- [ ] 3.1 Write failing tests: coaching is valid for Shadow Boxing and Heavy Bag, rejected for Skipping, Speed Ball and Sparring, and always valid when absent
-- [ ] 3.2 Add the coaching rule to `ConfigurationValidator` with a new `ConfigurationValidationError` case
-- [ ] 3.3 Test that a coaching violation is reported alongside other violations, consistent with reporting all of them together
-- [ ] 3.4 Expose which workout types support coaching as a single source both the validator and the editor read, so the two cannot disagree
+- [x] 3.1 Write failing tests: coaching is valid for Shadow Boxing and Heavy Bag, rejected for Skipping, Speed Ball and Sparring, and always valid when absent
+- [x] 3.2 Add the coaching rule to `ConfigurationValidator` with a new `ConfigurationValidationError` case
+- [x] 3.3 Test that a coaching violation is reported alongside other violations, consistent with reporting all of them together
+- [x] 3.4 Expose which workout types support coaching as a single source both the validator and the editor read, so the two cannot disagree
 
 ## 4. Settings
 
-- [ ] 4.1 Write failing tests for the two new preferences on the in-memory store: defaults are numbers and non-minimal
-- [ ] 4.2 Add `namingConvention` and `minimalRunningScreen` to the `SettingsStore` protocol, the `UserDefaults` store, and the in-memory fake
-- [ ] 4.3 Write failing durability tests: set each, construct a new store over the same defaults, read the new value back
-- [ ] 4.4 Test that changing the naming convention rewrites no configuration and leaves stored configurations comparing equal
+- [x] 4.1 Write failing tests for the two new preferences on the in-memory store: defaults are numbers and non-minimal
+- [x] 4.2 Add `namingConvention` and `minimalRunningScreen` to the `SettingsStore` protocol, the `UserDefaults` store, and the in-memory fake
+- [x] 4.3 Write failing durability tests: set each, construct a new store over the same defaults, read the new value back
+- [x] 4.4 Test that changing the naming convention rewrites no configuration and leaves stored configurations comparing equal
 
 ## 5. Entitlement seam
 

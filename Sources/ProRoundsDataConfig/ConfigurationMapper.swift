@@ -16,7 +16,10 @@ enum ConfigurationMapper {
             restDuration: .seconds(entity.restSeconds),
             prepDuration: .seconds(entity.prepSeconds),
             warningLead: .seconds(entity.warningLeadSeconds),
-            customName: entity.customName.isEmpty ? nil : entity.customName
+            customName: entity.customName.isEmpty ? nil : entity.customName,
+            // An unrecognised level degrades to coaching off rather than throwing, so a store
+            // written by a later build with a level this build does not know still opens.
+            coachingLevel: entity.coachingLevelRaw.flatMap(CoachingLevel.init(rawValue:))
         )
     }
 
@@ -30,6 +33,7 @@ enum ConfigurationMapper {
             prepSeconds: seconds(config.prepDuration),
             warningLeadSeconds: seconds(config.warningLead),
             customName: config.customName ?? "",
+            coachingLevelRaw: config.coachingLevel?.rawValue,
             createdAt: now,
             updatedAt: now
         )
@@ -43,6 +47,7 @@ enum ConfigurationMapper {
         entity.restSeconds = seconds(config.restDuration)
         entity.prepSeconds = seconds(config.prepDuration)
         entity.warningLeadSeconds = seconds(config.warningLead)
+        entity.coachingLevelRaw = config.coachingLevel?.rawValue
         entity.customName = config.customName ?? ""
         entity.updatedAt = now
     }

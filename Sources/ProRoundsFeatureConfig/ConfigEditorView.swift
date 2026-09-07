@@ -98,6 +98,8 @@ public struct ConfigEditorView: View {
         case .restDurationNegative: return "Rest time can't be negative."
         case .prepDurationNegative: return "Prep time can't be negative."
         case .warningLeadOutOfRange: return "Warning lead must be shorter than the round."
+        case .coachingUnavailableForWorkoutType:
+            return "Coaching isn't available for this workout type yet."
         }
     }
 }

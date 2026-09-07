@@ -76,6 +76,7 @@ let package = Package(
         ]),
         .target(name: "ProRoundsDataSettings", dependencies: [
             "ProRoundsFoundationAudio",
+            "ProRoundsFoundationCoaching",
             "ProRoundsFoundationUtilities",
         ]),
 
@@ -148,6 +149,7 @@ let package = Package(
         ], exclude: ["__Snapshots__"]),
         .testTarget(name: "ProRoundsDataSettingsTests", dependencies: [
             "ProRoundsDataSettings",
+            "ProRoundsFoundationCoaching",
         ]),
         .testTarget(name: "ProRoundsFeatureSettingsTests", dependencies: [
             "ProRoundsFeatureSettings",
