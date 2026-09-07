@@ -160,3 +160,25 @@ Delivered mix is roughly 55% combo, 13% defence, 7% movement, 18% technique, 7% 
 Still open: crossfade timing against real audio (~220ms assumed), `estMs` values must be replaced
 with measured clip durations before the end-of-round guard can be trusted, and rest/prep stay silent
 in v1.
+
+## Next: audio, then OpenSpec (planned 2026-09-07)
+
+**Audio — ElevenLabs.** TTS for the 115 coach clips (2,489 characters in total, so regenerating the
+whole set after a wording change is cheap), and text-to-sound-effects to replace the five synthesized
+placeholders in `Sources/ProRoundsFoundationAudio/Resources/`. Audition voices through the
+`elevenlabs` MCP first — one voice must carry a fast combo, a technique correction, and a bark — then
+set `COACH_VOICE_ID` and run [`../scripts/gen-coach-clips.py`](../scripts/gen-coach-clips.py). That
+script measures each clip and writes the real duration back into `phrases.json`, replacing the hand
+estimates the end-of-round guard depends on. Re-run `coach-script.py validate` afterwards: real
+durations can breach a cadence ceiling. Shipping generated audio in an App Store build is commercial
+use — confirm the plan tier before recording day.
+
+**Then three OpenSpec changes**, bottom-up, one at a time:
+
+| | Change | Scope | Needs clips |
+|---|--------|-------|-------------|
+| 1 | `coaching-engine` | `ProRoundsFoundationCoaching`: phrase catalog, script loading, `CoachCueScheduler`. Pure logic, test-first against `coach-script.py preview` fixtures. | No |
+| 2 | `coaching-config` | `Configuration` coaching field + migration, `SettingsStore` call style + ticker visibility, editor section, `ConfigCard` badge, `EntitlementStore` seam. | No |
+| 3 | `coached-workout` | Coaching cues as a new kind on the existing `AudioCuePlayer`, the ticker, minimal screen, the `Coach ▾` chip and sheet. | Yes |
+
+Replacing the five workout sound effects is a separate small change against the existing assets.
