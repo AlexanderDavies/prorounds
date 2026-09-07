@@ -119,6 +119,12 @@ xcodegen generate
 xcodebuild -project ProRounds.xcodeproj -scheme ProRounds \
   -destination 'platform=iOS Simulator,name=iPhone 17' build
 
+# UI flows, including a coached workout on the real clock (start · call · pause · resume ·
+# background). The seeded UI-test configuration is coached so this exercises the whole path.
+xcodebuild test -project ProRounds.xcodeproj -scheme ProRounds \
+  -destination 'platform=iOS Simulator,name=iPhone 17' \
+  -only-testing:ProRoundsUITests CODE_SIGNING_ALLOWED=NO
+
 # Coach-script content checks (no Swift toolchain needed) — see docs/coaching/
 ./scripts/coach-script.py validate
 ./scripts/coach-script.py preview beginner_shadow --convention names

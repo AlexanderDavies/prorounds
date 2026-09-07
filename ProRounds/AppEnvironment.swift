@@ -55,6 +55,9 @@ final class AppEnvironment {
     private static let demoConfiguration = Configuration(
         workoutType: .heavyBag, rounds: 3, roundDuration: .seconds(120),
         restDuration: .seconds(30), prepDuration: .seconds(5), warningLead: .seconds(10),
-        customName: "UI Test Bag"
+        customName: "UI Test Bag",
+        // Coached, so the UI flow test exercises the whole path: a real catalog load, a real
+        // schedule, real clips resolved from the bundle, and the ticker on a real clock.
+        coachingLevel: .beginner
     )
 }

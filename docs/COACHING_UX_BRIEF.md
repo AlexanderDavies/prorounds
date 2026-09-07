@@ -137,6 +137,11 @@ Two mockup-stage items also landed: the minimal-screen preference is a global `S
 (and now strips the running screen back during a coached round), and the `ConfigCard` badge names the
 level rather than merely marking a card as coached.
 
+Verified end to end on a simulator, not only against a fake clock: `CoachedWorkoutUITests` runs the
+real composition root, so the catalog really loads, the scheduler really produces a plan, clips
+really resolve from the bundle, and cues really fire on wall time — through a pause, a resume and a
+backgrounding.
+
 Cue playback rides the engine's own monotonic-deadline clock as a new kind of cue — never a second
 timeline. The `RoundCuePlanning` seam takes offsets only, so it cannot express a delay or hold a
 clock, and `ProRoundsFeatureTimer` has no dependency on the coaching module at all. That last point

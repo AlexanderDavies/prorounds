@@ -46,3 +46,37 @@ struct CoachingValidationTests {
         #expect(rejected == !type.supportsCoaching)
     }
 }
+
+@Suite("UI-test seeding carries coaching")
+struct SeedCoachingTests {
+    /// `ConfigurationStore.seed` is how the app plants a known configuration for the UI flow tests.
+    /// If it dropped the coaching level, the coached UI test would exercise an uncoached workout and
+    /// quietly prove nothing — so the round-trip is asserted here rather than through a simulator.
+    @Test("a seeded coached configuration reads back coached")
+    func seedPreservesCoaching() async throws {
+        let container = try ConfigurationStore.makeContainer(inMemory: true)
+        let seeded = Configuration(
+            workoutType: .heavyBag, rounds: 3, roundDuration: .seconds(120),
+            restDuration: .seconds(30), prepDuration: .seconds(5), warningLead: .seconds(10),
+            customName: "UI Test Bag", coachingLevel: .beginner)
+        await MainActor.run { ConfigurationStore.seed([seeded], into: container) }
+
+        let repository = SwiftDataConfigurationRepository(modelContainer: container)
+        let loaded = try #require(try await repository.all().first { $0.id == seeded.id })
+        #expect(loaded.coachingLevel == .beginner)
+        #expect(loaded.workoutType == .heavyBag)
+        #expect(loaded.customName == "UI Test Bag")
+    }
+
+    @Test("a seeded uncoached configuration stays uncoached")
+    func seedPreservesAbsence() async throws {
+        let container = try ConfigurationStore.makeContainer(inMemory: true)
+        let seeded = Configuration(
+            workoutType: .heavyBag, rounds: 3, roundDuration: .seconds(120),
+            restDuration: .seconds(30), prepDuration: .zero, warningLead: .zero)
+        await MainActor.run { ConfigurationStore.seed([seeded], into: container) }
+        let repository = SwiftDataConfigurationRepository(modelContainer: container)
+        let loaded = try #require(try await repository.all().first { $0.id == seeded.id })
+        #expect(loaded.coachingLevel == nil)
+    }
+}
