@@ -2,27 +2,27 @@
 
 The seam that keeps the engine ignorant of coaching. Everything else depends on getting it right.
 
-- [ ] 1.1 Write failing tests for a `PlannedCue` value: a cue, an offset from round start, and the ticker strings, all resolved
-- [ ] 1.2 Define `PlannedCue` and the `RoundCuePlanning` protocol in `ProRoundsFoundationAudio` — it deals in `AudioCue`, and putting it here is what lets `ProRoundsFeatureTimer` use it without touching coaching
-- [ ] 1.3 Give the protocol a no-op default implementation and test that it plans nothing, so an uncoached workout needs no special case anywhere
-- [ ] 1.4 Assert the seam takes **offsets only** — it must expose no way to express a delay, a sleep, or a clock
+- [x] 1.1 Write failing tests for a `PlannedCue` value: a cue, an offset from round start, and the ticker strings, all resolved
+- [x] 1.2 Define `PlannedCue` and the `RoundCuePlanning` protocol in `ProRoundsFoundationAudio` — it deals in `AudioCue`, and putting it here is what lets `ProRoundsFeatureTimer` use it without touching coaching
+- [x] 1.3 Give the protocol a no-op default implementation and test that it plans nothing, so an uncoached workout needs no special case anywhere
+- [x] 1.4 Assert the seam takes **offsets only** — it must expose no way to express a delay, a sleep, or a clock
 
 ## 2. Engine: firing planned cues (test-first, against FakeTimeSource)
 
-- [ ] 2.1 Write a failing test: a cue planned at a 30s offset fires exactly once, at that instant on the fake clock
-- [ ] 2.2 Write failing tests: several cues fire in ascending offset order; a clock jump past several offsets fires all of them, in order, none skipped or repeated
-- [ ] 2.3 Write a failing test: an offset beyond the round's length never fires and the round still ends on time
-- [ ] 2.4 Implement plan firing in `processTick`, driven from the same crossing test as the round-end warning rather than a second mechanism
-- [ ] 2.5 Write failing tests for transport: no cue fires while paused; cues not yet reached still fire after resume at their round-relative offsets; reset discards the abandoned round's plan
-- [ ] 2.6 Write the regression that matters: the same workout run with and without a plan puts **every phase transition and every non-coaching cue at an identical instant**
-- [ ] 2.7 Confirm every pre-existing engine test passes unchanged, with no edits to their expectations
-- [ ] 2.8 Confirm `ProRoundsFeatureTimer` still has no dependency on `ProRoundsFoundationCoaching` — the architectural test from the previous change must still pass
+- [x] 2.1 Write a failing test: a cue planned at a 30s offset fires exactly once, at that instant on the fake clock
+- [x] 2.2 Write failing tests: several cues fire in ascending offset order; a clock jump past several offsets fires all of them, in order, none skipped or repeated
+- [x] 2.3 Write a failing test: an offset beyond the round's length never fires and the round still ends on time
+- [x] 2.4 Implement plan firing in `processTick`, driven from the same crossing test as the round-end warning rather than a second mechanism
+- [x] 2.5 Write failing tests for transport: no cue fires while paused; cues not yet reached still fire after resume at their round-relative offsets; reset discards the abandoned round's plan
+- [x] 2.6 Write the regression that matters: the same workout run with and without a plan puts **every phase transition and every non-coaching cue at an identical instant**
+- [x] 2.7 Confirm every pre-existing engine test passes unchanged, with no edits to their expectations
+- [x] 2.8 Confirm `ProRoundsFeatureTimer` still has no dependency on `ProRoundsFoundationCoaching` — the architectural test from the previous change must still pass
 
 ## 3. Audio: speaking a clip
 
-- [ ] 3.1 Write failing tests for a spoken `AudioCue` case carrying a file URL, including that it compares equal only for the same clip and that the existing cases are unchanged
-- [ ] 3.2 Add the case, carrying a URL rather than a phrase id so the audio module needs no coaching dependency
-- [ ] 3.3 Play the clip in `AVAudioCuePlayer` alongside the bundled sounds
+- [x] 3.1 Write failing tests for a spoken `AudioCue` case carrying a file URL, including that it compares equal only for the same clip and that the existing cases are unchanged
+- [x] 3.2 Add the case, carrying a URL rather than a phrase id so the audio module needs no coaching dependency
+- [x] 3.3 Play the clip in `AVAudioCuePlayer` alongside the bundled sounds
 - [ ] 3.4 Write a failing test: an unreadable clip does not crash and leaves the workout unaffected
 - [ ] 3.5 Confirm the existing interruption and background-audio tests pass unchanged
 - [ ] 3.6 Test that a phase-boundary cue still plays while a spoken clip is playing — the bell is the more important sound
