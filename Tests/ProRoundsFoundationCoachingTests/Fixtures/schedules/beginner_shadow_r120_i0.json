@@ -1,0 +1,109 @@
+{
+  "script": "beginner_shadow",
+  "roundMs": 120000,
+  "warningMs": 10000,
+  "roundIndex": 0,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1500,
+      "phraseId": "move_circle_right",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 10780,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 20511,
+      "phraseId": "tech_off_centre_line",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 24000,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 31278,
+      "phraseId": "cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 37699,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 45246,
+      "phraseId": "move_angle_off",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 51386,
+      "phraseId": "jab_cross_out",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 59003,
+      "phraseId": "def_slip_outside",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 66000,
+      "phraseId": "tech_guard_stays_home",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 71006,
+      "phraseId": "double_jab_cross_angle",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 76729,
+      "phraseId": "def_roll_hook",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 82213,
+      "phraseId": "cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 87564,
+      "phraseId": "jab_cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 92682,
+      "phraseId": "def_slip_slip_cross",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 98267,
+      "phraseId": "jab_cross_roll",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 102000,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 106514,
+      "phraseId": "jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 110750,
+      "phraseId": "effort_last_ten",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 113440,
+      "phraseId": "effort_work",
+      "kind": "effort"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ docs/coaching/README.md. The Swift `CoachCueScheduler` must reproduce these sequ
 same seed, same order, same offsets — so this doubles as the fixture generator for its tests.
 """
 from __future__ import annotations
-import argparse, json, sys
+import argparse, json, struct, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -269,11 +269,47 @@ def validate() -> int:
     return 1 if errs else 0
 
 
+# ------------------------------------------------------------ seed vectors
+def seed_vectors(pairs: list[tuple[str, int]], count: int) -> int:
+    """Emit RNG ground truth for the Swift port.
+
+    `unit` is given as the raw IEEE-754 bit pattern, not a decimal: a decimal round-trip is
+    exactly where a port silently loses the last mantissa bit.
+    """
+    out = []
+    for config_id, round_index in pairs:
+        seed = seed_for(config_id, round_index)
+        rng = SplitMix64(seed)
+        u64 = [rng.next_u64() for _ in range(count)]
+        rng2 = SplitMix64(seed)
+        units = [struct.pack(">d", rng2.unit()).hex() for _ in range(count)]
+        out.append({"configId": config_id, "roundIndex": round_index,
+                    "seed": f"{seed:016x}",
+                    "nextU64": [f"{v:016x}" for v in u64],
+                    "unitBits": units})
+    json.dump({"note": "FNV-1a 64 over \"<configID>#<roundIndex>\" then SplitMix64; roundIndex is zero-based",
+               "vectors": out}, sys.stdout, indent=2)
+    sys.stdout.write("\n")
+    return 0
+
+
 # ---------------------------------------------------------------- preview
-def preview(name: str, round_ms: int, warning_ms: int, round_index: int, config_id: str, convention: str) -> int:
+def preview(name: str, round_ms: int, warning_ms: int, round_index: int, config_id: str,
+            convention: str, as_json: bool = False) -> int:
     cat = catalog()
     s = load(name)
     calls = schedule(s, cat, round_ms, warning_ms, config_id, round_index)
+
+    if as_json:
+        # Fixture form for the Swift port. Selection is convention-independent — schedule() takes
+        # no convention — so this deliberately carries none: forking fixtures by convention would
+        # imply a dependency that does not exist.
+        json.dump({"script": name, "roundMs": round_ms, "warningMs": warning_ms,
+                   "roundIndex": round_index, "configId": config_id,
+                   "calls": [{"offsetMs": o, "phraseId": pid, "kind": k} for o, pid, k in calls]},
+                  sys.stdout, indent=2)
+        sys.stdout.write("\n")
+        return 0
 
     bounds, acc = [], 0.0
     for seg in s["segments"]:
@@ -345,6 +381,11 @@ def main() -> int:
     pv.add_argument("--round-index", type=int, default=0)
     pv.add_argument("--config", default="demo", help="config ID — half of the RNG seed")
     pv.add_argument("--convention", choices=["numbers", "names"], default="numbers")
+    pv.add_argument("--json", action="store_true", help="emit fixture JSON instead of the human read")
+    sv = sub.add_parser("seed-vectors", help="RNG ground truth for the Swift port")
+    sv.add_argument("--pairs", default="demo:0,demo:1,demo:2,bag-cfg:0,x:7",
+                    help="comma-separated <configID>:<roundIndex>")
+    sv.add_argument("--count", type=int, default=8)
     st = sub.add_parser("stats")
     st.add_argument("script", choices=["beginner_shadow", "beginner_bag"])
     st.add_argument("--round", type=int, default=180)
@@ -355,7 +396,11 @@ def main() -> int:
         return validate()
     if a.cmd == "stats":
         return stats(a.script, a.round * 1000, a.rounds, a.config)
-    return preview(a.script, a.round * 1000, a.warning * 1000, a.round_index, a.config, a.convention)
+    if a.cmd == "seed-vectors":
+        pairs = [(x.rsplit(":", 1)[0], int(x.rsplit(":", 1)[1])) for x in a.pairs.split(",")]
+        return seed_vectors(pairs, a.count)
+    return preview(a.script, a.round * 1000, a.warning * 1000, a.round_index, a.config,
+                   a.convention, a.json)
 
 
 if __name__ == "__main__":

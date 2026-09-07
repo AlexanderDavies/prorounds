@@ -1,0 +1,14 @@
+{
+  "script": "beginner_bag",
+  "roundMs": 4000,
+  "warningMs": 10000,
+  "roundIndex": 1,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 800,
+      "phraseId": "tech_bag_punch_through",
+      "kind": "technique"
+    }
+  ]
+}

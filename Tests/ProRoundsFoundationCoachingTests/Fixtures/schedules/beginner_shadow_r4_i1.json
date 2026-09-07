@@ -1,0 +1,14 @@
+{
+  "script": "beginner_shadow",
+  "roundMs": 4000,
+  "warningMs": 10000,
+  "roundIndex": 1,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 800,
+      "phraseId": "tech_chin_down",
+      "kind": "technique"
+    }
+  ]
+}

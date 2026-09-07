@@ -1,0 +1,236 @@
+{
+  "note": "FNV-1a 64 over \"<configID>#<roundIndex>\" then SplitMix64; roundIndex is zero-based",
+  "vectors": [
+    {
+      "configId": "demo",
+      "roundIndex": 0,
+      "seed": "e01cc666aa2bb88d",
+      "nextU64": [
+        "8c60c90876ddd4d0",
+        "4b7766e783268bcc",
+        "a3cb4bd2d4272f9a",
+        "44493a42343673a4",
+        "73614fb03f9f9bc6",
+        "ddac5e4bd1a5f621",
+        "e8baccf3b2ef57dd",
+        "fbf66e2ce1729f3d",
+        "b242aed5f40241de",
+        "449312b16ea1d6eb",
+        "4f3a08307d72fad2",
+        "a3867a7cc2982695"
+      ],
+      "unitBits": [
+        "3fe18c19210edbba",
+        "3fd2ddd9b9e0c9a2",
+        "3fe479697a5a84e5",
+        "3fd1124e908d0d9c",
+        "3fdcd853ec0fe7e6",
+        "3febb58bc97a34be",
+        "3fed17599e765dea",
+        "3fef7ecdc59c2e53",
+        "3fe64855dabe8048",
+        "3fd124c4ac5ba874",
+        "3fd3ce820c1f5cbe",
+        "3fe470cf4f985304"
+      ]
+    },
+    {
+      "configId": "demo",
+      "roundIndex": 1,
+      "seed": "e01cc566aa2bb6da",
+      "nextU64": [
+        "f3a031e4242c5fba",
+        "13a368e37357963d",
+        "591a85ab851e0530",
+        "89f52bdf52d22271",
+        "b4719bf65c33abe1",
+        "68f6eb89c3814d9f",
+        "6cddc9379739b73d",
+        "dd9c62af789ec045",
+        "60729db6239c88dc",
+        "338b959fd1d26766",
+        "f72a11a4220d8fc4",
+        "03da5f6fe8eb8e73"
+      ],
+      "unitBits": [
+        "3fee74063c84858b",
+        "3fb3a368e3735790",
+        "3fd646a16ae14780",
+        "3fe13ea57bea5a44",
+        "3fe68e337ecb8675",
+        "3fda3dbae270e052",
+        "3fdb37724de5ce6c",
+        "3febb38c55ef13d8",
+        "3fd81ca76d88e722",
+        "3fc9c5cacfe8e930",
+        "3feee542348441b1",
+        "3f8ed2fb7f475c40"
+      ]
+    },
+    {
+      "configId": "demo",
+      "roundIndex": 2,
+      "seed": "e01cc466aa2bb527",
+      "nextU64": [
+        "292d1760e25a1e5c",
+        "c9fd14f859fa54fb",
+        "49965067e7001674",
+        "9e874e59fb873135",
+        "ed41c10be040ff7b",
+        "0fa3a21701e80741",
+        "8480ec5fa8c60ea8",
+        "1e058e3aed66c94b",
+        "f53ad0e26173d508",
+        "4fd6159d9caba973",
+        "09179402696b58af",
+        "fa17350f305b3ad1"
+      ],
+      "unitBits": [
+        "3fc4968bb0712d0c",
+        "3fe93fa29f0b3f4a",
+        "3fd2659419f9c004",
+        "3fe3d0e9cb3f70e6",
+        "3feda838217c081f",
+        "3faf47442e03d000",
+        "3fe0901d8bf518c1",
+        "3fbe058e3aed66c8",
+        "3feea75a1c4c2e7a",
+        "3fd3f58567672aea",
+        "3fa22f2804d2d6b0",
+        "3fef42e6a1e60b67"
+      ]
+    },
+    {
+      "configId": "bag-cfg",
+      "roundIndex": 0,
+      "seed": "3ee6e656edf012e1",
+      "nextU64": [
+        "bae94002fde61efb",
+        "c21bb7335871cbdb",
+        "7141d506b78c70f0",
+        "d0e39585b8508759",
+        "66922d9a13018743",
+        "fcdac10f394c47f1",
+        "0f297f1f52438cac",
+        "bfd846980d9a5855",
+        "7a152f0249222efd",
+        "b153874c63285362",
+        "482d328b48b864ee",
+        "ffffa43d241ea4ec"
+      ],
+      "unitBits": [
+        "3fe75d28005fbcc3",
+        "3fe84376e66b0e39",
+        "3fdc507541ade31c",
+        "3fea1c72b0b70a10",
+        "3fd9a48b6684c060",
+        "3fef9b5821e72988",
+        "3fae52fe3ea48710",
+        "3fe7fb08d301b34b",
+        "3fde854bc092488a",
+        "3fe62a70e98c650a",
+        "3fd20b4ca2d22e18",
+        "3feffff487a483d4"
+      ]
+    },
+    {
+      "configId": "bag-cfg",
+      "roundIndex": 3,
+      "seed": "3ee6e356edf00dc8",
+      "nextU64": [
+        "c820eb21248da595",
+        "9351e39bba4cc8a2",
+        "969090ac2e7876a3",
+        "4f92232976a7a157",
+        "e72034e1f3c497fe",
+        "e3813c5c629f420e",
+        "a97271cdcf0e54bb",
+        "70e9070359df30b7",
+        "b8b9acb845d9dc0b",
+        "dd65f2f189419d73",
+        "4017296ee51aaa97",
+        "7ae4dcf51b3aff5b"
+      ],
+      "unitBits": [
+        "3fe9041d642491b4",
+        "3fe26a3c73774999",
+        "3fe2d2121585cf0e",
+        "3fd3e488ca5da9e8",
+        "3fece4069c3e7892",
+        "3fec70278b8c53e8",
+        "3fe52e4e39b9e1ca",
+        "3fdc3a41c0d677cc",
+        "3fe717359708bb3b",
+        "3febacbe5e312833",
+        "3fd005ca5bb946aa",
+        "3fdeb9373d46cebe"
+      ]
+    },
+    {
+      "configId": "x",
+      "roundIndex": 7,
+      "seed": "bec277197f2283e1",
+      "nextU64": [
+        "c668628a45e8cd55",
+        "77e50b4e480f88ba",
+        "3022600b71b79fa4",
+        "1c903b96ef4fcc26",
+        "04ac415fa83abde6",
+        "d543fbd761700092",
+        "616892734d557782",
+        "89953a2b6e225bb9",
+        "d28bb907116bb392",
+        "9d7ff55c833b7cf2",
+        "fbf66c26d7afb004",
+        "cc000a193b4ae57d"
+      ],
+      "unitBits": [
+        "3fe8cd0c5148bd19",
+        "3fddf942d39203e2",
+        "3fc8113005b8dbcc",
+        "3fbc903b96ef4fc8",
+        "3f92b1057ea0eae0",
+        "3feaa87f7aec2e00",
+        "3fd85a249cd3555c",
+        "3fe132a7456dc44b",
+        "3fea517720e22d76",
+        "3fe3affeab90676f",
+        "3fef7ecd84daf5f6",
+        "3fe980014327695c"
+      ]
+    },
+    {
+      "configId": "",
+      "roundIndex": 0,
+      "seed": "07c8fe07b4919c66",
+      "nextU64": [
+        "4c5109313f4c5d42",
+        "e0d7c9e88d5c447f",
+        "98ce60d9a2fc5da7",
+        "336e481267a6c7fc",
+        "25167e53540cb542",
+        "1e8cc8d1841222e3",
+        "cc02accf40944054",
+        "5d0d20bbe68f2b38",
+        "009ba396e173b976",
+        "24272cdfa628a1ad",
+        "652cf55a0cbdc1d6",
+        "28f83c02671c3d03"
+      ],
+      "unitBits": [
+        "3fd314424c4fd316",
+        "3fec1af93d11ab88",
+        "3fe319cc1b345f8b",
+        "3fc9b7240933d360",
+        "3fc28b3f29aa0658",
+        "3fbe8cc8d1841220",
+        "3fe9805599e81288",
+        "3fd743482ef9a3ca",
+        "3f637472dc2e7700",
+        "3fc213966fd31450",
+        "3fd94b3d56832f70",
+        "3fc47c1e01338e1c"
+      ]
+    }
+  ]
+}

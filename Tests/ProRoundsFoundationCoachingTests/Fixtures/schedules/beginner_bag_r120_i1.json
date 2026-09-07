@@ -1,0 +1,99 @@
+{
+  "script": "beginner_bag",
+  "roundMs": 120000,
+  "warningMs": 10000,
+  "roundIndex": 1,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1500,
+      "phraseId": "tech_bag_stay_in_range",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 12196,
+      "phraseId": "move_circle_right",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 23016,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 24000,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 32030,
+      "phraseId": "jab_cross_body",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 40135,
+      "phraseId": "jab_body_jab_head",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 49300,
+      "phraseId": "move_close_the_distance",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 57398,
+      "phraseId": "tech_bag_plant_feet",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 66000,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 73642,
+      "phraseId": "tech_bag_punch_through",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 80163,
+      "phraseId": "def_roll_counter",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 87731,
+      "phraseId": "jab_cross_sit_down",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 93911,
+      "phraseId": "jab_cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 100910,
+      "phraseId": "jab_cross_body_hook_head",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 102000,
+      "phraseId": "effort_dont_drop",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 107346,
+      "phraseId": "cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 110750,
+      "phraseId": "effort_last_ten",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 113740,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    }
+  ]
+}

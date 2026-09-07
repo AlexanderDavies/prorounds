@@ -1,0 +1,14 @@
+{
+  "script": "beginner_bag",
+  "roundMs": 5000,
+  "warningMs": 10000,
+  "roundIndex": 2,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1000,
+      "phraseId": "jab_body_jab_head",
+      "kind": "combo"
+    }
+  ]
+}

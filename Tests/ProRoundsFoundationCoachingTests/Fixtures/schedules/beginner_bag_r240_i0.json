@@ -1,0 +1,169 @@
+{
+  "script": "beginner_bag",
+  "roundMs": 240000,
+  "warningMs": 10000,
+  "roundIndex": 0,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1500,
+      "phraseId": "move_circle_left",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 12780,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 24511,
+      "phraseId": "tech_eyes_on_target",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 35904,
+      "phraseId": "jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 47182,
+      "phraseId": "def_slip_left_right",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 48000,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 57546,
+      "phraseId": "move_close_the_distance",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 65687,
+      "phraseId": "jab_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 75304,
+      "phraseId": "def_roll_counter",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 84892,
+      "phraseId": "tech_pivot_the_foot",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 92903,
+      "phraseId": "cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 102349,
+      "phraseId": "move_out_of_range",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 111318,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 120020,
+      "phraseId": "jab_cross_body",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 128255,
+      "phraseId": "move_circle_left",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 132000,
+      "phraseId": "def_roll_right",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 139098,
+      "phraseId": "jab_cross_sit_down",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 146127,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 153065,
+      "phraseId": "tech_bag_punch_through",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 160709,
+      "phraseId": "jab_cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 167883,
+      "phraseId": "effort_dont_drop",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 174670,
+      "phraseId": "tech_breathe",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 181766,
+      "phraseId": "jab_body_jab_head",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 189696,
+      "phraseId": "double_jab_cross_angle",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 196879,
+      "phraseId": "jab_cross_hook_pivot",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 204000,
+      "phraseId": "effort_hands_up",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 209527,
+      "phraseId": "def_roll_roll",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 215523,
+      "phraseId": "triple_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 221182,
+      "phraseId": "move_walk_the_bag",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 227106,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 230750,
+      "phraseId": "effort_last_ten",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 233740,
+      "phraseId": "jab_cross",
+      "kind": "combo"
+    }
+  ]
+}

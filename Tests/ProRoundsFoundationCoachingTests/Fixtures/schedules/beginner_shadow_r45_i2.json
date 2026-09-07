@@ -1,0 +1,49 @@
+{
+  "script": "beginner_shadow",
+  "roundMs": 45000,
+  "warningMs": 10000,
+  "roundIndex": 2,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1500,
+      "phraseId": "jab_step_in",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 9000,
+      "phraseId": "def_slip_left_right",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 15122,
+      "phraseId": "jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 23038,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 24750,
+      "phraseId": "def_roll_hook",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 29862,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 35750,
+      "phraseId": "def_roll_counter",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 38250,
+      "phraseId": "effort_dont_drop",
+      "kind": "effort"
+    }
+  ]
+}

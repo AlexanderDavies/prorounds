@@ -74,8 +74,12 @@ existing monotonic-deadline cue mechanism.
 **Mirror the reference's float arithmetic exactly, including its rounding mode.** The Python carries
 `t`, `seg_start` and `start` as `float` milliseconds for the whole walk and converts only at emit, via
 `int(round(...))`. Python's `round()` is **round-half-to-even**; Swift's `rounded()` defaults to
-**round-half-away-from-zero**, so a naive port diverges on every exact `.5` offset. Swift SHALL use
-`Double` for the walk and `.rounded(.toNearestOrEven)` at emit. *Alternative considered:* reworking the
+**round-half-away-from-zero**. Swift SHALL use `Double` for the walk and `.rounded(.toNearestOrEven)`
+at emit. **Measured, not assumed:** an exact `.5` never actually arises — 0 occurrences across 212,748
+pre-rounding values spanning both scripts, round lengths 45-600s and 4 round indices — because `t`
+accumulates `unit()`-driven cadence draws. So this is correctness insurance, not a live bug, and it
+cannot be covered by an end-to-end fixture; the rounding helper is unit-tested directly instead. An
+earlier draft of this design called it a divergence "on every exact `.5` offset", which overstated it. *Alternative considered:* reworking the
 walk in integer milliseconds, which is cleaner Swift — rejected for this change, because it would
 change draw boundaries and break byte-identity with the reference. If integerising is wanted later it
 must be done in the Python first, with fixtures regenerated from it.
@@ -90,8 +94,9 @@ would invalidate.
 - **Swift and Python diverge subtly** (share arithmetic, offset rounding, tie-breaks in weighted draws)
   → the two known traps are named as decisions above: `.toNearestOrEven` at emit, and `unit()` defined
   as `Double(next >> 11) / Double(1 << 53)`, which is exactly representable in IEEE-754 and so is
-  bit-identical across both languages. Fixtures cover both scripts across several round lengths and
-  round indices; a `.5` boundary is included deliberately.
+  bit-identical across both languages. Fixtures cover both scripts across eight round lengths and three
+  round indices — 48 files, four of which return an empty schedule so the guard path is covered by
+  byte-identity rather than only by property tests.
 - **Fixtures ossify a bug.** If the Python has a defect, Swift faithfully reproduces it → `validate`
   and `stats` are run over the catalog as part of this change, and the delivered-mix figures are
   sanity-checked against the authored mix rather than assumed.

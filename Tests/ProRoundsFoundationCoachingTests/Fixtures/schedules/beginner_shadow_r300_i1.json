@@ -1,0 +1,254 @@
+{
+  "script": "beginner_shadow",
+  "roundMs": 300000,
+  "warningMs": 10000,
+  "roundIndex": 1,
+  "configId": "demo",
+  "calls": [
+    {
+      "offsetMs": 1500,
+      "phraseId": "tech_balls_of_feet",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 10196,
+      "phraseId": "move_step_in_out",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 19016,
+      "phraseId": "jab_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 27770,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 35800,
+      "phraseId": "jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 43905,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 53070,
+      "phraseId": "move_circle_left",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 60000,
+      "phraseId": "tech_elbows_in",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 66640,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 74282,
+      "phraseId": "tech_lead_hand_back",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 80802,
+      "phraseId": "move_circle_right",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 88371,
+      "phraseId": "jab_cross_out",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 94550,
+      "phraseId": "jab_cross_slip",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 101550,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 108283,
+      "phraseId": "tech_move_head_after",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 114975,
+      "phraseId": "cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 121243,
+      "phraseId": "jab_cross_body",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 128008,
+      "phraseId": "tech_lazy_hand",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 135204,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 143047,
+      "phraseId": "jab_cross_out",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 150685,
+      "phraseId": "tech_rear_hand_back",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 158483,
+      "phraseId": "move_angle_off",
+      "kind": "movement"
+    },
+    {
+      "offsetMs": 165000,
+      "phraseId": "jab_cross_roll",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 170561,
+      "phraseId": "jab_cross_slip",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 175912,
+      "phraseId": "double_jab_cross_angle",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 181203,
+      "phraseId": "jab_cross_body_hook_head",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 187125,
+      "phraseId": "tech_slip_off_line",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 192873,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 198113,
+      "phraseId": "tech_chin_down",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 203570,
+      "phraseId": "cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 209406,
+      "phraseId": "jab_jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 215279,
+      "phraseId": "def_slip_counter",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 220738,
+      "phraseId": "tech_answer_after_defence",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 225941,
+      "phraseId": "jab_cross_body",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 231144,
+      "phraseId": "jab_cross_hook_pivot",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 236490,
+      "phraseId": "def_roll_hook",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 242051,
+      "phraseId": "jab_cross_slip",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 247844,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 253373,
+      "phraseId": "jab_cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 255000,
+      "phraseId": "double_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 259726,
+      "phraseId": "tech_lead_hand_back",
+      "kind": "technique"
+    },
+    {
+      "offsetMs": 264062,
+      "phraseId": "triple_jab",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 268687,
+      "phraseId": "effort_work",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 272777,
+      "phraseId": "jab_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 277022,
+      "phraseId": "cross_hook_cross",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 281075,
+      "phraseId": "def_catch_slip_roll",
+      "kind": "defence"
+    },
+    {
+      "offsetMs": 285100,
+      "phraseId": "jab_cross_hook",
+      "kind": "combo"
+    },
+    {
+      "offsetMs": 290750,
+      "phraseId": "effort_last_ten",
+      "kind": "effort"
+    },
+    {
+      "offsetMs": 293440,
+      "phraseId": "def_roll_roll",
+      "kind": "defence"
+    }
+  ]
+}

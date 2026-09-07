@@ -11,11 +11,11 @@
 Everything below is verified against these files, so they come first. `scripts/coach-script.py` is
 normative: where it and the README disagree, the Python wins.
 
-- [ ] 2.1 Add a `--json` output mode to `coach-script.py preview`, emitting `[{offsetMs, phraseId, kind}]` — it currently only prints human-readable output
-- [ ] 2.2 Add a `seed-vectors` subcommand emitting, for a set of `(configID, roundIndex)` pairs: the FNV-1a digest, the first N `next_u64()` values, and the first N `unit()` values as exact hex bit patterns
-- [ ] 2.3 Add `scripts/gen-coach-fixtures.sh` regenerating every fixture in one command, so a reference change is one step, not a manual sweep
-- [ ] 2.4 Generate schedule fixtures for both scripts across several round lengths and `roundIndex` values, including a length chosen to land an exact `.5` offset. Schedules are convention-independent (`schedule()` takes no convention), so do **not** fork fixtures by convention
-- [ ] 2.5 Commit fixtures under `Tests/ProRoundsFoundationCoachingTests/Fixtures/` and document regeneration in `docs/coaching/README.md`
+- [x] 2.1 Add a `--json` output mode to `coach-script.py preview`, emitting `[{offsetMs, phraseId, kind}]` — it currently only prints human-readable output
+- [x] 2.2 Add a `seed-vectors` subcommand emitting, for a set of `(configID, roundIndex)` pairs: the FNV-1a digest, the first N `next_u64()` values, and the first N `unit()` values as exact hex bit patterns
+- [x] 2.3 Add `scripts/gen-coach-fixtures.sh` regenerating every fixture in one command, so a reference change is one step, not a manual sweep
+- [x] 2.4 Generate schedule fixtures for both scripts across round lengths 4/5/45/60/120/180/240/300s × roundIndex 0-2 — 48 files, 4 of which exercise the empty-schedule guard path. Schedules are convention-independent (`schedule()` takes no convention), so fixtures are **not** forked by convention. **No `.5` fixture:** exact `.5` pre-rounding values do not occur — 0 across 212,748 samples spanning both scripts, 45-600s, 4 indices — so the rounding mode must be unit-tested directly instead (see 5.9)
+- [x] 2.5 Commit fixtures under `Tests/ProRoundsFoundationCoachingTests/Fixtures/` and document regeneration in `docs/coaching/README.md`
 
 ## 3. Deterministic RNG (test-first, against 2.2)
 
@@ -48,7 +48,7 @@ normative: where it and the README disagree, the Python wins.
 - [ ] 5.6 Implement the combo-pool fallback when filtering leaves no candidate
 - [ ] 5.7 Implement `nudge()` clear of the warning cue, and the end-of-round guard that drops a call whose `estMs` would breach `roundEndGuardMs`
 - [ ] 5.8 Implement cadence advance as `max(drawn, estMs + minGapMs)`
-- [ ] 5.9 Emit offsets with `.rounded(.toNearestOrEven)` to match Python's banker's rounding, with a test on the exact `.5` fixture from 2.4
+- [ ] 5.9 Emit offsets with `.rounded(.toNearestOrEven)` to match Python's `round()`. Test the rounding helper **directly** on 0.5/1.5/2.5/-0.5 — an end-to-end fixture cannot reach it, since exact `.5` never arises from the cadence walk (see 2.4)
 - [ ] 5.10 Make the byte-identity test from 5.1 pass for every fixture
 
 ## 6. Property and invariant tests
