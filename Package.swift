@@ -21,6 +21,7 @@ let package = Package(
         .library(name: "ProRoundsFoundationTiming", targets: ["ProRoundsFoundationTiming"]),
         .library(name: "ProRoundsFoundationAudio", targets: ["ProRoundsFoundationAudio"]),
         .library(name: "ProRoundsFoundationPersistence", targets: ["ProRoundsFoundationPersistence"]),
+        .library(name: "ProRoundsFoundationCoaching", targets: ["ProRoundsFoundationCoaching"]),
         // Design system
         .library(name: "ProRoundsDesignSystem", targets: ["ProRoundsDesignSystem"]),
         // Data
@@ -44,6 +45,20 @@ let package = Package(
         .target(name: "ProRoundsFoundationTiming"),
         .target(name: "ProRoundsFoundationAudio", resources: [.process("Resources")]),
         .target(name: "ProRoundsFoundationPersistence"),
+        // Catalog + cue scheduler for assisted coaching. Pure: no audio, no UI, no clock —
+        // it is an output of the round timer, never an input to it.
+        // `.copy` for the clips, not `.process`: processing FLATTENS the tree, and the 26 forked
+        // phrases share a filename across numbers/ and names/ (jab.m4a exists in both). Copying
+        // preserves the clips/<convention>/<id>.m4a layout docs/coaching/README.md defines.
+        .target(name: "ProRoundsFoundationCoaching", dependencies: [
+            "ProRoundsFoundationTiming",
+            "ProRoundsFoundationUtilities",
+        ], resources: [
+            .process("Resources/phrases.json"),
+            .process("Resources/beginner_shadow.json"),
+            .process("Resources/beginner_bag.json"),
+            .copy("Resources/clips"),
+        ]),
 
         // MARK: - Design system (may use Foundation)
         .target(name: "ProRoundsDesignSystem", dependencies: [
@@ -102,6 +117,9 @@ let package = Package(
         .testTarget(name: "ProRoundsFoundationPersistenceTests", dependencies: [
             "ProRoundsFoundationPersistence",
         ]),
+        .testTarget(name: "ProRoundsFoundationCoachingTests", dependencies: [
+            "ProRoundsFoundationCoaching",
+        ], resources: [.process("Fixtures")]),
         .testTarget(name: "ProRoundsDataConfigTests", dependencies: [
             "ProRoundsDataConfig",
         ]),
