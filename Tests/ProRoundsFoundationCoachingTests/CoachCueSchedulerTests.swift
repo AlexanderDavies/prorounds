@@ -34,7 +34,7 @@ struct CoachCueSchedulerTests {
         let catalog = try CoachCatalog.bundled()
         let scheduler = CoachCueScheduler(catalog: catalog)
         let fixtures = try ScheduleFixture.all()
-        #expect(fixtures.count == 48, "expected 48 fixtures, found \(fixtures.count)")
+        #expect(fixtures.count == 49, "expected 49 fixtures, found \(fixtures.count)")
 
         for fixture in fixtures {
             let script = try CoachScript.bundled(fixture.script)

@@ -54,11 +54,11 @@ normative: where it and the README disagree, the Python wins.
 
 ## 6. Property and invariant tests
 
-- [ ] 6.1 Property test over many generated rounds: no cue ends inside `roundEndGuardMs` — asserted as behaviour, so a clip re-record fails loudly rather than drifting
-- [ ] 6.2 Property test: no cue starts before `roundStartDelayMs`
-- [ ] 6.3 Property test: every offset falls within the round; a round too short for any call returns an empty schedule and does not throw
-- [ ] 6.4 Property test: no three consecutive non-combo calls, and no per-kind repeat inside its window
-- [ ] 6.5 Test that the scheduler exposes no clock dependency and no way to extend the round — the type takes no `TimeSource`
+- [x] 6.1 Property test over many generated rounds: no cue ends inside `roundEndGuardMs` — asserted as behaviour, so a clip re-record fails loudly rather than drifting
+- [x] 6.2 Property test: no cue starts before `roundStartDelayMs`
+- [x] 6.3 Property test: every offset falls within the round; a round too short for any call returns an empty schedule and does not throw
+- [x] 6.4 Property test: an over-long non-combo run always involves a pinned cue or an offset tie (the unconditional form does not hold — see the test's note), and no drawn phrase repeats inside its per-kind window
+- [x] 6.5 Test that the scheduler exposes no clock dependency and no way to extend the round — the type takes no `TimeSource`
 
 ## 7. Cross-check against the reference
 

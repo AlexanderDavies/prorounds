@@ -43,8 +43,11 @@ into consecutive non-punching calls.
 - **THEN** the kind SHALL be forced to combo
 
 #### Scenario: Never three non-combos in a row
-- **WHEN** the previous two calls were both non-combo
-- **THEN** the next call SHALL be a combo
+- **WHEN** the previous two drawn calls were both non-combo
+- **THEN** the next drawn call SHALL be a combo. This governs the **drawn** sequence; the delivered
+  sequence may still show a longer run in two cases, both reference behaviour — a pinned cue, which
+  is placed before the walk and never counted by it, or two calls sharing an offset, where the
+  `(offset, id, kind)` sort orders by phrase id rather than by draw order
 
 #### Scenario: A technique cue can answer the call before it
 - **WHEN** a candidate declares `follows` tags matching the previous call's tags

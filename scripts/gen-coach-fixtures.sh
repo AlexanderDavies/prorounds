@@ -35,5 +35,14 @@ for script in beginner_shadow beginner_bag; do
   done
 done
 
+# Edge cases found by the property tests, pinned so they cannot regress unnoticed.
+#
+# The 255s round below contains two calls at the SAME offset (140250ms) — a segment-boundary tie.
+# No round in the matrix above has one, so without this fixture the (offset, id, kind) sort
+# tie-break is untested, and a port that sorted by offset alone would pass every other check.
+scripts/coach-script.py preview beginner_shadow \
+  --round 255 --round-index 1 --config a-longer-config-id --json \
+  > "$OUT/schedules/edge_offset_tie.json"
+
 echo "fixtures written to $OUT"
 find "$OUT" -name '*.json' | wc -l | xargs echo "files:"
