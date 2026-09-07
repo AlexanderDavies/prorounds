@@ -28,15 +28,15 @@ normative: where it and the README disagree, the Python wins.
 
 ## 4. Catalog decoding and validation (test-first)
 
-- [ ] 4.1 Write failing tests for decoding `phrases.json` into `CoachPhrase`, covering forked vs shared text and all five kinds
-- [ ] 4.2 Implement `CoachPhrase`, `CoachKind`, `ClipKind` and the catalog decoder; an unknown kind must throw, not default
-- [ ] 4.3 Write failing tests for decoding a script into `CoachScript`/`CoachSegment`/`CoachGuards`, including pools, mix, cadence range and pinned cues
-- [ ] 4.4 Implement script decoding; assert `voice`/`intent` decode as author notes and are never exposed as speakable text
-- [ ] 4.5 Write failing tests for the load-time integrity rules: unknown pool id, no-repeat window ≥ pool size, unanswerable `follows` tag, segment shares not summing to 1
-- [ ] 4.6 Implement `validate()` mirroring `coach-script.py validate`, throwing typed errors that name the offending id
-- [ ] 4.7 Add a test asserting every phrase resolves to its clip file(s) in the bundle — 26 `numbers`, 26 `names`, 63 `shared`
-- [ ] 4.8 Add a test asserting the bundled `phrases.json` is byte-identical to `docs/coaching/phrases.json`, so the two copies cannot drift
-- [ ] 4.9 Implement `clipResource(for:convention:)` and test that shared phrases ignore the convention — this is the only place convention matters in this change
+- [x] 4.1 Write failing tests for decoding `phrases.json` into `CoachPhrase`, covering forked vs shared text and all five kinds
+- [x] 4.2 Implement `CoachPhrase`, `CoachKind`, `ClipKind` and the catalog decoder; an unknown kind must throw, not default
+- [x] 4.3 Write failing tests for decoding a script into `CoachScript`/`CoachSegment`/`CoachGuards`, including pools, mix, cadence range and pinned cues
+- [x] 4.4 Implement script decoding; assert `voice`/`intent` decode as author notes and are never exposed as speakable text
+- [x] 4.5 Write failing tests for the load-time integrity rules: unknown pool id, no-repeat window ≥ pool size, unanswerable `follows` tag, segment shares not summing to 1
+- [x] 4.6 Implement `validate()` mirroring `coach-script.py validate`, returning typed issues that name the offending id. **One reference rule is deferred:** "a whole workout must be schedulable at the shortest supported round" calls `schedule()`, so it lands with the scheduler — see 5.11
+- [x] 4.7 Add a test asserting every phrase resolves to its clip file(s) in the bundle — 26 `numbers`, 26 `names`, 63 `shared`
+- [x] 4.8 Add a test asserting the bundled `phrases.json` is byte-identical to `docs/coaching/phrases.json`, so the two copies cannot drift
+- [x] 4.9 Implement `clipResource(for:convention:)` and test that shared phrases ignore the convention — this is the only place convention matters in this change
 
 ## 5. Scheduler (test-first, against 2.4)
 
@@ -50,6 +50,7 @@ normative: where it and the README disagree, the Python wins.
 - [ ] 5.8 Implement cadence advance as `max(drawn, estMs + minGapMs)`
 - [ ] 5.9 Emit offsets with `.rounded(.toNearestOrEven)` to match Python's `round()`. Test the rounding helper **directly** on 0.5/1.5/2.5/-0.5 — an end-to-end fixture cannot reach it, since exact `.5` never arises from the cadence walk (see 2.4)
 - [ ] 5.10 Make the byte-identity test from 5.1 pass for every fixture
+- [ ] 5.11 Add the deferred validator rule from 4.6: every script must schedule at least one call at 60/120/180/300s, matching the reference's final check
 
 ## 6. Property and invariant tests
 
