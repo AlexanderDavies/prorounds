@@ -31,6 +31,12 @@ on the pool contents, their weights, and the generator state.
 - **WHEN** the same pool and weights are drawn from generators in identical state
 - **THEN** the same element SHALL be chosen and the generators SHALL advance identically
 
-#### Scenario: Zero-weight entries are never chosen
-- **WHEN** a pool contains an entry with weight zero
-- **THEN** that entry SHALL NOT be returned by any draw
+#### Scenario: Zero-weight entries are never chosen from a mixed pool
+- **WHEN** a pool contains an entry with weight zero alongside entries with positive weight
+- **THEN** the zero-weight entry SHALL NOT be returned by any draw
+
+#### Scenario: An all-zero pool falls through to its last entry
+- **WHEN** every entry in a pool has weight zero
+- **THEN** the last entry SHALL be returned, matching the reference's trailing fallback — this is a
+  real branch reached whenever the running total never exceeds the draw, and a port that instead
+  throws or returns nothing diverges from the reference

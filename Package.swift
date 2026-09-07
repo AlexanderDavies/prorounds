@@ -117,9 +117,11 @@ let package = Package(
         .testTarget(name: "ProRoundsFoundationPersistenceTests", dependencies: [
             "ProRoundsFoundationPersistence",
         ]),
+        // `.copy`, not `.process`, for the same reason as the target above: Fixtures/schedules/
+        // is nested, and processing would flatten it into the bundle root.
         .testTarget(name: "ProRoundsFoundationCoachingTests", dependencies: [
             "ProRoundsFoundationCoaching",
-        ], resources: [.process("Fixtures")]),
+        ], resources: [.copy("Fixtures")]),
         .testTarget(name: "ProRoundsDataConfigTests", dependencies: [
             "ProRoundsDataConfig",
         ]),

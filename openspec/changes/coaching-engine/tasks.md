@@ -19,12 +19,12 @@ normative: where it and the README disagree, the Python wins.
 
 ## 3. Deterministic RNG (test-first, against 2.2)
 
-- [ ] 3.1 Write failing tests for `SplitMix64` asserting the exact `next_u64()` values from the 2.2 vectors; plus same-seed determinism and different-seed divergence
-- [ ] 3.2 Implement `SplitMix64` as a `RandomNumberGenerator` with the reference constants (`0x9E3779B97F4A7C15`, `0xBF58476D1CE4E5B9`, `0x94D049BB133111EB`)
-- [ ] 3.3 Write failing tests for `fnvSeed(configID:roundIndex:)` over the UTF-8 bytes of `"<configID>#<roundIndex>"`, asserting the 2.2 digests; **`roundIndex` is zero-based** (`coach-script.py:283`, `--round-index` defaults to 0)
-- [ ] 3.4 Implement the FNV-1a 64 seed and make the tests pass
-- [ ] 3.5 Implement `unit()` as `Double(next >> 11) / Double(1 << 53)` and assert bit-identity against the 2.2 hex patterns
-- [ ] 3.6 Implement `weighted(_:weight:)` including the reference's trailing `return items[-1]` fallback, with a test that reaches it
+- [x] 3.1 Write failing tests for `SplitMix64` asserting the exact `next_u64()` values from the 2.2 vectors; plus same-seed determinism and different-seed divergence
+- [x] 3.2 Implement `SplitMix64` as a `RandomNumberGenerator` with the reference constants (`0x9E3779B97F4A7C15`, `0xBF58476D1CE4E5B9`, `0x94D049BB133111EB`)
+- [x] 3.3 Write failing tests for `fnvSeed(configID:roundIndex:)` over the UTF-8 bytes of `"<configID>#<roundIndex>"`, asserting the 2.2 digests; **`roundIndex` is zero-based** (`coach-script.py:283`, `--round-index` defaults to 0)
+- [x] 3.4 Implement the FNV-1a 64 seed and make the tests pass
+- [x] 3.5 Implement `unit()` as `Double(next >> 11) / Double(1 << 53)` and assert bit-identity against the 2.2 hex patterns
+- [x] 3.6 Implement `weighted(_:weight:)` including the reference's trailing `return items[-1]` fallback, with a test that reaches it
 
 ## 4. Catalog decoding and validation (test-first)
 
