@@ -49,15 +49,15 @@ The seam that keeps the engine ignorant of coaching. Everything else depends on 
 ## 6. The coaching chip and sheet
 
 - [x] 6.1 Write failing view-model tests: the chip shows the current level, is absent for workout types with no script, and is unavailable once running
-- [ ] 6.2 Add the chip above the transport on the idle workout screen
+- [x] 6.2 Add the chip above the transport on the idle workout screen
 - [x] 6.3 Write a failing test: changing the level from the chip persists to the same `Configuration.coachingLevel` and the list reflects it — two entry points, one stored value
-- [ ] 6.4 Build the sheet, mirroring the naming-convention control with an example of the coach's words per option
-- [ ] 6.5 Test that the convention set here and in Settings are the same stored preference
+- [x] 6.4 Build the sheet, mirroring the naming-convention control with an example of the coach's words per option
+- [x] 6.5 Test that the convention set here and in Settings are the same stored preference
 
 ## 7. The minimal running screen
 
 - [x] 7.1 Write failing view-model tests: with the preference on, a coached round keeps time, phase and ticker and hides the rest
-- [ ] 7.2 Implement it, and test that changing the preference takes effect on the next coached round without a relaunch
+- [x] 7.2 Implement it, and test that changing the preference takes effect on the next coached round without a relaunch
 
 ## 8. Composition root
 

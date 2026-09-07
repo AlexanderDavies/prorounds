@@ -27,6 +27,10 @@ public final class WorkoutViewModel {
     /// The coaching level as last successfully stored. Held here rather than read from the original
     /// configuration so the chip never claims a level a failed save did not persist.
     private var coachingLevel: CoachingLevel?
+    /// Naming-convention choices, resolved to strings by the composition root — this module cannot
+    /// name the convention type.
+    public private(set) var conventionOptions: [CoachingConventionOption]
+    private let onSelectConvention: ((String) -> Void)?
 
     private var snapshotTask: Task<Void, Never>?
     private var interruptionTask: Task<Void, Never>?
@@ -42,7 +46,9 @@ public final class WorkoutViewModel {
         sessions: any SessionRepository,
         countDirection: CountDirection = .countDown,
         configurationWriter: (any ConfigurationWriting)? = nil,
-        minimalScreen: Bool = false
+        minimalScreen: Bool = false,
+        conventionOptions: [CoachingConventionOption] = [],
+        onSelectConvention: ((String) -> Void)? = nil
     ) {
         self.configuration = configuration
         self.title = configuration.effectiveName
@@ -54,6 +60,8 @@ public final class WorkoutViewModel {
         self.configurationWriter = configurationWriter
         self.minimalScreen = minimalScreen
         self.coachingLevel = configuration.coachingLevel
+        self.conventionOptions = conventionOptions
+        self.onSelectConvention = onSelectConvention
         self.display = WorkoutDisplayModel(
             engine.snapshot, direction: countDirection, workoutType: configuration.workoutType,
             coachingLevel: configuration.coachingLevel, minimalScreen: minimalScreen)
@@ -63,6 +71,17 @@ public final class WorkoutViewModel {
         WorkoutDisplayModel(snapshot, direction: countDirection,
                             workoutType: configuration.workoutType,
                             coachingLevel: coachingLevel, minimalScreen: minimalScreen)
+    }
+
+    /// The level currently stored for this workout.
+    public var currentCoachingLevel: CoachingLevel? { coachingLevel }
+
+    /// Writes the naming convention and reflects it back into the offered options.
+    public func selectConvention(id: String) {
+        onSelectConvention?(id)
+        conventionOptions = conventionOptions.map {
+            CoachingConventionOption(id: $0.id, label: $0.label, isSelected: $0.id == id)
+        }
     }
 
     /// Sets the coaching level for this workout, writing through to the same stored value the

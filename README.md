@@ -42,9 +42,15 @@ openspec/              # spec-driven change proposals
 ### Module graph (compile-enforced)
 
 All modules live in the root `Package.swift` as library targets named `ProRounds<Layer><Feature>`
-(guide §2.1). Target-level dependencies enforce the layering — **Foundation ← Data ← Feature**,
-with DesignSystem available to Data/Feature, and no Feature depending on a sibling Feature. A target
-that imports a module it doesn't declare fails to compile.
+(guide §2.1). The layering is **Foundation ← Data ← Feature**, with DesignSystem available to
+Data/Feature, and no Feature depending on a sibling Feature.
+
+**This is enforced by a test, not by the compiler.** SwiftPM lets a target import any other target in
+the same package whether or not it declares the dependency — verified: `ProRoundsFeatureTimer` can
+`import ProRoundsFeaturePerformance` and build, which the guide forbids outright. The only case the
+toolchain catches by itself is a dependency *cycle*. So `ProRoundsArchitectureTests` parses
+`Package.swift` and asserts the graph, and it is mutation-checked: a Feature→Feature edge and a
+Foundation→Data inversion both fail it. Declare every module you import.
 
 Real code so far: `ProRoundsFoundationTiming` (the injectable `TimeSource` clock seam +
 `FakeTimeSource` + tick stream), `ProRoundsFoundationUtilities` (single-source total-duration /

@@ -158,6 +158,9 @@ let package = Package(
             "ProRoundsFoundationCoaching",
             .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
         ], exclude: ["__Snapshots__"]),
+        // No dependencies: it reads Package.swift as text. The layering is not compile-enforced,
+        // so this is the only thing checking it.
+        .testTarget(name: "ProRoundsArchitectureTests"),
         .testTarget(name: "ProRoundsDesignSystemTests", dependencies: [
             "ProRoundsDesignSystem",
             .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),

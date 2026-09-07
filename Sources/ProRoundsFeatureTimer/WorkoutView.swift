@@ -12,6 +12,7 @@ struct WorkoutContentView: View {
     let onReset: () -> Void
     let onDone: () -> Void
     let onRetrySave: () -> Void
+    let onEditCoaching: () -> Void
 
     var body: some View {
         ZStack {
@@ -19,9 +20,13 @@ struct WorkoutContentView: View {
             Rectangle().fill(phaseColor.opacity(0.08)).ignoresSafeArea() // subtle phase tint
 
             VStack(spacing: Spacing.xxl) {
-                Text(title)
-                    .fontToken(.caption)
-                    .foregroundStyle(ProRoundsColor.textSecondary)
+                // Hidden under the minimal preference: during a coached round the call is what
+                // matters, and the workout's name is not news by then.
+                if !display.hidesSecondaryDetail {
+                    Text(title)
+                        .fontToken(.caption)
+                        .foregroundStyle(ProRoundsColor.textSecondary)
+                }
 
                 if display.isFinished {
                     finishedView
@@ -33,6 +38,33 @@ struct WorkoutContentView: View {
                         numeral: display.timeLabel,
                         totalRemaining: display.totalRemainingLabel
                     )
+
+                    if let call = display.currentCall {
+                        CoachTickerView(
+                            primary: call.primary,
+                            secondary: call.secondary,
+                            modifier: call.modifier,
+                            accessibleDescription: call.accessibleDescription
+                        )
+                        .transition(.opacity)
+                        .accessibilityIdentifier("coachTicker")
+                    }
+
+                    // A pill above the transport, per the settled mockup — a shortcut into the
+                    // same stored value the configuration editor writes, not a second setting.
+                    if display.showsCoachingChip {
+                        Button(action: onEditCoaching) {
+                            Label(display.coachingChipLabel, systemImage: "figure.boxing")
+                                .fontToken(.caption)
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(ProRoundsColor.accent)
+                        .padding(.horizontal, Spacing.md)
+                        .padding(.vertical, Spacing.xs)
+                        .background(ProRoundsColor.accent.opacity(0.12), in: Capsule())
+                        .accessibilityIdentifier("coachChip")
+                    }
+
                     TransportControls(
                         isRunning: display.isRunning,
                         isResetEnabled: true,
@@ -44,6 +76,7 @@ struct WorkoutContentView: View {
             .padding(Spacing.lg)
         }
         .animation(.easeInOut(duration: 0.4), value: display.phaseStyle)
+        .animation(.easeInOut(duration: 0.2), value: display.currentCall)
     }
 
     private var finishedView: some View {
@@ -93,6 +126,8 @@ public struct WorkoutView: View {
     @State private var model: WorkoutViewModel
     @Environment(\.dismiss) private var dismiss
 
+    @State private var isEditingCoaching = false
+
     public init(model: WorkoutViewModel) {
         _model = State(initialValue: model)
     }
@@ -106,9 +141,21 @@ public struct WorkoutView: View {
             onPlayPause: { model.playPause() },
             onReset: { model.reset() },
             onDone: { dismiss() },
-            onRetrySave: { model.retrySave() }
+            onRetrySave: { model.retrySave() },
+            onEditCoaching: { isEditingCoaching = true }
         )
         .onAppear { model.onAppear() }
         .onDisappear { model.onDisappear() }
+        .sheet(isPresented: $isEditingCoaching) {
+            CoachingSheetView(
+                level: model.currentCoachingLevel,
+                conventionOptions: model.conventionOptions,
+                onSelectLevel: { level in
+                    isEditingCoaching = false
+                    Task { await model.setCoachingLevel(level) }
+                },
+                onSelectConvention: { model.selectConvention(id: $0) }
+            )
+        }
     }
 }
