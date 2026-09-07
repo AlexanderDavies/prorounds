@@ -88,7 +88,10 @@ The system SHALL drop any call whose measured `estMs` would leave it still speak
 
 #### Scenario: The round opens with silence
 - **WHEN** a round begins
-- **THEN** no call SHALL start before `roundStartDelayMs`, so the round-start bell is not spoken over
+- **THEN** no drawn call SHALL start before `roundStartDelayMs`, so the round-start bell is not
+  spoken over. The delay gates the **first segment only** — later segments begin at their own
+  boundary — and pinned cues are placed before the walk and do not consult it at all. With the
+  shipped scripts the earliest call observed across 240 round lengths is exactly `roundStartDelayMs`
 
 ### Requirement: Coaching never influences the workout clock
 The scheduler SHALL be an output of the round timer, never an input to it. Coaching SHALL NOT move a

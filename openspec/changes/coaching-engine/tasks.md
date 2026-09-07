@@ -40,17 +40,17 @@ normative: where it and the README disagree, the Python wins.
 
 ## 5. Scheduler (test-first, against 2.4)
 
-- [ ] 5.1 Write the failing byte-identity test: `schedule(...)` equals the committed fixture for each script × round length × roundIndex
-- [ ] 5.2 Implement segment placement by proportional share, carrying `t` and `segStart` as `Double` milliseconds per the design
-- [ ] 5.3 Implement pinned-cue placement first, with `minGapMs` reserved either side and silent drop when the round is too short
-- [ ] 5.4 Implement kind drawing from `mix`, with the two adjacency rules: force combo on a repeated kind, and never a third consecutive non-combo
-- [ ] 5.5 Implement per-kind no-repeat filtering, `follows` matching with `followsBoost`, `answerAfterNonCombo`, and `windowFromRoundEndMs`
-- [ ] 5.6 Implement the combo-pool fallback when filtering leaves no candidate
-- [ ] 5.7 Implement `nudge()` clear of the warning cue, and the end-of-round guard that drops a call whose `estMs` would breach `roundEndGuardMs`
-- [ ] 5.8 Implement cadence advance as `max(drawn, estMs + minGapMs)`
-- [ ] 5.9 Emit offsets with `.rounded(.toNearestOrEven)` to match Python's `round()`. Test the rounding helper **directly** on 0.5/1.5/2.5/-0.5 — an end-to-end fixture cannot reach it, since exact `.5` never arises from the cadence walk (see 2.4)
-- [ ] 5.10 Make the byte-identity test from 5.1 pass for every fixture
-- [ ] 5.11 Add the deferred validator rule from 4.6: every script must schedule at least one call at 60/120/180/300s, matching the reference's final check
+- [x] 5.1 Write the failing byte-identity test: `schedule(...)` equals the committed fixture for each script × round length × roundIndex
+- [x] 5.2 Implement segment placement by proportional share, carrying `t` and `segStart` as `Double` milliseconds per the design
+- [x] 5.3 Implement pinned-cue placement first, with `minGapMs` reserved either side and silent drop when the round is too short
+- [x] 5.4 Implement kind drawing from `mix`, with the two adjacency rules: force combo on a repeated kind, and never a third consecutive non-combo
+- [x] 5.5 Implement per-kind no-repeat filtering, `follows` matching with `followsBoost`, `answerAfterNonCombo`, and `windowFromRoundEndMs`
+- [x] 5.6 Implement the combo-pool fallback when filtering leaves no candidate
+- [x] 5.7 Implement `nudge()` clear of the warning cue, and the end-of-round guard that drops a call whose `estMs` would breach `roundEndGuardMs`
+- [x] 5.8 Implement cadence advance as `max(drawn, estMs + minGapMs)`
+- [x] 5.9 Emit offsets with `.rounded(.toNearestOrEven)` to match Python's `round()`. Test the rounding helper **directly** on 0.5/1.5/2.5/-0.5 — an end-to-end fixture cannot reach it, since exact `.5` never arises from the cadence walk (see 2.4)
+- [x] 5.10 Make the byte-identity test from 5.1 pass for every fixture
+- [x] 5.11 Add the deferred validator rule from 4.6: every script must schedule at least one call at 60/120/180/300s, matching the reference's final check
 
 ## 6. Property and invariant tests
 

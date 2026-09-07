@@ -183,3 +183,49 @@ struct ValidatorParityTests {
         #expect(report.isValid)
     }
 }
+
+@Suite("Schedulability")
+struct SchedulabilityTests {
+    /// The reference's final validation rule. A script can be perfectly well formed and still
+    /// schedule nothing, if guards and cadence leave no room.
+    @Test("both scripts fill every supported round length", arguments: ["beginner_shadow", "beginner_bag"])
+    func scriptsSchedule(name: String) throws {
+        let catalog = try CoachCatalog.bundled()
+        let issues = CoachValidator.schedulabilityIssues(
+            script: try CoachScript.bundled(name), catalog: catalog)
+        #expect(issues.isEmpty, "\(issues.map(\.description))")
+    }
+
+    @Test("a script whose guards swallow the round is reported")
+    func impossibleGuardsAreCaught() throws {
+        let catalog = try CoachCatalog.bundled()
+        var script = try CoachScript.bundled("beginner_shadow")
+        // An end guard longer than the round leaves nothing able to finish before the bell.
+        script.guards.roundEndGuardMs = 400_000
+        let issues = CoachValidator.schedulabilityIssues(script: script, catalog: catalog)
+        #expect(issues.count == CoachValidator.supportedRoundsMs.count)
+    }
+
+    /// `roundStartDelayMs` gates only the **first** segment — the reference applies it with
+    /// `if seg is script["segments"][0]`, and every later segment starts at its own boundary. So a
+    /// delay past the opening segment silences the opening and nothing else. Worth pinning: it
+    /// reads like a round-wide rule and is not one.
+    @Test("the start delay silences the opening segment only")
+    func startDelayGatesFirstSegmentOnly() throws {
+        let catalog = try CoachCatalog.bundled()
+        var script = try CoachScript.bundled("beginner_shadow")
+        let roundMs = 180_000
+        let openingEnd = script.segments[0].share * Double(roundMs)
+
+        script.guards.roundStartDelayMs = Int(openingEnd) + 1_000
+        let calls = CoachCueScheduler(catalog: catalog).schedule(
+            script: script, roundMs: roundMs, warningMs: 10_000, configID: "x", roundIndex: 0)
+
+        #expect(!calls.isEmpty, "later segments should still schedule")
+        let drawnInOpening = calls.filter { cue in
+            Double(cue.offsetMs) < openingEnd
+                && !script.segments.flatMap(\.pinned).contains { $0.id == cue.phraseID }
+        }
+        #expect(drawnInOpening.isEmpty, "opening segment should be silent")
+    }
+}

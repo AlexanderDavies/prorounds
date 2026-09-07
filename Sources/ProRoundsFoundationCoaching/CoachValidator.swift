@@ -24,8 +24,9 @@ public struct CoachValidationReport: Sendable {
 /// line — those are structural and cannot survive `CoachCatalog.init`, so they are not re-checked
 /// here.
 ///
-/// One reference rule is **not** implemented yet: "a whole workout must be schedulable at the
-/// shortest supported round", which calls `schedule()`. It lands with the scheduler.
+/// The reference's final rule — "a whole workout must be schedulable at the shortest supported
+/// round" — needs the scheduler, so it lives in `validateBundled()` rather than in the pure
+/// script checks.
 public enum CoachValidator {
     private static let epsilon = 1e-9
 
@@ -156,14 +157,31 @@ public enum CoachValidator {
         }
     }
 
+    /// Round lengths a script must be able to fill, matching the reference's final check.
+    static let supportedRoundsMs = [60_000, 120_000, 180_000, 300_000]
+
+    /// A script that schedules nothing at a supported round length is unusable, however well formed
+    /// its pools are — guards and cadence can conspire to leave no room.
+    static func schedulabilityIssues(script: CoachScript, catalog: CoachCatalog) -> [CoachIssue] {
+        let scheduler = CoachCueScheduler(catalog: catalog)
+        return supportedRoundsMs.compactMap { roundMs in
+            let calls = scheduler.schedule(script: script, roundMs: roundMs, warningMs: 10_000,
+                                           configID: "validate", roundIndex: 0)
+            guard calls.isEmpty else { return nil }
+            return CoachIssue(script.id, "no calls scheduled for a \(roundMs / 1000)s round")
+        }
+    }
+
     /// Validates everything shipped in the module bundle.
     public static func validateBundled() throws -> CoachValidationReport {
         let catalog = try CoachCatalog.bundled()
         var errors = validate(catalog: catalog)
         var warnings: [CoachIssue] = []
         for name in CoachScript.bundledNames {
-            let result = inspect(script: try CoachScript.bundled(name), against: catalog)
+            let script = try CoachScript.bundled(name)
+            let result = inspect(script: script, against: catalog)
             errors += result.errors
+            errors += schedulabilityIssues(script: script, catalog: catalog)
             warnings += result.warnings
         }
         return CoachValidationReport(errors: errors, warnings: warnings)
